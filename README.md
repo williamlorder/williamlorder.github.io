@@ -1,2 +1,0 @@
-# williamlorder.github.io
-CV
