@@ -2,7 +2,7 @@
 <html lang=""><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://cdn.plot.ly/plotly-2.18.1.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/plotly.js/2.13.3/plotly.min.js"></script>
     <title>About</title>
     <meta name="description" content="Zekai&#39;s Curriculum Vitae">
     <meta name="author" content='Zekai Lu'>
@@ -121,6 +121,59 @@
 <ol>
 <li><strong>Zekai Lu</strong>, Wang Yayu, and Xie Ying. 2020. What we can learn about urban governance in the epidemic: a textual analysis based on documents from the Guangzhou Health Commission during Covid-19.(In Chinese for now) Guangzhou.</li>
 </ol>
+<div class="figure">
+    <div class="figure-plot" id="plot">
+        Code could not finish, this are some reasons why this happen.
+        - Plot name not defined. The first parameter of the shortcode is the name.
+        - There is a syntax error. check browser console.
+    </div>
+    <script>
+      function draw(){
+        test = document.getElementById("plot");
+        if (test == null){
+            console.log("The plot name is not defined")
+            return
+        }
+
+        fig = null
+        layout = {title: "Sankey with manually positioned node"}
+        
+var data = [{
+    type: "sankey",
+    orientation: "h",
+    node: {
+        pad: 15,
+        thickness: 20,
+        line: {
+            color: "black",
+            width: 0.5
+        },
+        label: ["Punlisheds", "Accepted", "Under Review", "First Author", "Other Author"],
+        color: ["blue", "blue", "blue", "orange", "orange"]
+    },
+    link: {
+        source: [0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2],  // Node index of source node for edge
+        target: [3, 3, 4, 4, 4, 3, 3, 3, 4, 3, 3, 4],  // Node index of target node for edge
+        value: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]     // Value of edge - used to determine edge width
+    }
+}];
+var layout = {title: "Papers sankey plot"}
+fig = {
+  data: data,
+  layout: layout
+}
+
+
+        if (!fig) {
+            test.innerText = "ERROR: fig variable is not defined"
+            return
+        }
+        test.innerText = null
+        Plotly.newPlot(test,fig,layout);
+      }
+      draw()
+    </script>
+    </div>
 <h2 id="teaching-experience">TEACHING EXPERIENCE</h2>
 <ol>
 <li>Fall Term 2020-2021   Teaching assistant of <em><strong>Quantitative Analysis Method</strong></em> (Prof. Ying Xie)</li>
