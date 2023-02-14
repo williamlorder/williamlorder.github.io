@@ -141,23 +141,16 @@
 <ol>
 <li><strong>Zekai Lu</strong>, Wang Yayu, and Xie Ying. 2020. What we can learn about urban governance in the epidemic: a textual analysis based on documents from the Guangzhou Health Commission during Covid-19.(In Chinese for now) Guangzhou.</li>
 </ol>
+<hr>
+<style>
+  .plotly-caption {
+    text-align: center;
+    color: #999;
+    font-size: 1em;
+  }
+</style>
 <div id="sankey"></div>
-<script>
-  // Fetch data from external JSON file using path from shortcode parameter
-  fetch('sankey_data.json')
-    .then(response => response.json())
-    .then(data => {
-      // Fetch layout from external JSON file using path from shortcode parameter
-      fetch('sankey_layout.json')
-        .then(response => response.json())
-        .then(layout => {
-          // Create Plotly plot with fetched data and layout
-          Plotly.newPlot('sankey', [data], layout);
-        });
-    });
-</script>
-<h2 id="teaching-experience">TEACHING EXPERIENCE</h2>
-<div id="sankey"></div>
+<p class="vega-caption">Sankey Chart of My works</p>
 <script>
   
   fetch('sankey_data.json')
@@ -173,6 +166,7 @@
     });
 </script>
 
+<h2 id="teaching-experience">TEACHING EXPERIENCE</h2>
 <ol>
 <li>Fall Term 2020-2021 Teaching assistant of <em><strong>Quantitative Analysis Method</strong></em> (Prof. Ying Xie)</li>
 <li>Fall Term 2020-2021 Teaching assistant of <em><strong>Application Of Statistical Software In Social Sciences</strong></em> (Dr. Nian Liu)</li>
