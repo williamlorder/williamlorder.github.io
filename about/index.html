@@ -76,7 +76,7 @@
 <p><em><strong>Sociology</strong></em>: Medical sociology; Computational sociology; Media Sociology and Gender sociology.</p>
 <p><em><strong>Psychology</strong></em>: Social Psychology(substance use disorder); Behavioral Psychology and Criminal Psychology.</p>
 <h2 id="skill">Skill</h2>
-<p><em><strong>Methodology</strong></em>: Traditional metrology(including Mixed linear models, Structural equation modelling, LCA/LPA and so on); Big data processing; Social network analysis; Machine learning(including Deep learning, and Natural Language Processing); Causal inference (Rubin Counterfactual Framework and Pearl’s DAG); Meta-analysis</p>
+<p><em><strong>Methodology</strong></em>: Traditional metrology(including Mixed linear models, Structural equation modelling, LCA/LPA and so on); Big data processing; Social network analysis; Machine learning(including Deep learning, and Natural Language Processing); Causal inference (Rubin Counterfactual Framework and Pearl&rsquo;s DAG); Meta-analysis</p>
 <p><em><strong>Programming Language</strong></em>: Python(skilled), R(skilled), Stata(skilled), MATLAB, Netlogo, and Mplus(skilled).</p>
 <h2 id="appointment">APPOINTMENT</h2>
 <h2 id="work">Work</h2>
@@ -99,72 +99,37 @@
 </ol>
 <h2 id="publications1">PUBLICATIONS<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></h2>
 <p><em>In chronological order</em></p>
-<div class="figure">
-    <div class="figure-plot" id="plot">
-        Code could not finish, this are some reasons why this happen.
-        - Plot name not defined. The first parameter of the shortcode is the name.
-        - There is a syntax error. check browser console.
-    </div>
-    <script>
-      function draw(){
-        test = document.getElementById("plot");
-        if (test == null){
-            console.log("The plot name is not defined")
-            return
-        }
-        fig = null
-        
-var data = [{
-    type: "sankey",
-    orientation: "h",
-    node: {
-        pad: 15,
-        thickness: 20,
-        line: {
-            color: "black",
-            width: 0.5
-        },
-        label: ["Punlisheds", "Accepted", "Under Review", "First Author", "Other Author","Sociology","Psychology"],
-        color: ["rgba(76, 114, 176, 0.8)", "rgba(76, 114, 176, 0.8)", "rgba(76, 114, 176, 0.8)", "rgba(221, 132, 82, 0.8)", "rgba(221, 132, 82, 0.8)","rgba(196, 78, 82, 0.8)","rgba(196, 78, 82, 0.8)"]
-    },
-    link: {
-        source: [0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 5, 5,5,5,5,5,5,6,6,6,6,6],  // Node index of source node for edge
-        target: [3, 3, 4, 4, 4, 3, 3, 3, 4, 3, 3, 4, 0,0,0,0,0,1,2,0,0,1,2,2],  // Node index of target node for edge
-        value: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1,1,1],     // Value of edge - used to determine edge width
-        color: ["rgba(76, 114, 176, 0.3)", "rgba(76, 114, 176, 0.3)", "rgba(76, 114, 176, 0.3)", "rgba(76, 114, 176, 0.3)", "rgba(76, 114, 176, 0.3)","rgba(76, 114, 176, 0.3)", "rgba(76, 114, 176, 0.3)", "rgba(76, 114, 176, 0.3)", "rgba(76, 114, 176, 0.3)", "rgba(76, 114, 176, 0.3)","rgba(76, 114, 176,0.3)","rgba(76, 114, 176, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)","rgba(196, 78, 82, 0.3)"]
-    }
-}];
-var layout = {title: "Sankey Chart of Papers"}
-fig = {
-  data: data,
-  layout: layout
-}
+<style>
+  .vega-caption {
+    text-align: center;
+    color: #999;
+    font-size: 1em;
+  }
+</style>
+<div id="word-cloud"></div>
+<p class="vega-caption">Wordcloud of my research</p>
+<script>
+  fetch('word-cloud.json')
+    .then(res => res.json())
+    .then(spec => vegaEmbed('#word-cloud', spec))
+    .catch(console.warn);
+</script>
 
-
-        if (!fig) {
-            test.innerText = "ERROR: fig variable is not defined"
-            return
-        }
-        test.innerText = null
-        Plotly.newPlot(test,fig,layout);
-      }
-      draw()
-    </script>
-    </div>
+<hr>
 <h3 id="published">Published</h3>
 <ol>
-<li><strong>Zekai Lu</strong>, Chuyin Xie, Nian Liu, Ying Xie, and Hong Lu. 2022. ‘Can We Predict Aggression?’—Determining the Predictors of Aggression among Individuals with Substance Use Disorder in China Undergoing Enforced Detoxification through Machine Learning. <em>Journal of Affective Disorders</em>. <a href="https://doi.org/10.1016/j.jad.2022.10.005">https://doi.org/10.1016/j.jad.2022.10.005</a>. (SSCI JCRQ1)</li>
-<li><strong>Zekai Lu</strong>, Lingxi Peng, Xuan Liu, Lizhi Zhan, Haohuai Liu, and Rong Hu. 2022. “The Systematic Traceability and Analysis of COVID-19.” <em>Journal of Nonlinear and Convex Analysis</em> 23(10): 2383–93<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. <a href="http://yokohamapublishers.jp/online-p/JNCA/Open/vol23/jncav23n10p2383-oa/HTML5/index.html">http://yokohamapublishers.jp/online-p/JNCA/Open/vol23/jncav23n10p2383-oa/HTML5/index.html</a>. (SCI JCRQ2)</li>
+<li><strong>Zekai Lu</strong>, Chuyin Xie, Nian Liu, Ying Xie, and Hong Lu. 2022. &lsquo;Can We Predict Aggression?&rsquo;&mdash;Determining the Predictors of Aggression among Individuals with Substance Use Disorder in China Undergoing Enforced Detoxification through Machine Learning. <em>Journal of Affective Disorders</em>. <a href="https://doi.org/10.1016/j.jad.2022.10.005">https://doi.org/10.1016/j.jad.2022.10.005</a>. (SSCI JCRQ1)</li>
+<li><strong>Zekai Lu</strong>, Lingxi Peng, Xuan Liu, Lizhi Zhan, Haohuai Liu, and Rong Hu. 2022. &ldquo;The Systematic Traceability and Analysis of COVID-19.&rdquo; <em>Journal of Nonlinear and Convex Analysis</em> 23(10): 2383&ndash;93<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. <a href="http://yokohamapublishers.jp/online-p/JNCA/Open/vol23/jncav23n10p2383-oa/HTML5/index.html">http://yokohamapublishers.jp/online-p/JNCA/Open/vol23/jncav23n10p2383-oa/HTML5/index.html</a>. (SCI JCRQ2)</li>
 <li>Liu, Nian, <strong>Zekai Lu</strong>, and Ying Xie. 2022. Tracking Study on the Relapse and Aftercare Effect of Drug Patients Released From a Compulsory Isolated Detoxification Center. <em>Frontiers in Psychiatry</em> 12 (January): 699074. <a href="https://doi.org/10/gn458v">https://doi.org/10/gn458v</a>. (SSCI JCRQ1)</li>
 <li>Xu, Junhui, <strong>Zekai Lu</strong>, and Ying Xie. 2021. Loan Default Prediction of Chinese P2P Market: A Machine Learning Methodology. <em>Scientific Reports</em> 11 (September): 18759. <a href="https://doi.org/10/gmwnfz">https://doi.org/10/gmwnfz</a>. (SCI JCRQ1)</li>
-<li>Liu, Nian, <strong>Zekai Lu</strong>, and Ying Xie. 2021. Factors Affecting the Public Acceptance of Extramarital Sex in China. <em>International Journal of Environmental Research and Public Health</em> 18 (11): 5767. <a href="https://doi.org/10.3390/ijerph18115767">https://doi.org/10.3390/ijerph18115767</a>.  (SSCI JCRQ1)</li>
+<li>Liu, Nian, <strong>Zekai Lu</strong>, and Ying Xie. 2021. Factors Affecting the Public Acceptance of Extramarital Sex in China. <em>International Journal of Environmental Research and Public Health</em> 18 (11): 5767. <a href="https://doi.org/10.3390/ijerph18115767">https://doi.org/10.3390/ijerph18115767</a>. (SSCI JCRQ1)</li>
 <li><strong>Zekai Lu</strong>, and Xie, Ying. 2021. A study of public opinion texts on the &ldquo;Sino-US diplomatic storm&rdquo; in microblogs: a word vector sentiment analysis based on R language. <em>Media Watch(Chinese)</em>, no. 02: 54-61. <a href="https://doi.org/10.19480/j.cnki.cmgc.2021.02.007">https://doi.org/10.19480/j.cnki.cmgc.2021.02.007</a>. (CSSCI)</li>
 <li><strong>Zekai Lu</strong>, Yaya Wang, and Ying Xie. n.d. A random forest-based approach to poverty alleviation identification. <em>China Market(chinese)</em>. 2021, 22-23+36. <a href="https://doi.org/10.13939/j.cnki.zgsc.2021.25.022">https://doi.org/10.13939/j.cnki.zgsc.2021.25.022</a></li>
 </ol>
 <h3 id="accepted">Accepted</h3>
 <ol>
-<li><strong>Zekai Lu</strong>, Nian Liu, Ying Xie, and Junhui Xu. 2021. Time Series Analysis and Forecasting of China’s Energy Production during Covid-19: Statistical Models vs Machine Learning Models. <em>Energies</em>. <a href="https://doi.org/10.21203/rs.3.rs-1074872/v3">https://doi.org/10.21203/rs.3.rs-1074872/v3</a>. (SSCI JCRQ3)</li>
-<li>Liu, Nian, <strong>Zekai Lu*</strong>, and Xie Ying. n.d. Application of the R Package ProcessR to Implement Various Types of Intermediary Models.  <em>China Health Statistics(Chinese)</em>.(CSCD)</li>
+<li><strong>Zekai Lu</strong>, Nian Liu, Ying Xie, and Junhui Xu. 2021. Time Series Analysis and Forecasting of China&rsquo;s Energy Production during Covid-19: Statistical Models vs Machine Learning Models. <em>Energies</em>. <a href="https://doi.org/10.21203/rs.3.rs-1074872/v3">https://doi.org/10.21203/rs.3.rs-1074872/v3</a>. (SSCI JCRQ3)</li>
+<li>Liu, Nian, <strong>Zekai Lu*</strong>, and Xie Ying. n.d. Application of the R Package ProcessR to Implement Various Types of Intermediary Models. <em>China Health Statistics(Chinese)</em>.(CSCD)</li>
 </ol>
 <h3 id="under-review">Under Review</h3>
 <ol>
@@ -176,34 +141,57 @@ fig = {
 <ol>
 <li><strong>Zekai Lu</strong>, Wang Yayu, and Xie Ying. 2020. What we can learn about urban governance in the epidemic: a textual analysis based on documents from the Guangzhou Health Commission during Covid-19.(In Chinese for now) Guangzhou.</li>
 </ol>
-<div id="view"></div>
-  <script>
-    vegaEmbed(
-      '#view',
-      'word-cloud.json'
-    );
+<div id="sankey"></div>
+<script>
+  // Fetch data from external JSON file using path from shortcode parameter
+  fetch('sankey_data.json')
+    .then(response => response.json())
+    .then(data => {
+      // Fetch layout from external JSON file using path from shortcode parameter
+      fetch('sankey_layout.json')
+        .then(response => response.json())
+        .then(layout => {
+          // Create Plotly plot with fetched data and layout
+          Plotly.newPlot('sankey', [data], layout);
+        });
+    });
 </script>
-<h3 id="heading"></h3>
 <h2 id="teaching-experience">TEACHING EXPERIENCE</h2>
+<div id="sankey"></div>
+<script>
+  
+  fetch('sankey_data.json')
+    .then(response => response.json())
+    .then(data => {
+      
+      fetch('sankey_layout.json')
+        .then(response => response.json())
+        .then(layout => {
+          
+          Plotly.newPlot('sankey', [data], layout);
+        });
+    });
+</script>
+
 <ol>
-<li>Fall Term 2020-2021   Teaching assistant of <em><strong>Quantitative Analysis Method</strong></em> (Prof. Ying Xie)</li>
-<li>Fall Term 2020-2021   Teaching assistant of <em><strong>Application Of Statistical Software In Social Sciences</strong></em> (Dr. Nian Liu)</li>
-<li>Spring Term 2020-2021    Teaching assistant of <em><strong>Application of Statistic Software</strong></em> (Dr. Nian Liu)</li>
+<li>Fall Term 2020-2021 Teaching assistant of <em><strong>Quantitative Analysis Method</strong></em> (Prof. Ying Xie)</li>
+<li>Fall Term 2020-2021 Teaching assistant of <em><strong>Application Of Statistical Software In Social Sciences</strong></em> (Dr. Nian Liu)</li>
+<li>Spring Term 2020-2021 Teaching assistant of <em><strong>Application of Statistic Software</strong></em> (Dr. Nian Liu)</li>
 </ol>
 <h2 id="grants-and-awards">GRANTS AND AWARDS</h2>
 <h3 id="awards-and-honors">Awards and Honors</h3>
 <ol>
-<li>2021	<strong>First prize</strong> for thesis in <em>First Chinese Political Science Undergraduate Symposium</em></li>
-<li>2021	<strong>First-class scholarship</strong> of Guangzhou University</li>
-<li>2021	<strong>Outstanding student</strong> at Guangzhou University</li>
-<li>2021	<strong>Excellent academic scale</strong> of Guangzhou University</li>
-<li>2021	<strong>Second prize</strong> of the College Challenge Cup of Guangzhou University</li>
-<li>2020	<strong>Third-class scholarship</strong> of Guangzhou University</li>
+<li>2021 <strong>First prize</strong> for thesis in <em>First Chinese Political Science Undergraduate Symposium</em></li>
+<li>2021 <strong>First-class scholarship</strong> of Guangzhou University</li>
+<li>2021 <strong>Outstanding student</strong> at Guangzhou University</li>
+<li>2021 <strong>Excellent academic scale</strong> of Guangzhou University</li>
+<li>2021 <strong>Second prize</strong> of the College Challenge Cup of Guangzhou University</li>
+<li>2020 <strong>Third-class scholarship</strong> of Guangzhou University</li>
 </ol>
 <h3 id="grants-and-fellowships">Grants and Fellowships</h3>
 <ol>
-<li>2020–21	Provincial scientific research projects for college students (<strong>¥7000</strong>)</li>
-<li>2020–21	College Challenge Cup of Guangzhou University (<strong>¥2500</strong>)</li>
+<li>2020&ndash;21 Provincial scientific research projects for college students (<strong>¥7000</strong>)</li>
+<li>2020&ndash;21 College Challenge Cup of Guangzhou University (<strong>¥2500</strong>)</li>
 </ol>
 <div class="footnotes" role="doc-endnotes">
 <hr>
