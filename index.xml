@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>About on Zekai Lu (陆泽凯)</title>
-    <link>https://williamlorder.github.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content in About on Zekai Lu (陆泽凯)</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="https://williamlorder.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>About</title>
-      <link>https://williamlorder.github.io/about/</link>
+      <title></title>
+      <link>http://localhost:1313/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://williamlorder.github.io/about/</guid>
-      <description>ABOUT ME Zekai Lu(陆泽凯) is a social science researcher who is currently a fast-tracking PhD student in the Department of Sociology at McGill University. His areas of interest include medical sociology, social psychology and computational sociology.Zekai hopes to focus on the field of medical sociology in his graduate research. Zekai has already published many works on some English and Chinese journal.&#xA;Zekai&amp;rsquo;s favourite poem is by Du Fu.This poem depicts a magnificent scene in the transition zone between the Tibetan plateau and the Chengdu plain</description>
+      <guid>http://localhost:1313/about/</guid>
+      <description>book����mark����8���8����������������-�1��A������������������������Users��������zekai���&#x9;�����WorkPlace��������博客�������content������about.md�������� ���0���D���T���d���������8������������������������� ����������]������������3�������������~r���������������������������������������A���i����������������������������������������������������������luzekai������������&#x9;��file:///�����Macintosh HD������P�s���������A������$�����2AE0A805-D16E-4FB2-80D7-EA17403E994A�����������������������������/��������NSURLDocumentIdentifierKey�������_j�2�����dnib������������������������������md????���������� ������������������t�������������������$������@��������T��L������U��L������V��D������ �������� ��������� ��������� ��������� ��������� ��������� ���������0 ��D���������X���������h���������x���������D�������������������d�������&amp;quot;���P������ ��D������</description>
     </item>
     <item>
       <title>Contact</title>
-      <link>https://williamlorder.github.io/contact/</link>
+      <link>http://localhost:1313/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://williamlorder.github.io/contact/</guid>
+      <guid>http://localhost:1313/contact/</guid>
       <description> Academic Email: zekai.lu@mail.mcgill.ca zekai.lu@mcgill.ca Personal Email: luzewilliam@icloud.com Phone: +1 (438) 365 7454 Mailing Address 3460 rue McTavish&#xA;Montreal, QC H3A 0E6&#xA;Canada&#xA;Social Twitter </description>
     </item>
     <item>
       <title>Paper</title>
-      <link>https://williamlorder.github.io/paper/</link>
+      <link>http://localhost:1313/paper/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://williamlorder.github.io/paper/</guid>
+      <guid>http://localhost:1313/paper/</guid>
       <description>Subscription paper1 Exploring the Symptom Patterns of Depression and Anxiety among Teachers during COVID-19: A Latent Profile Analysis Psychological Trauma: Theory, Research, Practice, and Policy The Systematic Traceability and Analysis of COVID-19 Journal of Nonlinear and Convex Analysis Course Paper Nature or Nurture, revisiting the controversy over the Westermarck effect Final Paper for SOCI 515 MEDICINE AND SOCIETY Some of my papers are subscription based. I&amp;rsquo;m posting the format the articles were accepted here.</description>
     </item>
   </channel>
