@@ -77,7 +77,12 @@ partial or no measurement invariance).</p>
 <span>  random <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  between_covariates <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  integration <span class="op">=</span> <span class="fl">15</span>,</span>
-<span>  adaptive <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  adaptive <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  direct <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  classspecific <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pairs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  association <span class="op">=</span> <span class="st">"varying"</span>,</span>
+<span>  slopes <span class="op">=</span> <span class="st">"equal"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -211,6 +216,34 @@ points.</p></dd>
 <dd><p>With <code>random = "factor"</code>: adaptive quadrature (nodes centred and
 scaled at each cluster's posterior of the factor).</p></dd>
 
+
+<dt id="arg-direct">direct<a class="anchor" aria-label="anchor" href="#arg-direct"></a></dt>
+<dd><p>Direct effects of covariates on indicators (DIF, Mplus <code>u ON x</code>): a named
+list <code>list(item = covariate(s))</code>, e.g. <code>list(u3 = x1, u6 = c(x1, x2))</code> (bare names,
+strings or tidyselect helpers); the covariates must also be in <code>covariates</code>. Not
+with <code>group</code>, <code>level2</code>, start values or a GPU device.</p></dd>
+
+
+<dt id="arg-classspecific">classspecific<a class="anchor" aria-label="anchor" href="#arg-classspecific"></a></dt>
+<dd><p>Items (tidyselect) whose direct effects are class-specific (Mplus
+<code>u ON x</code> in every <code>%c#k%</code>); <code>TRUE</code> for all items in <code>direct</code>. Default: equal across
+classes.</p></dd>
+
+
+<dt id="arg-pairs">pairs<a class="anchor" aria-label="anchor" href="#arg-pairs"></a></dt>
+<dd><p>Locally dependent pairs of categorical indicators modelled jointly within
+class: <code>list(c(u4, u5), ...)</code> or <code>c(u4, u5)</code> for one pair.</p></dd>
+
+
+<dt id="arg-association">association<a class="anchor" aria-label="anchor" href="#arg-association"></a></dt>
+<dd><p>With <code>pairs</code>: <code>"varying"</code> (class-specific association, the pair as
+one joint item; Mplus <code>NOMINAL</code> joint item) or <code>"equal"</code> across classes.</p></dd>
+
+
+<dt id="arg-slopes">slopes<a class="anchor" aria-label="anchor" href="#arg-slopes"></a></dt>
+<dd><p>Multigroup models with covariates: covariate slopes <code>"equal"</code> across
+groups (default) or <code>"group"</code>-specific.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -275,9 +308,20 @@ log-likelihood, parameters, class proportions and robust standard errors are wei
 group and <code>invariance</code> sets the measurement model: <code>"full"</code> (item-response
 probabilities equal across groups), <code>"none"</code> (group-specific) or a character vector of
 indicator names whose parameters are group-specific (partial invariance). Groups are
-numbered in the order of <code>levels(factor(group))</code>. Multigroup models cannot yet have
-covariates or weights, and run on the CPU. Compare invariance models with
-<code><a href="compare_models.html">compare_models()</a></code>.</p>
+numbered in the order of <code>levels(factor(group))</code>. With <code>covariates</code> the class logits
+have group-specific intercepts and slopes equal across groups (<code>slopes = "equal"</code>, Mplus
+<code>c ON cg; c ON x</code>) or group-specific (<code>slopes = "group"</code>); <code>weights</code> are allowed too.
+Multigroup models run on the CPU. Compare invariance models with <code><a href="compare_models.html">compare_models()</a></code>.</p>
+<p><strong>Direct effects</strong> (differential item functioning, Mplus <code>u ON x</code>): <code>direct = list(u3 = x1, u6 = c(x1, x2))</code> lets items depend on covariates within class, with a
+cumulative logit <code>P(u &lt;= c | k, x) = logistic(tau_kc - x'beta)</code> (Mplus's ordered model for
+categorical items); the slope is equal across classes unless the item is in
+<code>classspecific</code>. The direct-effect covariates must also be in <code>covariates</code> (so <code>c ON x</code>
+is estimated too). <code><a href="parameters.html">parameters()</a></code> lists their <code>"direct effect"</code> rows.</p>
+<p><strong>Local dependence</strong>: <code>pairs = list(c(u4, u5))</code> models pairs of items jointly within
+class with a log-linear association (Hagenaars 1988), class-specific
+(<code>association = "varying"</code>: the pair as one joint item) or equal across classes; a row
+with one item of a pair missing keeps the other's margin. <code><a href="parameters.html">parameters()</a></code> lists the
+<code>"joint logit"</code> and <code>"association"</code> rows. <code><a href="bvr.html">bvr()</a></code> finds candidate pairs.</p>
 <p><strong>GPU.</strong> <code>device = "cuda"</code> runs the EM iterations on an NVIDIA GPU through CUDA.jl
 (which must be installed in the Julia environment); standard errors and auxiliary
 models are computed on the CPU from the stored data.</p>
@@ -310,6 +354,11 @@ cluster's posterior mean and SD of the factor.</p>
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Collins, L. M., &amp; Lanza, S. T. (2010). <em>Latent Class and Latent Transition Analysis:
 With Applications in the Social, Behavioral, and Health Sciences</em>. Wiley.</p>
+<p>Hagenaars, J. A. (1988). Latent structure models with direct effects between
+indicators: Local dependence models. <em>Sociological Methods &amp; Research</em>, 16(3), 379–405.</p>
+<p>Masyn, K. E. (2017). Measurement invariance and differential item functioning in
+latent class analysis with stepwise multiple indicator multiple cause modeling.
+<em>Structural Equation Modeling</em>, 24, 180–197.</p>
 <p>Clogg, C. C., &amp; Goodman, L. A. (1985). Simultaneous latent structure analysis in
 several groups. <em>Sociological Methodology</em>, 15, 81–110. <a href="https://doi.org/10.2307/270847" class="external-link">doi:10.2307/270847</a></p>
 <p>Dempster, A. P., Laird, N. M., &amp; Rubin, D. B. (1977). Maximum likelihood from

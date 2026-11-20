@@ -73,7 +73,11 @@ chosen by <code>variances</code> and <code>covariances</code>.</p>
 <span>  optseed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  level2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  KB <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  between_covariates <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  between_covariates <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  direct <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  classspecific <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  with <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  slopes <span class="op">=</span> <span class="st">"equal"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -198,6 +202,28 @@ each cluster; columns of <code>data</code> (tidyselect) or a numeric data frame 
 between factor (<code>f ON w</code>). <code>covariates</code> are then within-level covariates of the
 individual classes (<code>cw ON x</code> / <code>c ON x</code>).</p></dd>
 
+
+<dt id="arg-direct">direct<a class="anchor" aria-label="anchor" href="#arg-direct"></a></dt>
+<dd><p>Direct effects of covariates on indicators (DIF, Mplus <code>u ON x</code>): a named
+list <code>list(item = covariate(s))</code>, e.g. <code>list(u3 = x1, u6 = c(x1, x2))</code> (bare names,
+strings or tidyselect helpers); the covariates must also be in <code>covariates</code>. Not
+with <code>group</code>, <code>level2</code>, start values or a GPU device.</p></dd>
+
+
+<dt id="arg-classspecific">classspecific<a class="anchor" aria-label="anchor" href="#arg-classspecific"></a></dt>
+<dd><p>Items (tidyselect) whose direct effects are class-specific (Mplus
+<code>u ON x</code> in every <code>%c#k%</code>); <code>TRUE</code> for all items in <code>direct</code>. Default: equal across
+classes.</p></dd>
+
+
+<dt id="arg-with">with<a class="anchor" aria-label="anchor" href="#arg-with"></a></dt>
+<dd><p>Within-class covariances of selected pairs of indicators (Mplus <code>y1 WITH y2</code>): <code>list(c(y3, y4), ...)</code> or <code>c(y3, y4)</code>.</p></dd>
+
+
+<dt id="arg-slopes">slopes<a class="anchor" aria-label="anchor" href="#arg-slopes"></a></dt>
+<dd><p>Multigroup models with covariates: covariate slopes <code>"equal"</code> across
+groups (default) or <code>"group"</code>-specific.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -211,6 +237,12 @@ available on the GPU. Two-level LPA (<code>level2</code>, <code>KB</code>; see <
 and <code>"varying"</code> variances with <code>covariances = "zero"</code>. Missing values, starts, covariates, weights and multigroup models
 work as described in <code><a href="lca.html">lca()</a></code>; with <code>group</code>, <code>invariance</code> names the indicators whose
 profile parameters are group-specific.</p>
+<p><strong>Direct effects</strong> (Mplus <code>y ON x</code>): <code>direct = list(y2 = x1)</code> gives the item the
+within-class regression <code>y | k, x ~ N(alpha_k + x'beta, sigma^2)</code> (slope equal across
+classes unless the item is in <code>classspecific</code>). <strong>Within-class covariances</strong> of
+selected pairs (Mplus <code>y1 WITH y2</code>): <code>with = list(c(y3, y4))</code>; connected pairs form
+blocks with a full covariance matrix (list every pair inside a block), equal across
+classes with <code>variances = "equal"</code> and class-specific with <code>"varying"</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

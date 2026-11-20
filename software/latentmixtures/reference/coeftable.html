@@ -64,7 +64,9 @@
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A data frame with <code>class</code>, <code>term</code>, <code>estimate</code> (multinomial logit against the
-reference class), <code>se</code> (robust), <code>z</code>, <code>p</code> and <code>oddsratio</code>. For an LTA: the
+reference class), <code>se</code> (robust), <code>z</code>, <code>p</code> and <code>oddsratio</code>. For a multigroup model
+(<code>group</code>): the <code>"class logit"</code> (intercept per group), <code>"class slope"</code> (with
+covariates) and <code>"group logit"</code> rows of <code><a href="parameters.html">parameters()</a></code> with <code>oddsratio</code>. For an LTA: the
 initial-class and transition rows of <code><a href="parameters.html">parameters()</a></code> (Mplus parameterisation, with
 <code>parameter</code>, <code>kind</code>, <code>wave</code>, <code>class</code>, <code>from</code>) and <code>oddsratio</code>.</p>
     </div>

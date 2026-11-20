@@ -300,6 +300,9 @@ and the vignettes.
   : Bootstrap likelihood-ratio test of K-1 against K classes (Mplus
   TECH14)
 
+- [`bvr()`](https://williamlorder.github.io/software/latentmixtures/reference/bvr.md)
+  : Bivariate residuals of a latent class model
+
 - [`classification_table()`](https://williamlorder.github.io/software/latentmixtures/reference/classification_table.md)
   : Classification diagnostics (Mplus CLASSIFICATION QUALITY)
 
