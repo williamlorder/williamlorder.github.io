@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="referrer" content="no-referrer"/><title>LCA, LPA and class enumeration · LatentMixtures.jl</title><meta name="title" content="LCA, LPA and class enumeration · LatentMixtures.jl"/><meta property="og:title" content="LCA, LPA and class enumeration · LatentMixtures.jl"/><meta property="twitter:title" content="LCA, LPA and class enumeration · LatentMixtures.jl"/><meta name="description" content="Documentation for LatentMixtures.jl."/><meta property="og:description" content="Documentation for LatentMixtures.jl."/><meta property="twitter:description" content="Documentation for LatentMixtures.jl."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.63.2/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../index.html">LatentMixtures.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../index.html">Home</a></li><li><span class="tocitem">Example datasets</span><ul><li><a class="tocitem" href="../datasets.html">Overview</a></li><li><a class="tocitem" href="../codebook.html">Codebook</a></li></ul></li><li><span class="tocitem">Tutorials</span><ul><li class="is-active"><a class="tocitem" href="enumeration.html">LCA, LPA and class enumeration</a><ul class="internal"><li><a class="tocitem" href="#The-ACE-data"><span>The ACE data</span></a></li><li><a class="tocitem" href="#Fitting-one-latent-class-model"><span>Fitting one latent class model</span></a></li><li><a class="tocitem" href="#Standard-errors"><span>Standard errors</span></a></li><li><a class="tocitem" href="#Choosing-the-number-of-classes"><span>Choosing the number of classes</span></a></li><li><a class="tocitem" href="#Latent-profile-analysis"><span>Latent profile analysis</span></a></li><li><a class="tocitem" href="#Your-own-data"><span>Your own data</span></a></li><li><a class="tocitem" href="#Checklist"><span>Checklist</span></a></li></ul></li><li><a class="tocitem" href="auxiliary.html">Covariates and three-step methods</a></li><li><a class="tocitem" href="survey.html">Complex survey data</a></li><li><a class="tocitem" href="mixed.html">Mixed and count indicators</a></li><li><a class="tocitem" href="longitudinal.html">Longitudinal models</a></li><li><a class="tocitem" href="invariance.html">Measurement invariance and nested models</a></li><li><a class="tocitem" href="performance.html">GPU and performance</a></li></ul></li><li><a class="tocitem" href="../example_brfss_ace.html">Example: BRFSS ACE</a></li><li><a class="tocitem" href="../plotting.html">Plotting</a></li><li><a class="tocitem" href="../validation.html">Validation against Mplus</a></li><li><a class="tocitem" href="../mplus.html">Mplus interoperability</a></li><li><a class="tocitem" href="../api.html">API reference</a></li><li><a class="tocitem" href="../internals.html">Internals</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Tutorials</a></li><li class="is-active"><a href="enumeration.html">LCA, LPA and class enumeration</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href="enumeration.html">LCA, LPA and class enumeration</a></li></ul></nav><div class="docs-right"><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="LCA,-LPA-and-class-enumeration"><a class="docs-heading-anchor" href="#LCA,-LPA-and-class-enumeration">LCA, LPA and class enumeration</a><a id="LCA,-LPA-and-class-enumeration-1"></a><a class="docs-heading-anchor-permalink" href="#LCA,-LPA-and-class-enumeration" title="Permalink"></a></h1><p>This tutorial fits latent class and latent profile models to two of the example datasets (see <a href="../datasets.html">Example datasets</a>): retrospective reports of eight adverse childhood experiences (ACEs) by 1,500 adults, and six health-behaviour and wellbeing indicators of 1,000 adults. Both were simulated from known models, so the estimates can be compared with the truth. Every block is executed when the documentation is built, with the default random starts (<code>starts = (100, 20)</code>).</p><h2 id="The-ACE-data"><a class="docs-heading-anchor" href="#The-ACE-data">The ACE data</a><a id="The-ACE-data-1"></a><a class="docs-heading-anchor-permalink" href="#The-ACE-data" title="Permalink"></a></h2><pre><code class="language-julia hljs">using LatentMixtures, LinearAlgebra, Printf
+d = dataset(&quot;aces&quot;)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">Dataset &quot;aces&quot;: 1500 rows × 16 columns
+id  ace_emo_abuse  ace_phys_abuse  ace_sex_abuse  ace_emo_neglect  …
+ 1              0               1              0                0  …
+ 2              0               1              1                1  …
+ 3              1               1              0                0  …
+ 4              0               1              0          missing  …
+ 5              1               1        missing                1  …
+ 6              0               0              0                0  …
+  ⋮ (1494 more rows)
+  11 more columns: ace_phys_neglect, ace_violence, ace_substance, ace_mental, female, age, low_parent_edu, weight, depress, srh, smoker</code></pre><p>The eight items are the columns whose names start with <code>ace_</code> (1 = experienced before age 18; 2% of the answers are missing and handled by full-information maximum likelihood):</p><pre><code class="language-julia hljs">Y = d[:, r&quot;^ace_&quot;]
+names(Y)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">8-element Vector{String}:
+ &quot;ace_emo_abuse&quot;
+ &quot;ace_phys_abuse&quot;
+ &quot;ace_sex_abuse&quot;
+ &quot;ace_emo_neglect&quot;
+ &quot;ace_phys_neglect&quot;
+ &quot;ace_violence&quot;
+ &quot;ace_substance&quot;
+ &quot;ace_mental&quot;</code></pre><h2 id="Fitting-one-latent-class-model"><a class="docs-heading-anchor" href="#Fitting-one-latent-class-model">Fitting one latent class model</a><a id="Fitting-one-latent-class-model-1"></a><a class="docs-heading-anchor-permalink" href="#Fitting-one-latent-class-model" title="Permalink"></a></h2><p><code>lca</code> takes a matrix or any Tables.jl table (a <code>Dataset</code>, a <code>DataFrame</code>, …) whose columns are the indicators. Category codes can be anything (here 0/1).</p><pre><code class="language-julia hljs">m = lca(Y, 4)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">Latent class analysis: 4 classes, 8 indicators, n = 1500
+Random starts: 100 / 20; best LL replicated 20 times
+
+  Log-likelihood          -5248.007
+  Free parameters                35
+  AIC                     10566.015
+  BIC                     10751.977
+  Sample-size adj BIC     10640.792
+  Entropy                     0.759
+
+  Class   Proportion   Modal n
+      1       0.5601       876
+      2       0.1855       262
+      3       0.1556       212
+      4       0.0987       150
+
+  Average posterior probabilities (rows: most likely class; columns: class)
+              1       2       3       4
+      1   0.922   0.030   0.048   0.000
+      2   0.059   0.845   0.049   0.047
+      3   0.081   0.066   0.790   0.064
+      4   0.000   0.108   0.077   0.815
+
+  Classification probabilities P(most likely class = column | class = row)
+              1       2       3       4
+      1   0.961   0.018   0.020   0.000
+      2   0.096   0.796   0.050   0.058
+      3   0.178   0.055   0.717   0.049
+      4   0.001   0.083   0.091   0.825
+
+  Item-response probabilities (rows: item = category; columns: classes)
+  ace_emo_abuse = 0   0.9394   0.2093   0.8075   0.1791
+  ace_emo_abuse = 1   0.0606   0.7907   0.1925   0.8209
+  ace_phys_abuse = 0   0.9646   0.4124   0.8323   0.2758
+  ace_phys_abuse = 1   0.0354   0.5876   0.1677   0.7242
+  ace_sex_abuse = 0   0.9548   0.6498   0.9256   0.5116
+  ace_sex_abuse = 1   0.0452   0.3502   0.0744   0.4884
+  ace_emo_neglect = 0   0.9563   0.3676   0.8281   0.2816
+  ace_emo_neglect = 1   0.0437   0.6324   0.1719   0.7184
+  ace_phys_neglect = 0   0.9859   0.6913   0.8909   0.4973
+  ace_phys_neglect = 1   0.0141   0.3087   0.1091   0.5027
+  ace_violence = 0   0.9586   0.7993   0.4595   0.1435
+  ace_violence = 1   0.0414   0.2007   0.5405   0.8565
+  ace_substance = 0   0.9426   0.8137   0.1782   0.1010
+  ace_substance = 1   0.0574   0.1863   0.8218   0.8990
+  ace_mental = 0     0.9136   0.7530   0.4430   0.1898
+  ace_mental = 1     0.0864   0.2470   0.5570   0.8102
+</code></pre><p>The printed summary follows the Mplus mixture output: fit information, class counts, the CLASSIFICATION QUALITY tables and the item-response probabilities. Before reading it, check that the solution is the maximum-likelihood one:</p><pre><code class="language-julia hljs">convergence(m)       # check that the best LL is replicated and EM reached the maximum</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">Convergence check: ✓ no problems found
+  best start converged      yes (77 EM iterations)
+  stage-2 starts converged  20 / 20
+  best LL replicated        20 times
+  LL at EM / after Newton   -5248.0073 / -5248.0073 (gain 5.5e-07; max |gradient| 1.6e-13)
+  smallest class            0.099</code></pre><p>The data were generated with class shares 0.52 (Low adversity), 0.20 (Household dysfunction), 0.17 (Maltreatment) and 0.11 (High adversity). Classes are reported largest first:</p><pre><code class="language-julia hljs">round.(classprobs(m); digits = 3)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">4-element Vector{Float64}:
+ 0.56
+ 0.186
+ 0.156
+ 0.099</code></pre><p>The profiles identify the classes: class 2 has high probabilities of abuse and neglect (Maltreatment), class 3 of domestic violence, household substance misuse and mental illness (Household dysfunction), class 4 of everything (High adversity). Compare with the generating probabilities in the codebook:</p><pre><code class="language-julia hljs">P = reduce(hcat, [ip.probs[end, :] for ip in itemprobs(m)])&#39;     # P(item = 1 | class)
+[names(Y) round.(P; digits = 2)]</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">8×5 Matrix{Any}:
+ &quot;ace_emo_abuse&quot;     0.06  0.79  0.19  0.82
+ &quot;ace_phys_abuse&quot;    0.04  0.59  0.17  0.72
+ &quot;ace_sex_abuse&quot;     0.05  0.35  0.07  0.49
+ &quot;ace_emo_neglect&quot;   0.04  0.63  0.17  0.72
+ &quot;ace_phys_neglect&quot;  0.01  0.31  0.11  0.5
+ &quot;ace_violence&quot;      0.04  0.2   0.54  0.86
+ &quot;ace_substance&quot;     0.06  0.19  0.82  0.9
+ &quot;ace_mental&quot;        0.09  0.25  0.56  0.81</code></pre><p>Posterior probabilities and modal classes are aligned with the analysed rows (<code>m.rows</code>); <a href="../api.html#LatentMixtures.classify-Tuple{LatentMixtureModel}"><code>classify</code></a> returns them for every input row, with <code>missing</code> for rows that were not analysed.</p><pre><code class="language-julia hljs">c = classify(m)
+keys(c), c.class[1:10]</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">((:row, :p1, :p2, :p3, :p4, :class), Union{Missing, Int64}[1, 2, 2, 3, 2, 1, 2, 1, 1, 2])</code></pre><h2 id="Standard-errors"><a class="docs-heading-anchor" href="#Standard-errors">Standard errors</a><a id="Standard-errors-1"></a><a class="docs-heading-anchor-permalink" href="#Standard-errors" title="Permalink"></a></h2><p><a href="../api.html#LatentMixtures.parameters-Tuple{LTAModel}"><code>parameters</code></a> lists every parameter with its robust (Mplus MLR) standard error: class logits, item-response probabilities and logit thresholds.</p><pre><code class="language-julia hljs">pt = parameters(m)
+for i in findall((pt.kind .== &quot;probability&quot;) .&amp; (pt.level .== &quot;1&quot;))[1:8]
+    @printf(&quot;%-16s class %d  %.3f (%.3f)\n&quot;, pt.item[i], pt.class[i], pt.estimate[i], pt.se[i])
+end</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">ace_emo_abuse    class 1  0.061 (0.012)
+ace_phys_abuse   class 1  0.035 (0.008)
+ace_sex_abuse    class 1  0.045 (0.009)
+ace_emo_neglect  class 1  0.044 (0.009)
+ace_phys_neglect class 1  0.014 (0.005)
+ace_violence     class 1  0.041 (0.011)
+ace_substance    class 1  0.057 (0.017)
+ace_mental       class 1  0.086 (0.013)</code></pre><h2 id="Choosing-the-number-of-classes"><a class="docs-heading-anchor" href="#Choosing-the-number-of-classes">Choosing the number of classes</a><a id="Choosing-the-number-of-classes-1"></a><a class="docs-heading-anchor-permalink" href="#Choosing-the-number-of-classes" title="Permalink"></a></h2><p>Fit a sequence of models and compare information criteria. Models with more classes than the data support have flat likelihoods with many local maxima, so the enumeration uses more random starts than the default (with <code>starts = (100, 20)</code> the best log-likelihoods of the 5- and 6-class models are not replicated, and the fit warns). <a href="../api.html#LatentMixtures.fittable-Tuple{AbstractVector{&lt;:LatentMixtureModel}}"><code>fittable</code></a> returns a column table (convert with <code>DataFrame(fittable(fits))</code> if DataFrames is loaded).</p><pre><code class="language-julia hljs">fits = [lca(Y, k; starts = (400, 80)) for k in 1:6]
+ft = fittable(fits)
+@printf(&quot;%2s %5s %11s %11s %11s %8s %5s\n&quot;, &quot;K&quot;, &quot;npar&quot;, &quot;LL&quot;, &quot;BIC&quot;, &quot;saBIC&quot;, &quot;entropy&quot;, &quot;rep&quot;)
+for i in eachindex(ft.K)
+    @printf(&quot;%2d %5d %11.3f %11.3f %11.3f %8.3f %5d\n&quot;, ft.K[i], ft.npar[i], ft.ll[i],
+            ft.bic[i], ft.sabic[i], ft.entropy[i], ft.replicated[i])
+end</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi"> K  npar          LL         BIC       saBIC  entropy   rep
+ 1     8   -6197.364   12453.234   12427.821      NaN    80
+ 2    17   -5413.828   10951.980   10897.976    0.781    80
+ 3    26   -5316.153   10822.451   10739.856    0.794    52
+ 4    35   -5248.007   10751.977   10640.792    0.759    80
+ 5    44   -5240.280   10802.342   10662.566    0.771     9
+ 6    53   -5234.394   10856.389   10688.022    0.770     6</code></pre><p>BIC and saBIC are smallest at four classes, the generating number. The likelihood-ratio χ² is not valid for comparing <code>K − 1</code> with <code>K</code> classes. The Vuong–Lo–Mendell–Rubin test (<a href="../api.html#LatentMixtures.lmr-Tuple{LatentMixtureModel}"><code>lmr</code></a>, Mplus TECH11) and the parametric bootstrap test (<a href="../api.html#LatentMixtures.blrt-Tuple{LatentMixtureModel}"><code>blrt</code></a>, Mplus TECH14) compare each model with one class fewer:</p><pre><code class="language-julia hljs">[(K = f.K, p_lmr = round(lmr(f).p_adjusted; digits = 4)) for f in fits[2:end]]</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">5-element Vector{@NamedTuple{K::Int64, p_lmr::Float64}}:
+ (K = 2, p_lmr = 0.0)
+ (K = 3, p_lmr = 0.0)
+ (K = 4, p_lmr = 0.0)
+ (K = 5, p_lmr = 0.1158)
+ (K = 6, p_lmr = 0.245)</code></pre><p>The LMR test rejects three classes in favour of four and does not reject four in favour of five. The bootstrap test refits both models to every bootstrap sample; it is the most expensive call in the package:</p><pre><code class="language-julia hljs">blrt(fits[4]; reps = 100)       # 3 vs 4 classes</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">Bootstrap likelihood-ratio test: 3 vs 4 classes (TECH14)
+  H0 log-likelihood                       -5316.153
+  2 × log-likelihood difference             136.292
+  Difference in number of parameters              9
+  Approximate p-value                        0.0000
+  Successful bootstrap draws                    100
+</code></pre><div class="admonition is-info" id="LMR-p-values-8c00eaf03f5ab66c"><header class="admonition-header">LMR p-values<a class="admonition-anchor" href="#LMR-p-values-8c00eaf03f5ab66c" title="Permalink"></a></header><div class="admonition-body"><p>The H0 log-likelihood, the statistic and the LMR adjustment agree with Mplus TECH11; the reference distribution (mean, SD) and p-values follow Vuong (1989) and Lo, Mendell &amp; Rubin (2001) and differ from Mplus, which does not document its computation. See the <a href="../validation.html#Validation">Validation</a> page.</p></div></div><h2 id="Latent-profile-analysis"><a class="docs-heading-anchor" href="#Latent-profile-analysis">Latent profile analysis</a><a id="Latent-profile-analysis-1"></a><a class="docs-heading-anchor-permalink" href="#Latent-profile-analysis" title="Permalink"></a></h2><p><a href="../api.html#LatentMixtures.lpa-Tuple{Any, Integer}"><code>lpa</code></a> fits Gaussian mixtures to continuous indicators. Within-profile variances are equal across profiles by default (Mplus default, mclust <code>EEI</code>); <code>variances = :varying</code> makes them profile-specific (<code>VVI</code>), and <code>covariances = :equal</code> / <code>:varying</code> adds within-profile covariances (<code>EEE</code> / <code>VVV</code>).</p><p>The <code>wellbeing</code> data were generated from four profiles — Thriving (24%), Typical (44%), Stressed short sleepers (23%) and Isolated and inactive (10%) — with profile-specific variances:</p><pre><code class="language-julia hljs">w = dataset(&quot;wellbeing&quot;)
+X = w[:, [:sleep, :activity, :fruitveg, :stress, :lonely, :lifesat]]
+eei = [lpa(X, k; starts = (400, 80)) for k in 1:6]
+vvi = [lpa(X, k; variances = :varying, starts = (400, 80)) for k in 1:6]
+(K = 1:6, bic_EEI = round.(bic.(eei); digits = 1), bic_VVI = round.(bic.(vvi); digits = 1))</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">(K = 1:6, bic_EEI = [23062.3, 21433.3, 20973.2, 20558.7, 20516.6, 20504.0], bic_VVI = [23062.3, 21036.6, 20559.0, 20343.7, 20356.4, 20357.4])</code></pre><p>With equal variances BIC keeps falling as profiles are added to absorb the unequal spread; with profile-specific variances it is smallest at the four generating profiles.</p><pre><code class="language-julia hljs">p = vvi[4]
+convergence(p)       # check that the best LL is replicated and EM reached the maximum</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">Convergence check: ✓ no problems found
+  best start converged      yes (35 EM iterations)
+  stage-2 starts converged  80 / 80
+  best LL replicated        80 times
+  LL at EM / after Newton   -9995.7125 / -9995.7125 (gain 8.7e-08; max |gradient| 1.2e-13)
+  smallest class            0.100</code></pre><pre><code class="language-julia hljs">round.(classprobs(p); digits = 3)        # Typical, Thriving, Stressed, Isolated</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">4-element Vector{Float64}:
+ 0.418
+ 0.266
+ 0.216
+ 0.1</code></pre><pre><code class="language-julia hljs">round.(profilemeans(p); digits = 2)      # indicators × profiles, original scale</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">6×4 Matrix{Float64}:
+ 7.09  7.6    5.88  7.89
+ 3.54  5.78   2.84  0.92
+ 2.97  4.39   2.43  1.96
+ 6.09  3.29  11.1   8.68
+ 4.6   3.7    6.05  7.62
+ 6.99  8.26   5.19  4.63</code></pre><pre><code class="language-julia hljs">round.(profilevariances(p); digits = 2)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">6×4 Matrix{Float64}:
+ 0.46  0.37  0.86  1.09
+ 2.18  4.31  2.09  0.38
+ 1.33  1.48  0.88  0.83
+ 3.34  2.25  4.74  6.09
+ 0.63  0.28  1.01  0.86
+ 1.0   0.82  1.62  2.2</code></pre><p>A full covariance model (VVV) estimates the within-profile correlations (generated: stress–life satisfaction −0.35, stress–loneliness 0.25, …):</p><pre><code class="language-julia hljs">vvv = lpa(X, 4; variances = :varying, covariances = :varying)
+S = profilecovariances(vvv)[1]
+round.(S ./ sqrt.(diag(S) * diag(S)&#39;); digits = 2)    # correlations in profile 1</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">6×6 Matrix{Float64}:
+  1.0   -0.0   -0.04  -0.24   0.06   0.1
+ -0.0    1.0    0.3    0.05   0.08   0.08
+ -0.04   0.3    1.0    0.11  -0.03   0.06
+ -0.24   0.05   0.11   1.0    0.21  -0.29
+  0.06   0.08  -0.03   0.21   1.0   -0.21
+  0.1    0.08   0.06  -0.29  -0.21   1.0</code></pre><p>The log-likelihood and the parameters are on the original scale of the data, although the EM runs on standardised indicators; models fitted to rescaled data differ only by the Jacobian of the rescaling.</p><h2 id="Your-own-data"><a class="docs-heading-anchor" href="#Your-own-data">Your own data</a><a id="Your-own-data-1"></a><a class="docs-heading-anchor-permalink" href="#Your-own-data" title="Permalink"></a></h2><p>Raw survey files and Mplus data files often code missing values as <code>-999</code>. Convert the code to <code>missing</code> before fitting; here a whitespace-delimited Mplus file shipped with the package (<code>validation/data/lca_bin.dat</code>, eight binary items):</p><pre><code class="language-julia hljs">path = joinpath(pkgdir(LatentMixtures), &quot;validation&quot;, &quot;data&quot;, &quot;lca_bin.dat&quot;)
+A = reduce(vcat, [permutedims(parse.(Float64, split(l))) for l in eachline(path)])
+Yraw = [x == -999 ? missing : Int(x) for x in A]    # -999 → missing
+count(ismissing, Yraw), size(Yraw)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">(916, (1500, 8))</code></pre><p>With CSV.jl the same is <code>CSV.read(path, DataFrame; delim = &#39; &#39;, ignorerepeated = true, header = false, missingstring = &quot;-999&quot;)</code>.</p><h2 id="Checklist"><a class="docs-heading-anchor" href="#Checklist">Checklist</a><a id="Checklist-1"></a><a class="docs-heading-anchor-permalink" href="#Checklist" title="Permalink"></a></h2><ul><li>Run <a href="../api.html#LatentMixtures.convergence-Tuple{Union{LTAModel, LatentMixtureModel, MultiGroupModel}}"><code>convergence</code></a> on every model you interpret; increase <code>starts</code> until <a href="../api.html#LatentMixtures.bestll_replicated-Tuple{Union{LTAModel, LatentMixtureModel, MultiGroupModel}}"><code>bestll_replicated</code></a> is at least 2 (the summary flags a non-replicated best log-likelihood with ⚠).</li><li>Inspect the smallest class (<code>fitstats(m).smallest</code>) and the classification tables (<a href="../api.html#LatentMixtures.classification_table-Tuple{LTAModel}"><code>classification_table</code></a>) before interpreting a solution.</li><li>BIC and the bootstrap LRT performed best in the simulations of Nylund, Asparouhov &amp; Muthén (2007).</li></ul></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../codebook.html">« Codebook</a><a class="docs-footer-nextpage" href="auxiliary.html">Covariates and three-step methods »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.20.0 on <span class="colophon-date" title="Friday 20 November 2026 05:19">Friday 20 November 2026</span>. Using Julia version 1.13.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
