@@ -148,7 +148,7 @@ latentmixtures manages. Install the Julia packages once:</p>
 <span><span class="co">#                                        causal_path = "path/to/LatentClassCausal.jl")</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://williamlorder.github.io/software/latentmixtures/" class="external-link">latentmixtures</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">latentclasscausal</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://williamlorder.github.io/software/latentclasscausal/">latentclasscausal</a></span><span class="op">)</span></span>
 <span><span class="fu">latentmixtures</span><span class="fu">::</span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lm_start.html" class="external-link">lm_start</a></span><span class="op">(</span>threads <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>    <span class="co"># optional; started automatically otherwise</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Starting Julia ...</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; Julia 1.12.5 started with 4 threads; LatentMixtures.jl loaded.</span></span></code></pre>
@@ -449,7 +449,7 @@ model whose biases sum to zero over classes.</p>
 <span><span class="co">#&gt;   E-values (VanderWeele &amp; Ding 2017) for P(C(1)=k)/P(C(0)=k) given the confounders.</span></span></code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">s1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/lcc-sensitivity-1.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/lcc-sensitivity-1.png" class="r-plt" alt="Corrected effect of the programme on the probability of class 1, with its confidence band, as a function of the assumed bias of class 1, with dashed and dotted lines where the effect and its confidence interval first reach zero" width="504"></p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intervene_dif.html">intervene_dif</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">programme</span>, indicators <span class="op">=</span> <span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, treatment <span class="op">=</span> <span class="va">programme</span>,</span>
 <span>              confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">female</span>, <span class="va">age</span>, <span class="va">low_ses</span>, <span class="va">distress</span>, <span class="va">belonging</span><span class="op">)</span><span class="op">)</span></span>
@@ -978,16 +978,16 @@ errors that are too small, and the printout says so.</p>
 <span>                    confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span>, g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>                    family <span class="op">=</span> <span class="st">"binomial"</span>, B <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 4 thread(s)…</span></span>
-<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 52 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 42 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 32 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 30 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 25 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 20 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 14 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 10 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 5 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 52 s</span></span></code></pre>
+<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 61 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 49 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 39 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 34 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 31 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 23 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 17 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 12 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 6 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 62 s</span></span></code></pre>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ce</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ▸ Class-specific effects of a hypothetical intervention on exposures</span></span>
@@ -1031,16 +1031,16 @@ are far too small (coverage about 50% in the simulation).</p>
 <code class="sourceCode R"><span><span class="va">sh</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intervene_shares.html">intervene_shares</a></span><span class="op">(</span><span class="va">ace_study</span>, exposures <span class="op">=</span> <span class="va">ace1</span><span class="op">:</span><span class="va">ace8</span>, intervene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ace1</span>, <span class="va">ace2</span><span class="op">)</span>,</span>
 <span>                   confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span>, g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">3</span>, B <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 4 thread(s)…</span></span>
-<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 50 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 39 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 35 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 31 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 25 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 19 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 14 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 10 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 5 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 51 s</span></span></code></pre>
+<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 63 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 48 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 44 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 35 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 29 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 23 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 16 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 11 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 6 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 58 s</span></span></code></pre>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sh</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ▸ Post-intervention classification shares (latent class model of all exposures)</span></span>
@@ -1080,16 +1080,16 @@ joint bootstrap of the effect and the
 <span>                        confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span>, g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>                        target <span class="op">=</span> <span class="va">hi</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, B <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 4 thread(s)…</span></span>
-<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 51 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 42 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 37 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 32 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 28 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 21 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 15 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 10 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 5 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 54 s</span></span></code></pre>
+<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 66 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 49 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 42 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 37 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 30 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 24 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 17 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 12 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 7 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 71 s</span></span></code></pre>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ▸ Sensitivity of an intervention effect to a direct effect of the exposure class</span></span>
@@ -1101,7 +1101,7 @@ joint bootstrap of the effect and the
 <span><span class="co">#&gt;   SE: joint bootstrap of the effect and Delta (100 replicates)</span></span></code></pre>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/latent-sensitivity-1.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/latent-sensitivity-1.png" class="r-plt" alt="Corrected intervention effect with its confidence band as a function of the assumed direct effect of class 3 on the outcome, with dashed and dotted lines where the effect and its confidence interval first reach zero" width="504"></p>
 <p><strong>Class-based adjustment:
 <code>adjust = "classes"</code>.</strong> With many adversities some
 profiles are rare and the propensity of the intervened ones becomes
@@ -1236,13 +1236,13 @@ values stored in the result, so they also work after the Julia session
 has ended.</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">r</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Flourishing"</span>, <span class="st">"Moderate"</span>, <span class="st">"Distressed"</span><span class="op">)</span><span class="op">)</span>   <span class="co"># forest plot of the class effects Delta_k</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-lcc-1.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-lcc-1.png" class="r-plt" alt="Forest plot of the programme effects on membership in the Flourishing, Moderate and Distressed classes with 95 percent confidence intervals" width="504"></p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">r</span>, type <span class="op">=</span> <span class="st">"probabilities"</span><span class="op">)</span>  <span class="co"># P(C(1) = k) and P(C(0) = k) with CIs</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-lcc-2.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-lcc-2.png" class="r-plt" alt="Bars of class-membership probabilities under programme and no programme for each class, with 95 percent confidence intervals" width="504"></p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">r</span>, type <span class="op">=</span> <span class="st">"overlap"</span><span class="op">)</span>        <span class="co"># cross-fitted propensity scores by treatment group</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-lcc-3.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-lcc-3.png" class="r-plt" alt="Mirrored histograms of the cross-fitted propensity scores for programme participants and non-participants" width="504"></p>
 <p>For interventions, the default figure shows the mean outcomes under
 the two interventions and their difference. The overlap figure shows,
 for every pattern of the intervened exposures that receives probability
@@ -1254,23 +1254,23 @@ marked; values near zero signal positivity problems.
 <code>type = "weights"</code> shows the inverse-probability weights.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ie</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-ie-1.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-ie-1.png" class="r-plt" alt="Mean outcome under setting both exposures to zero and under the natural course, and their difference, with 95 percent confidence intervals" width="504"></p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">ie</span>, type <span class="op">=</span> <span class="st">"overlap"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-ie-2.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-ie-2.png" class="r-plt" alt="Mirrored histograms of the cross-fitted propensities of each exposure pattern, observed pattern against other patterns, one panel per pattern" width="504"></p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">ie_shift</span>, type <span class="op">=</span> <span class="st">"weights"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-ie-3.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-ie-3.png" class="r-plt" alt="Histogram of the stochastic-shift weights on a log scale" width="504"></p>
 <p><code><a href="../reference/causal_plot.html">causal_plot()</a></code> puts several results side by side,
 e.g. the four estimators of the same intervention, or several
 <code><a href="../reference/intervene_membership.html">intervene_membership()</a></code> estimators:</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ie_ipw</span> <span class="op">&lt;-</span> <span class="fu">ie_fit</span><span class="op">(</span>g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, estimator <span class="op">=</span> <span class="st">"ipw"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/causal_plot.html">causal_plot</a></span><span class="op">(</span>AIPW <span class="op">=</span> <span class="va">ie</span>, TMLE <span class="op">=</span> <span class="va">ie_tmle</span>, `g-formula` <span class="op">=</span> <span class="va">ie_gf</span>, IPTW <span class="op">=</span> <span class="va">ie_ipw</span>, what <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-compare-1.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-compare-1.png" class="r-plt" alt="Mean outcomes and effect of setting both exposures to zero estimated by AIPW, TMLE, g-formula and IPTW, with 95 percent confidence intervals" width="504"></p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/causal_plot.html">causal_plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>AIPW <span class="op">=</span> <span class="va">r</span>, `Outcome regression` <span class="op">=</span> <span class="va">r_or</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-compare-2.png" class="r-plt" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-compare-2.png" class="r-plt" alt="Class-membership effects estimated by AIPW and by outcome regression, side by side for each class" width="504"></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
