@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Function guide • latentclasscausal</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Function guide">
 </head>
@@ -83,11 +83,11 @@ class-model bootstraps use <code>B = 100</code> replicates; use the
 default <code>B = 200</code> for a paper. With <code>B = 200</code> the
 R and Julia interfaces give identical numbers.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">latentmixtures</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://williamlorder.github.io/software/latentmixtures/" class="external-link">latentmixtures</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">latentclasscausal</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/lm_start.html" class="external-link">lm_start</a></span><span class="op">(</span><span class="op">)</span>          <span class="co"># optional (started on first use); threads = "auto" by default</span></span></code></pre></div>
+<span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lm_start.html" class="external-link">lm_start</a></span><span class="op">(</span><span class="op">)</span>          <span class="co"># optional (started on first use); threads = "auto" by default</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Starting Julia ...</span></span></code></pre>
-<pre><code><span><span class="co">#&gt; Julia 1.13.2 started with 10 threads; LatentMixtures.jl loaded.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Julia 1.12.5 started with 4 threads; LatentMixtures.jl loaded.</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">programme</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">ace_study</span><span class="op">)</span></span></code></pre></div>
@@ -201,7 +201,7 @@ below.</p>
 </h2>
 <p><strong>Question it answers.</strong> Does a binary treatment change
 which latent class people belong to? For each class,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Delta_k = P(C(1) = k) - P(C(0) = k)</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Δ</mi><mi>k</mi></msub><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta_k = P(C(1) = k) - P(C(0) = k)</annotation></semantics></math>.
 Example: does a school mental-health programme raise the probability of
 being in the Flourishing wellbeing class?</p>
 <p><strong>When to use it / when not.</strong> The treatment is one 0/1
@@ -212,8 +212,8 @@ use <code><a href="../reference/intervene_latent_outcome.html">intervene_latent_
 by the exposures, see <code><a href="../reference/intervene_within.html">intervene_within()</a></code> and
 <code><a href="../reference/intervene_shares.html">intervene_shares()</a></code>. Valid only if the measurement model is
 the same for treated and untreated (no DIF).</p>
-<p><strong>Data you need.</strong> A <code><a href="https://rdrr.io/pkg/latentmixtures/man/lca.html" class="external-link">latentmixtures::lca()</a></code>
-(or <code><a href="https://rdrr.io/pkg/latentmixtures/man/lpa.html" class="external-link">lpa()</a></code>) model of the outcome indicators fitted
+<p><strong>Data you need.</strong> A <code><a href="https://williamlorder.github.io/software/latentmixtures/reference/lca.html" class="external-link">latentmixtures::lca()</a></code>
+(or <code><a href="https://williamlorder.github.io/software/latentmixtures/reference/lpa.html" class="external-link">lpa()</a></code>) model of the outcome indicators fitted
 <strong>without covariates</strong>, and the same data frame (same rows,
 same order) with the treatment (0/1, logical or two-level factor) and
 the confounders (factors are dummy-coded).</p>
@@ -286,20 +286,21 @@ scores</td>
 </table>
 <p><strong>Example.</strong></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">programme</span>, <span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>   <span class="co"># outcome items only: no treatment, no covariates</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/convergence.html" class="external-link">convergence</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">programme</span>, <span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>   <span class="co"># outcome items only: no treatment, no covariates</span></span>
+<span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/convergence.html" class="external-link">convergence</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Convergence check: ✓ no problems found</span></span>
 <span><span class="co">#&gt;   best start converged      yes (240 EM iterations)</span></span>
 <span><span class="co">#&gt;   stage-2 starts converged  20 / 20</span></span>
 <span><span class="co">#&gt;   best LL replicated        20 times</span></span>
-<span><span class="co">#&gt;   LL at EM / after Newton   -7785.7692 / -7785.7692 (gain 3.0e-06; max |gradient| 3.2e-12)</span></span>
-<span><span class="co">#&gt;   smallest class            0.204</span></span></code></pre>
+<span><span class="co">#&gt;   LL at EM / after Newton   -7785.7692 / -7785.7692 (gain 0.0e+00; max |gradient| 3.2e-12)</span></span>
+<span><span class="co">#&gt;   smallest class            0.204</span></span>
+<span><span class="co">#&gt;   · EM converged; 2 Newton steps (polish = true) raised the log-likelihood by 3.0e-06 (max |gradient| 4.6e-03 → 3.2e-12); the reported solution is the Newton one</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/itemprobs.html" class="external-link">itemprobs</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="va">p</span><span class="op">[</span><span class="st">"1"</span>, <span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>   <span class="co"># P(item = 1 | class)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/itemprobs.html" class="external-link">itemprobs</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="va">p</span><span class="op">[</span><span class="st">"1"</span>, <span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>   <span class="co"># P(item = 1 | class)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;        low_mood worry sleep lonely hopeless enjoy confident friends</span></span>
 <span><span class="co">#&gt; class1     0.05  0.13  0.10   0.04     0.02  0.97      0.91    0.90</span></span>
 <span><span class="co">#&gt; class2     0.30  0.44  0.30   0.33     0.10  0.64      0.51    0.72</span></span>
-<span><span class="co">#&gt; class3     0.86  0.83  0.68   0.68     0.55  0.25      0.15    0.39</span></span></code></pre>
+<span><span class="co">#&gt; class3     0.86  0.83  0.68   0.68     0.56  0.25      0.15    0.39</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intervene_membership.html">intervene_membership</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">programme</span>, treatment <span class="op">=</span> <span class="va">programme</span>,</span>
 <span>                          confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">female</span>, <span class="va">age</span>, <span class="va">low_ses</span>, <span class="va">distress</span>, <span class="va">belonging</span><span class="op">)</span><span class="op">)</span></span>
@@ -312,25 +313,25 @@ scores</td>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            P(C¹=k)  P(C⁰=k)       Δ     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1    0.623    0.429   0.194  0.031    [0.134, 0.254]  &lt;.001</span></span>
-<span><span class="co">#&gt;   Class 2    0.242    0.294  −0.052  0.037   [−0.123, 0.020]   .160</span></span>
-<span><span class="co">#&gt;   Class 3    0.135    0.277  −0.143  0.021  [−0.185, −0.101]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 1    0.626    0.430   0.196  0.031    [0.136, 0.256]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 2    0.238    0.293  −0.055  0.036   [−0.127, 0.016]   .129</span></span>
+<span><span class="co">#&gt;   Class 3    0.136    0.277  −0.141  0.022  [−0.183, −0.099]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Δ = P(C¹=k) − P(C⁰=k); SE from the influence function incl. the measurement model.</span></span>
-<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, propensity range [0.022, 0.922]</span></span></code></pre>
+<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, propensity range [0.019, 0.923]</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"term"</span>, <span class="st">"estimate"</span>, <span class="st">"std.error"</span>, <span class="st">"conf.low"</span>, <span class="st">"conf.high"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;      term    estimate  std.error   conf.low   conf.high</span></span>
-<span><span class="co">#&gt; 1 Class 1  0.19412038 0.03079076  0.1337716  0.25446916</span></span>
-<span><span class="co">#&gt; 2 Class 2 -0.05151209 0.03663291 -0.1233113  0.02028709</span></span>
-<span><span class="co">#&gt; 3 Class 3 -0.14260828 0.02144657 -0.1846428 -0.10057377</span></span></code></pre>
+<span><span class="co">#&gt; 1 Class 1  0.19623314 0.03068359  0.1360944  0.25637188</span></span>
+<span><span class="co">#&gt; 2 Class 2 -0.05540049 0.03649414 -0.1269277  0.01612672</span></span>
+<span><span class="co">#&gt; 3 Class 3 -0.14083265 0.02153219 -0.1830350 -0.09863033</span></span></code></pre>
 <p>Robustness checks:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">conf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"female"</span>, <span class="st">"age"</span>, <span class="st">"low_ses"</span>, <span class="st">"distress"</span>, <span class="st">"belonging"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/intervene_membership.html">intervene_membership</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">programme</span>, treatment <span class="op">=</span> <span class="va">programme</span>, confounders <span class="op">=</span> <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">conf</span><span class="op">)</span>,</span>
 <span>                     estimator <span class="op">=</span> <span class="st">"ipw_bch"</span><span class="op">)</span><span class="op">$</span><span class="va">delta</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; [1]  0.1968477 -0.0513689 -0.1454788</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1]  0.19981618 -0.05269863 -0.14711755</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/intervene_membership.html">intervene_membership</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">programme</span>, treatment <span class="op">=</span> <span class="va">programme</span>, confounders <span class="op">=</span> <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">conf</span><span class="op">)</span>,</span>
 <span>                     estimator <span class="op">=</span> <span class="st">"naive"</span><span class="op">)</span><span class="op">$</span><span class="va">delta</span></span></code></pre></div>
@@ -338,7 +339,7 @@ scores</td>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/intervene_membership.html">intervene_membership</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">programme</span>, treatment <span class="op">=</span> <span class="va">programme</span>, confounders <span class="op">=</span> <span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">conf</span><span class="op">)</span>,</span>
 <span>                     propensity_model <span class="op">=</span> <span class="st">"quadratic"</span>, outcome_model <span class="op">=</span> <span class="st">"quadratic"</span>, trim <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span><span class="op">$</span><span class="va">delta</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; [1]  0.20611972 -0.07019977 -0.13591996</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1]  0.1954222 -0.0542778 -0.1411444</span></span></code></pre>
 <p><strong>Reading the output.</strong></p>
 <ul>
 <li>
@@ -371,7 +372,7 @@ with trimming agree with the default.</li>
 <p><strong>Assumptions and checks.</strong> No unmeasured confounding →
 <code><a href="../reference/intervene_membership_sensitivity.html">intervene_membership_sensitivity()</a></code>; measurement invariance
 across treatment groups → <code><a href="../reference/intervene_dif.html">intervene_dif()</a></code>; the right
-measurement model and <code>K</code> → <code><a href="https://rdrr.io/pkg/latentmixtures/man/convergence.html" class="external-link">convergence()</a></code> and
+measurement model and <code>K</code> → <code><a href="https://williamlorder.github.io/software/latentmixtures/reference/convergence.html" class="external-link">convergence()</a></code> and
 latentmixtures’ model comparison; positivity → the propensity range,
 <code>autoplot(r, type = "overlap")</code>, <code>trim</code>. Double
 robustness covers the propensity and class-regression models, not the
@@ -389,7 +390,7 @@ the others package comparators.</p>
 </h2>
 <p><strong>Question it answers.</strong> Would an intervention on one or
 more binary exposures change membership in a latent class outcome?
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>C</mi><msub><mi>g</mi><mn>1</mn></msub></msup><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>C</mi><msub><mi>g</mi><mn>0</mn></msub></msup><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Delta_k = P(C^{g_1} = k) - P(C^{g_0} = k)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Δ</mi><mi>k</mi></msub><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>C</mi><msub><mi>g</mi><mn>1</mn></msub></msup><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>C</mi><msub><mi>g</mi><mn>0</mn></msub></msup><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta_k = P(C^{g_1} = k) - P(C^{g_0} = k)</annotation></semantics></math>,
 with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
 measured by a separate model. Example: if every student took part, how
@@ -466,13 +467,13 @@ and the <code>confounders</code>.</p>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            P(C^g1=k)  P(C^g0=k)       Δ     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1      0.621      0.431   0.190  0.031    [0.129, 0.251]  &lt;.001</span></span>
-<span><span class="co">#&gt;   Class 2      0.242      0.291  −0.050  0.037   [−0.122, 0.023]   .178</span></span>
-<span><span class="co">#&gt;   Class 3      0.137      0.277  −0.140  0.023  [−0.185, −0.096]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 1      0.625      0.432   0.193  0.031    [0.132, 0.253]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 2      0.238      0.290  −0.052  0.037   [−0.124, 0.020]   .159</span></span>
+<span><span class="co">#&gt;   Class 3      0.137      0.278  −0.141  0.023  [−0.186, −0.096]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   SE from the influence function incl. the measurement model; assumes no DIF.</span></span>
-<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, min pi = 0.0216, max weight = 25.0</span></span></code></pre>
+<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, min pi = 0.0190, max weight = 25.6</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/intervene_latent_outcome.html">intervene_latent_outcome</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">programme</span>, exposures <span class="op">=</span> <span class="va">programme</span>, intervene <span class="op">=</span> <span class="va">programme</span>,</span>
 <span>                         confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">female</span>, <span class="va">age</span>, <span class="va">low_ses</span>, <span class="va">distress</span>, <span class="va">belonging</span><span class="op">)</span>,</span>
@@ -485,13 +486,13 @@ and the <code>confounders</code>.</p>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            P(C^g1=k)  P(C^g0=k)       Δ     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1      0.621      0.520   0.101  0.021    [0.061, 0.142]  &lt;.001</span></span>
-<span><span class="co">#&gt;   Class 2      0.242      0.276  −0.035  0.023   [−0.080, 0.010]   .132</span></span>
+<span><span class="co">#&gt;   Class 1      0.625      0.520   0.105  0.021    [0.065, 0.145]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 2      0.238      0.276  −0.038  0.023   [−0.083, 0.006]   .092</span></span>
 <span><span class="co">#&gt;   Class 3      0.137      0.204  −0.067  0.013  [−0.092, −0.041]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   SE from the influence function incl. the measurement model; assumes no DIF.</span></span>
-<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, min pi = 0.0216, max weight = 25.0</span></span></code></pre>
+<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, min pi = 0.0190, max weight = 25.6</span></span></code></pre>
 <p><strong>Reading the output.</strong></p>
 <ul>
 <li>
@@ -522,7 +523,7 @@ tests it. <em>Status:</em> Experimental.</p>
 <code>intervene_within()</code><a class="anchor" aria-label="anchor" href="#effects-within-each-exposure-class-intervene_within"></a>
 </h2>
 <p><strong>Question it answers.</strong> For whom?
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ψ</mi><mi>k</mi></msub><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>1</mn></msub></msup><mo>−</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>0</mn></msub></msup><mo>∣</mo><mi>C</mi><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\psi_k = E[Y^{g_1} - Y^{g_0} \mid C = k]</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ψ</mi><mi>k</mi></msub><mo>=</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>1</mn></msub></msup><mo>−</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>0</mn></msub></msup><mo>∣</mo><mi>C</mi><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\psi_k = E[Y^{g_1} - Y^{g_0} \mid C = k]</annotation></semantics></math>,
 the effect within each latent class of a class model of all exposures.
 Example: is preventing abuse and neglect worth more for adults from
 high-adversity family contexts?</p>
@@ -535,7 +536,7 @@ is biased: check with <code><a href="../reference/intervene_latent_sensitivity.h
 <p><strong>Data you need.</strong> The data frame with the outcome, all
 binary exposures (<code>exposures</code>), the intervened ones
 (<code>intervene</code>) and the confounders; and either <code>K</code>
-or a fitted <code><a href="https://rdrr.io/pkg/latentmixtures/man/lca.html" class="external-link">latentmixtures::lca()</a></code> model of
+or a fitted <code><a href="https://williamlorder.github.io/software/latentmixtures/reference/lca.html" class="external-link">latentmixtures::lca()</a></code> model of
 <strong>all</strong> exposures with the confounders as covariates.</p>
 <p><strong>Key arguments.</strong></p>
 <table class="table">
@@ -617,17 +618,17 @@ understates SEs when classes are weakly separated</td>
 </table>
 <p><strong>Example.</strong></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">ace_study</span>, <span class="va">ace1</span><span class="op">:</span><span class="va">ace8</span>, K <span class="op">=</span> <span class="fl">3</span>, covariates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/convergence.html" class="external-link">convergence</a></span><span class="op">(</span><span class="va">mA</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">ace_study</span>, <span class="va">ace1</span><span class="op">:</span><span class="va">ace8</span>, K <span class="op">=</span> <span class="fl">3</span>, covariates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/convergence.html" class="external-link">convergence</a></span><span class="op">(</span><span class="va">mA</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Convergence check: ✓ no problems found</span></span>
 <span><span class="co">#&gt;   best start converged      yes (347 EM iterations)</span></span>
 <span><span class="co">#&gt;   stage-2 starts converged  20 / 20</span></span>
 <span><span class="co">#&gt;   best LL replicated        20 times</span></span>
-<span><span class="co">#&gt;   LL at EM / after Newton   -8255.7234 / -8255.7234 (gain 0.0e+00; max |gradient| 5.2e-09)</span></span>
+<span><span class="co">#&gt;   LL at EM / after Newton   -8255.7234 / -8255.7234 (gain 0.0e+00; max |gradient| 5.1e-09)</span></span>
 <span><span class="co">#&gt;   smallest class            0.096</span></span>
-<span><span class="co">#&gt;   · EM stopped with a large gradient (max |gradient| 2.0e-01); 2 Newton steps from the EM estimates raised the log-likelihood by 0.0000 (max |gradient| now 5.2e-09), as Mplus switches from EM to quasi-Newton; the reported solution is the Newton one</span></span></code></pre>
+<span><span class="co">#&gt;   · EM stopped with a large gradient (max |gradient| 2.0e-01); 2 Newton steps from the EM estimates raised the log-likelihood by 0.0000 (max |gradient| now 5.1e-09), as Mplus switches from EM to quasi-Newton; the reported solution is the Newton one</span></span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/itemprobs.html" class="external-link">itemprobs</a></span><span class="op">(</span><span class="va">mA</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="va">p</span><span class="op">[</span><span class="st">"1"</span>, <span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>   <span class="co"># P(ace = 1 | class)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/itemprobs.html" class="external-link">itemprobs</a></span><span class="op">(</span><span class="va">mA</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="va">p</span><span class="op">[</span><span class="st">"1"</span>, <span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>   <span class="co"># P(ace = 1 | class)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;        ace1 ace2 ace3 ace4 ace5 ace6 ace7 ace8</span></span>
 <span><span class="co">#&gt; class1 0.08 0.05 0.03 0.06 0.08 0.08 0.18 0.02</span></span>
 <span><span class="co">#&gt; class2 0.23 0.25 0.06 0.47 0.57 0.49 0.54 0.24</span></span>
@@ -639,17 +640,17 @@ class 3 high adversity with maltreatment (abuse 0.83, neglect 0.54).</p>
 <code class="sourceCode R"><span><span class="va">ce</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intervene_within.html">intervene_within</a></span><span class="op">(</span><span class="va">ace_study</span>, outcome <span class="op">=</span> <span class="va">depressed</span>, exposures <span class="op">=</span> <span class="va">ace1</span><span class="op">:</span><span class="va">ace8</span>,</span>
 <span>                       intervene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ace1</span>, <span class="va">ace2</span><span class="op">)</span>, confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span>,</span>
 <span>                       g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, model <span class="op">=</span> <span class="va">mA</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, B <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 10 thread(s)…</span></span>
-<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 135 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 112 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 97 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 81 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 64 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 49 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 37 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 23 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 12 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 116 s</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 4 thread(s)…</span></span>
+<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 50 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 42 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 36 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 30 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 26 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 19 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 14 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 9 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 5 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 51 s</span></span></code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ce</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ▸ Class-specific effects of a hypothetical intervention on exposures</span></span>
@@ -660,17 +661,17 @@ class 3 high adversity with maltreatment (abuse 0.83, neglect 0.54).</p>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            P(C=k)  E[Y^g1|k]  E[Y^g0|k]   psi_k     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1   0.674      0.120      0.129  −0.008  0.003  [−0.015, −0.002]   .011</span></span>
-<span><span class="co">#&gt;   Class 2   0.230      0.157      0.188  −0.032  0.028   [−0.087, 0.024]   .264</span></span>
-<span><span class="co">#&gt;   Class 3   0.096      0.137      0.345  −0.209  0.052  [−0.311, −0.106]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 1   0.674      0.120      0.129  −0.009  0.003  [−0.015, −0.002]   .007</span></span>
+<span><span class="co">#&gt;   Class 2   0.230      0.153      0.188  −0.035  0.026   [−0.086, 0.015]   .173</span></span>
+<span><span class="co">#&gt;   Class 3   0.096      0.136      0.345  −0.210  0.052  [−0.312, −0.108]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Population effect: −0.033 (SE 0.007); overlap: min pi = 0.0054, max weight = 8.8</span></span>
+<span><span class="co">#&gt;   Population effect: −0.034 (SE 0.007); overlap: min pi = 0.0050, max weight = 10.1</span></span>
 <span><span class="co">#&gt;   Assumes no direct class effect on the outcome (Y^g independent of C given A, X).</span></span>
 <span><span class="co">#&gt;   SE: bootstrap (100 replicates)</span></span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">ce</span><span class="op">)</span></span></code></pre></div>
-<p><img src="function-guide_files/figure-html/within-1.png" class="r-plt" alt="" width="504"></p>
+<p><img src="function-guide_files/figure-html/within-1.png" class="r-plt" width="504"></p>
 <p><strong>Reading the output.</strong></p>
 <ul>
 <li>
@@ -704,7 +705,7 @@ the sample), where it would lower the risk of past-year depression from
 <p><strong>Assumptions and checks.</strong> Those of
 <code><a href="../reference/intervene_effect.html">intervene_effect()</a></code>, plus no direct effect of the class on
 the outcome
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>Y</mi><mi>g</mi></msup><mo>⟂</mo><mi>C</mi><mo>∣</mo><mi>A</mi><mo>,</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y^g \perp C \mid A, X</annotation></semantics></math>)
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>Y</mi><mi>g</mi></msup><mo>⊥</mo><mi>C</mi><mo>∣</mo><mi>A</mi><mo>,</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y^g \perp C \mid A, X</annotation></semantics></math>)
 → <code><a href="../reference/intervene_latent_sensitivity.html">intervene_latent_sensitivity()</a></code>; a correct class model →
 <code>convergence(mA)</code>; not doubly robust → vary
 <code>outcome_model</code>; keep the bootstrap SEs. <em>Status:</em>
@@ -721,16 +722,16 @@ Experimental.</p>
 the exposures classify the exposure profiles an intervention produces?
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>π</mi><mi>k</mi><mi>g</mi></msubsup><annotation encoding="application/x-tex">\pi_k^g</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><mo>=</mo><msubsup><mi>π</mi><mi>k</mi><msub><mi>g</mi><mn>1</mn></msub></msubsup><mo>−</mo><msubsup><mi>π</mi><mi>k</mi><msub><mi>g</mi><mn>0</mn></msub></msubsup></mrow><annotation encoding="application/x-tex">\Delta_k = \pi_k^{g_1} - \pi_k^{g_0}</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Δ</mi><mi>k</mi></msub><mo>=</mo><msubsup><mi>π</mi><mi>k</mi><msub><mi>g</mi><mn>1</mn></msub></msubsup><mo>−</mo><msubsup><mi>π</mi><mi>k</mi><msub><mi>g</mi><mn>0</mn></msub></msubsup></mrow><annotation encoding="application/x-tex">\Delta_k = \pi_k^{g_1} - \pi_k^{g_0}</annotation></semantics></math>.
 Example: after preventing abuse and neglect, how many profiles would
 still look like the high-adversity pattern?</p>
 <p><strong>When to use it / when not.</strong> To connect an
 intervention to the class sizes of the LCA literature and to get the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
 behind <code><a href="../reference/intervene_latent_sensitivity.html">intervene_latent_sensitivity()</a></code>. No outcome is
 needed. It is <strong>descriptive</strong>: the class generates the
 exposures, so preventing abuse changes nobody’s class; never report
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
 as a causal effect on class membership.</p>
 <p><strong>Data you need.</strong> As <code><a href="../reference/intervene_within.html">intervene_within()</a></code>
 without the outcome.</p>
@@ -794,17 +795,17 @@ small)</td>
 <code class="sourceCode R"><span><span class="va">sh</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intervene_shares.html">intervene_shares</a></span><span class="op">(</span><span class="va">ace_study</span>, exposures <span class="op">=</span> <span class="va">ace1</span><span class="op">:</span><span class="va">ace8</span>, intervene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ace1</span>, <span class="va">ace2</span><span class="op">)</span>,</span>
 <span>                       confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span>, g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                       model <span class="op">=</span> <span class="va">mA</span>, B <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 10 thread(s)…</span></span>
-<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 153 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 130 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 99 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 85 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 68 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 55 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 40 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 25 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 12 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 121 s</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 4 thread(s)…</span></span>
+<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 47 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 38 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 35 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 30 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 26 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 19 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 14 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 10 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 5 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 51 s</span></span></code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sh</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ▸ Post-intervention classification shares (latent class model of all exposures)</span></span>
@@ -815,9 +816,9 @@ small)</td>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            pi_k^g1  pi_k^g0       Δ     SE            95% CI</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1    0.733    0.674   0.058  0.008    [0.043, 0.074]</span></span>
-<span><span class="co">#&gt;   Class 2    0.247    0.230   0.017  0.025   [−0.032, 0.066]</span></span>
-<span><span class="co">#&gt;   Class 3    0.020    0.096  −0.075  0.026  [−0.127, −0.024]</span></span>
+<span><span class="co">#&gt;   Class 1    0.733    0.674   0.058  0.007    [0.045, 0.072]</span></span>
+<span><span class="co">#&gt;   Class 2    0.247    0.230   0.017  0.022   [−0.027, 0.061]</span></span>
+<span><span class="co">#&gt;   Class 3    0.020    0.096  −0.075  0.024  [−0.121, −0.029]</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Shares of the model's classification of post-intervention profiles; not a causal effect</span></span>
@@ -830,10 +831,10 @@ small)</td>
 <p><strong>Reading the output.</strong></p>
 <ul>
 <li>
-<em>pi_k^g0</em>: under the natural course, the class sizes;
-<em>pi_k^g1</em>: the share of post-intervention profiles classified
-into each class. Only 2.0% would look like the high-adversity pattern
-(now 9.6%); most move to the low-adversity class.</li>
+<em>pi_k<sup>g0<em>: under the natural course, the class sizes;
+</em>pi_k</sup>g1</em>: the share of post-intervention profiles
+classified into each class. Only 2.0% would look like the high-adversity
+pattern (now 9.6%); most move to the low-adversity class.</li>
 <li>
 <em>Δ, SE, 95% CI</em>: bootstrap SEs (class model refitted): Δ =
 −0.075 for the high-adversity class (95% CI −0.121 to −0.029). With
@@ -857,7 +858,7 @@ how profiles would be classified, not a change in family contexts.”</li>
 <h2 id="the-intervention-estimators-intervene_effect">5. The intervention estimators: <code>intervene_effect()</code><a class="anchor" aria-label="anchor" href="#the-intervention-estimators-intervene_effect"></a>
 </h2>
 <p><strong>Question it answers.</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ψ</mi><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>1</mn></msub></msup><mo stretchy="false" form="postfix">]</mo><mo>−</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>0</mn></msub></msup><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\psi = E[Y^{g_1}] - E[Y^{g_0}]</annotation></semantics></math>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ψ</mi><mo>=</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>1</mn></msub></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>0</mn></msub></msup><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\psi = E[Y^{g_1}] - E[Y^{g_0}]</annotation></semantics></math>:
 the effect on an observed outcome of intervening on some binary
 exposures, adjusting for the other exposures and the confounders.
 Example: how much lower would past-year depression be if childhood abuse
@@ -977,13 +978,13 @@ propensities</td>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;                        Estimate     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   E[Yᵍ¹]                  0.130  0.009    [0.113, 0.148]       </span></span>
+<span><span class="co">#&gt;   E[Yᵍ¹]                  0.129  0.009    [0.112, 0.147]       </span></span>
 <span><span class="co">#&gt;   E[Yᵍ⁰]                  0.163  0.007    [0.149, 0.178]       </span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   ψ = E[Yᵍ¹] − E[Yᵍ⁰]    −0.033  0.007  [−0.046, −0.020]  &lt;.001</span></span>
+<span><span class="co">#&gt;   ψ = E[Yᵍ¹] − E[Yᵍ⁰]    −0.034  0.007  [−0.047, −0.021]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Overlap: min P(A_S = s | H) = 0.0054, max weight = 8.8</span></span>
+<span><span class="co">#&gt;   Overlap: min P(A_S = s | H) = 0.0050, max weight = 10.1</span></span>
 <span><span class="co">#&gt;   ⚠ near-violation of positivity: some post-intervention profiles are rare</span></span></code></pre>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ie</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu"><a href="../reference/intervene_effect.html">intervene_effect</a></span><span class="op">(</span><span class="va">ace_study</span>, exposures <span class="op">=</span> <span class="va">ace1</span><span class="op">:</span><span class="va">ace8</span>, intervene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ace1</span>, <span class="va">ace2</span><span class="op">)</span>,</span>
@@ -993,10 +994,10 @@ propensities</td>
 <span>                         estimator <span class="op">=</span> <span class="st">"tmle"</span><span class="op">)</span><span class="op">$</span><span class="va">effect</span>,</span>
 <span>        dep_halve   <span class="op">=</span> <span class="fu">ie</span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">depressed</span>, g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">shift</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span><span class="op">$</span><span class="va">effect</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; health_aipw    dep_tmle   dep_halve </span></span>
-<span><span class="co">#&gt;      2.2328     -0.0336     -0.0199</span></span></code></pre>
+<span><span class="co">#&gt;      2.2639     -0.0345     -0.0205</span></span></code></pre>
 <p>Adjusting for the latent pattern of the other six exposures:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">ace_study</span>, <span class="va">ace3</span><span class="op">:</span><span class="va">ace8</span>, K <span class="op">=</span> <span class="fl">3</span>, covariates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">ace_study</span>, <span class="va">ace3</span><span class="op">:</span><span class="va">ace8</span>, K <span class="op">=</span> <span class="fl">3</span>, covariates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">adj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"exposures"</span>, <span class="st">"classes"</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">ie</span><span class="op">(</span>outcome <span class="op">=</span> <span class="va">depressed</span>, g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"binomial"</span>,</span>
 <span>          adjust <span class="op">=</span> <span class="va">a</span>, adjust_model <span class="op">=</span> <span class="va">mr</span><span class="op">)</span></span>
@@ -1004,9 +1005,9 @@ propensities</td>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">adj</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;      adjust      effect          se      min_pi max_weight</span></span>
-<span><span class="co">#&gt; 1 exposures -0.03293098 0.006621283 0.005384251   8.822055</span></span>
-<span><span class="co">#&gt; 2   classes -0.03409203 0.005682950 0.005775681   3.132625</span></span>
-<span><span class="co">#&gt; 3      both -0.03431965 0.005698877 0.005957572   7.153974</span></span></code></pre>
+<span><span class="co">#&gt; 1 exposures -0.03407103 0.006594700 0.005046343  10.084326</span></span>
+<span><span class="co">#&gt; 2   classes -0.03521508 0.005641716 0.004797183   2.975186</span></span>
+<span><span class="co">#&gt; 3      both -0.03506270 0.005757146 0.005955781   5.580061</span></span></code></pre>
 <p><strong>Reading the output.</strong></p>
 <ul>
 <li>
@@ -1056,9 +1057,9 @@ generates the exposures also raised the outcome directly, part of the
 effect would be confounding. Under an additive class effect
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>γ</mi><annotation encoding="application/x-tex">\gamma</annotation></semantics></math>
 the bias is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>k</mi></msub><msub><mi>γ</mi><mi>k</mi></msub><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\sum_k \gamma_k \Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>k</mi></msub><msub><mi>γ</mi><mi>k</mi></msub><msub><mi>Δ</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\sum_k \gamma_k \Delta_k</annotation></semantics></math>
 (the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
 of <code><a href="../reference/intervene_shares.html">intervene_shares()</a></code>); how large would
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>γ</mi><annotation encoding="application/x-tex">\gamma</annotation></semantics></math>
 have to be to explain the effect away?</p>
@@ -1119,7 +1120,7 @@ for the curve; confidence level</td>
 <td align="left">joint bootstrap of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>ψ</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat\psi</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi mathvariant="normal">Δ</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat\Delta</annotation></semantics></math>;
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>Δ</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat\Delta</annotation></semantics></math>;
 <code>"none"</code> is optimistic</td>
 </tr>
 <tr class="odd">
@@ -1144,33 +1145,33 @@ and
 <span>                                  intervene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ace1</span>, <span class="va">ace2</span><span class="op">)</span>, confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span>,</span>
 <span>                                  g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, model <span class="op">=</span> <span class="va">mA</span>, family <span class="op">=</span> <span class="st">"binomial"</span>,</span>
 <span>                                  target <span class="op">=</span> <span class="va">hi</span>, B <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 10 thread(s)…</span></span>
-<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 213 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 195 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 151 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 132 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 100 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 79 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 56 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 35 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 17 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 161 s</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 4 thread(s)…</span></span>
+<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 50 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 41 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 35 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 30 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 26 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 20 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 14 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 10 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 5 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 52 s</span></span></code></pre>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ▸ Sensitivity of an intervention effect to a direct effect of the exposure class</span></span>
 <span><span class="co">#&gt;   g1: set to (0, 0)</span></span>
 <span><span class="co">#&gt;   g0: natural course</span></span>
-<span><span class="co">#&gt;   Uncorrected effect: −0.033 (SE 0.006); Δ_k = 0.058, 0.017, −0.075</span></span>
-<span><span class="co">#&gt;   Tipping points in gamma of class 3 vs the rest: effect = 0 at 0.437; 95% CI includes 0 from 0.240</span></span>
+<span><span class="co">#&gt;   Uncorrected effect: −0.034 (SE 0.006); Δ_k = 0.058, 0.017, −0.075</span></span>
+<span><span class="co">#&gt;   Tipping points in gamma of class 3 vs the rest: effect = 0 at 0.452; 95% CI includes 0 from 0.244</span></span>
 <span><span class="co">#&gt;   bias = sum_k gamma_k Delta_k; gamma in outcome units (risk difference for a binary outcome).</span></span>
 <span><span class="co">#&gt;   SE: joint bootstrap of the effect and Delta (100 replicates)</span></span></code></pre>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>tipping_zero <span class="op">=</span> <span class="va">s</span><span class="op">$</span><span class="va">tipping_zero</span>, tipping_ci <span class="op">=</span> <span class="va">s</span><span class="op">$</span><span class="va">tipping_ci</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; tipping_zero   tipping_ci </span></span>
-<span><span class="co">#&gt;    0.4371844    0.2396413</span></span></code></pre>
+<span><span class="co">#&gt;    0.4523194    0.2444653</span></span></code></pre>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></code></pre></div>
-<p><img src="function-guide_files/figure-html/sens-1.png" class="r-plt" alt="" width="504"></p>
+<p><img src="function-guide_files/figure-html/sens-1.png" class="r-plt" width="504"></p>
 <p><strong>Reading the output.</strong></p>
 <ul>
 <li>
@@ -1211,9 +1212,9 @@ approximation there). <em>Status:</em> Experimental.</p>
 <p><strong>Question it answers.</strong> How strong would an unmeasured
 confounder of treatment and class membership have to be? Per class:
 E-values (VanderWeele &amp; Ding 2017) for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><msub><mi>R</mi><mi>k</mi></msub><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">RR_k = P(C(1)=k)/P(C(0)=k)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><msub><mi>R</mi><mi>k</mi></msub><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">RR_k = P(C(1)=k)/P(C(0)=k)</annotation></semantics></math>,
 and tipping points of an additive bias model
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi mathvariant="normal">Δ</mi><mo accent="true">̂</mo></mover><mi>k</mi></msub><mo>→</mo><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><mo>+</mo><msub><mi>b</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\hat\Delta_k \to \Delta_k + b_k</annotation></semantics></math>,
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>Δ</mi><mo accent="true">̂</mo></mover><mi>k</mi></msub><mo>→</mo><msub><mi>Δ</mi><mi>k</mi></msub><mo>+</mo><msub><mi>b</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\hat\Delta_k \to \Delta_k + b_k</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>k</mi></msub><msub><mi>b</mi><mi>k</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\sum_k b_k = 0</annotation></semantics></math>,
 probability units).</p>
 <p><strong>When to use it / when not.</strong> After every observational
@@ -1287,9 +1288,9 @@ scenario</td>
 <span><span class="co">#&gt;   ───────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;                 Δ   bias  corrected            95% CI  tip (=0)  tip (CI)     RR  E-value  E (CI)</span></span>
 <span><span class="co">#&gt;   ───────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1   0.194  0.000      0.194    [0.134, 0.254]     0.194     0.134  1.452     2.26    1.90</span></span>
-<span><span class="co">#&gt;   Class 2  −0.052  0.000     −0.052   [−0.123, 0.020]    −0.052     0.000  0.825     1.72    1.00</span></span>
-<span><span class="co">#&gt;   Class 3  −0.143  0.000     −0.143  [−0.185, −0.101]    −0.143    −0.101  0.486     3.53    2.70</span></span>
+<span><span class="co">#&gt;   Class 1   0.196  0.000      0.196    [0.136, 0.256]     0.196     0.136  1.456     2.27    1.90</span></span>
+<span><span class="co">#&gt;   Class 2  −0.055  0.000     −0.055   [−0.127, 0.016]    −0.055     0.000  0.811     1.77    1.00</span></span>
+<span><span class="co">#&gt;   Class 3  −0.141  0.000     −0.141  [−0.183, −0.099]    −0.141    −0.099  0.491     3.49    2.67</span></span>
 <span><span class="co">#&gt;   ───────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Estimate -&gt; Delta_k + bias_k with sum_k bias_k = 0 (probability units).</span></span>
@@ -1300,12 +1301,12 @@ scenario</td>
 <span>                                       bias <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.03</span>, <span class="op">-</span><span class="fl">0.02</span>, <span class="op">-</span><span class="fl">0.01</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span>corrected <span class="op">=</span> <span class="va">sb</span><span class="op">$</span><span class="va">corrected</span>, lower <span class="op">=</span> <span class="va">sb</span><span class="op">$</span><span class="va">lower</span>, upper <span class="op">=</span> <span class="va">sb</span><span class="op">$</span><span class="va">upper</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;            [,1]   [,2]   [,3]</span></span>
-<span><span class="co">#&gt; corrected 0.164 -0.032 -0.133</span></span>
-<span><span class="co">#&gt; lower     0.104 -0.103 -0.175</span></span>
-<span><span class="co">#&gt; upper     0.224  0.040 -0.091</span></span></code></pre>
+<span><span class="co">#&gt; corrected 0.166 -0.035 -0.131</span></span>
+<span><span class="co">#&gt; lower     0.106 -0.107 -0.173</span></span>
+<span><span class="co">#&gt; upper     0.226  0.036 -0.089</span></span></code></pre>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">sm</span><span class="op">)</span></span></code></pre></div>
-<p><img src="function-guide_files/figure-html/msens-1.png" class="r-plt" alt="" width="504"></p>
+<p><img src="function-guide_files/figure-html/msens-1.png" class="r-plt" width="504"></p>
 <p><strong>Reading the output.</strong></p>
 <ul>
 <li>
@@ -1328,7 +1329,7 @@ corrected effects are +0.166, −0.035 and −0.131.</li>
 was 2.27 (1.90 for the confidence limit).”</li>
 </ul>
 <p><strong>Assumptions and checks.</strong> The E-values treat
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(C(a)=k)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">P(C(a)=k)</annotation></semantics></math>
 as genuine risks, which requires an invariant measurement model →
 <code><a href="../reference/intervene_dif.html">intervene_dif()</a></code>. <em>Status:</em>
 Established-with-adaptation (E-values); Experimental (additive bias
@@ -1347,12 +1348,12 @@ classes the same for treated and untreated, as the BCH correction of
 them with the scaled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
 difference test, and recomputes
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
 with treatment-specific classification errors.</p>
 <p><strong>When to use it / when not.</strong> With every
 <code><a href="../reference/intervene_membership.html">intervene_membership()</a></code> analysis. It is a diagnostic: the
 non-invariant
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
 is noisy and meaningful only if the classes keep their meaning in both
 groups.</p>
 <p><strong>Data you need.</strong> The measurement model, the data frame
@@ -1414,9 +1415,9 @@ invariance)</td>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            Delta (invariant)     SE  Delta (non-inv.)     SE  change</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1              0.194  0.031             0.132  0.032  −0.062</span></span>
-<span><span class="co">#&gt;   Class 2             −0.052  0.037            −0.021  0.037   0.030</span></span>
-<span><span class="co">#&gt;   Class 3             −0.143  0.021            −0.111  0.023   0.032</span></span>
+<span><span class="co">#&gt;   Class 1              0.196  0.031             0.134  0.032  −0.062</span></span>
+<span><span class="co">#&gt;   Class 2             −0.055  0.036            −0.021  0.037   0.034</span></span>
+<span><span class="co">#&gt;   Class 3             −0.141  0.022            −0.113  0.022   0.028</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   No significant DIF: the change column is noise around zero.</span></span></code></pre>
@@ -1436,14 +1437,14 @@ reject.</li>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
 difference test did not reject measurement invariance across treatment
 groups
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo stretchy="false" form="prefix">(</mo><mn>24</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>22.79</mn></mrow><annotation encoding="application/x-tex">\chi^2(24) = 22.79</annotation></semantics></math>,
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>24</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>22.79</mn></mrow><annotation encoding="application/x-tex">\chi^2(24) = 22.79</annotation></semantics></math>,
 p = .53).”</li>
 </ul>
 <p><strong>Assumptions and checks.</strong> The usual
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
 caveats (sparse tables, boundary estimates). <em>Status:</em>
 Experimental (the test is established, the recomputed
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
 is the package’s own).</p>
 <p><strong>Related functions.</strong>
 <code><a href="../reference/intervene_membership.html">intervene_membership()</a></code>,
@@ -1453,7 +1454,7 @@ is the package’s own).</p>
 <h2 id="effects-within-a-subgroup-intervene_subgroup">9. Effects within a subgroup: <code>intervene_subgroup()</code><a class="anchor" aria-label="anchor" href="#effects-within-a-subgroup-intervene_subgroup"></a>
 </h2>
 <p><strong>Question it answers.</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>G</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo>∣</mo><mi>G</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo>∣</mo><mi>G</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Delta_k(G) = P(C(1)=k \mid G) - P(C(0)=k \mid G)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Δ</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo>∣</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo>∣</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta_k(G) = P(C(1)=k \mid G) - P(C(0)=k \mid G)</annotation></semantics></math>
 for a subgroup
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
 defined by pre-treatment variables. Example: is the programme’s effect
@@ -1515,13 +1516,13 @@ subgroup)</td>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            P(C¹=k)  P(C⁰=k)       Δ     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1    0.580    0.420   0.160  0.044    [0.074, 0.246]  &lt;.001</span></span>
-<span><span class="co">#&gt;   Class 2    0.254    0.252   0.002  0.052   [−0.101, 0.104]   .975</span></span>
-<span><span class="co">#&gt;   Class 3    0.166    0.328  −0.162  0.030  [−0.221, −0.102]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 1    0.584    0.421   0.163  0.044    [0.077, 0.249]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 2    0.248    0.252  −0.003  0.052   [−0.105, 0.098]   .949</span></span>
+<span><span class="co">#&gt;   Class 3    0.167    0.327  −0.160  0.030  [−0.219, −0.100]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Δ = P(C¹=k) − P(C⁰=k); SE from the influence function incl. the measurement model.</span></span>
-<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, propensity range [0.022, 0.922]</span></span></code></pre>
+<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, propensity range [0.019, 0.923]</span></span></code></pre>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/intervene_subgroup.html">intervene_subgroup</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">programme</span>, treatment <span class="op">=</span> <span class="va">programme</span>,</span>
 <span>                   confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">female</span>, <span class="va">age</span>, <span class="va">low_ses</span>, <span class="va">distress</span>, <span class="va">belonging</span><span class="op">)</span>, subset <span class="op">=</span> <span class="va">female</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
@@ -1534,13 +1535,13 @@ subgroup)</td>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            P(C¹=k)  P(C⁰=k)       Δ     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1    0.668    0.438   0.229  0.043    [0.144, 0.314]  &lt;.001</span></span>
-<span><span class="co">#&gt;   Class 2    0.230    0.336  −0.106  0.050  [−0.205, −0.008]   .035</span></span>
-<span><span class="co">#&gt;   Class 3    0.103    0.225  −0.123  0.029  [−0.179, −0.066]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 1    0.670    0.439   0.231  0.043    [0.146, 0.315]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 2    0.227    0.336  −0.109  0.050  [−0.208, −0.011]   .030</span></span>
+<span><span class="co">#&gt;   Class 3    0.103    0.224  −0.121  0.029  [−0.178, −0.064]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Δ = P(C¹=k) − P(C⁰=k); SE from the influence function incl. the measurement model.</span></span>
-<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, propensity range [0.022, 0.922]</span></span></code></pre>
+<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, propensity range [0.019, 0.923]</span></span></code></pre>
 <p><strong>Reading the output.</strong></p>
 <ul>
 <li>

@@ -149,6 +149,8 @@ e.g. <code>dat[dat == -999] &lt;- NA</code>.</p>
 <span class="r-in"><span><span class="co"># which patterns of childhood adversity are there? (4 classes in the generating model)</span></span></span>
 <span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="lca.html">lca</a></span><span class="op">(</span><span class="va">aces</span>, <span class="fu">starts_with</span><span class="op">(</span><span class="st">"ace_"</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Starting Julia ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Package "Tables.jl" (version &gt;= 1.0) is required. Installing ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting Julia ...</span>
 <span class="r-in"><span><span class="fu"><a href="classprobs.html">classprobs</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>   <span class="co"># close to the generating shares 0.52, 0.20, 0.17, 0.11</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.56010023 0.18552219 0.15563946 0.09873811</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>

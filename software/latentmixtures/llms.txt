@@ -1,7 +1,7 @@
 # latentmixtures
 
 A tidy R interface to the Julia package
-[LatentMixtures.jl](https://williamlorder.github.io/software/LatentMixtures.jl):
+[LatentMixtures.jl](https://williamlorder.github.io/software/latentmixtures-jl/):
 latent class analysis (LCA), latent profile analysis (LPA), latent
 transition analysis (LTA), multigroup models with full, partial or no
 measurement invariance, two-level (multilevel) latent class and profile

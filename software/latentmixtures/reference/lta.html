@@ -372,17 +372,37 @@ With Applications in the Social, Behavioral, and Health Sciences</em>. Wiley.</p
 <span class="r-in"><span><span class="co"># continuous indicators: sleep, activity, stress and loneliness of 700 adults in 2019,</span></span></span>
 <span class="r-in"><span><span class="co"># 2020 and 2021; stress and loneliness rose in every profile in 2020 (generated +1.5, +1.0)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">wellbeing_panel</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sleep_1</span><span class="op">:</span><span class="va">lonely_1</span>, <span class="va">sleep_2</span><span class="op">:</span><span class="va">lonely_2</span>, <span class="va">sleep_3</span><span class="op">:</span><span class="va">lonely_3</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'sleep_1' not found</span>
-<span class="r-in"><span><span class="va">c_full</span> <span class="op">&lt;-</span> <span class="fu">lta</span><span class="op">(</span><span class="va">wellbeing_panel</span>, waves <span class="op">=</span> <span class="va">wb</span>, K <span class="op">=</span> <span class="fl">3</span>, indicators <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'wb' not found</span>
-<span class="r-in"><span><span class="va">c_part</span> <span class="op">&lt;-</span> <span class="fu">lta</span><span class="op">(</span><span class="va">wellbeing_panel</span>, waves <span class="op">=</span> <span class="va">wb</span>, K <span class="op">=</span> <span class="fl">3</span>, indicators <span class="op">=</span> <span class="st">"continuous"</span>,</span></span>
+<span class="r-in"><span><span class="va">c_full</span> <span class="op">&lt;-</span> <span class="fu">lta</span><span class="op">(</span><span class="va">wellbeing_panel</span>, waves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sleep_1</span><span class="op">:</span><span class="va">lonely_1</span>, <span class="va">sleep_2</span><span class="op">:</span><span class="va">lonely_2</span>, <span class="va">sleep_3</span><span class="op">:</span><span class="va">lonely_3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              K <span class="op">=</span> <span class="fl">3</span>, indicators <span class="op">=</span> <span class="st">"continuous"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">c_part</span> <span class="op">&lt;-</span> <span class="fu">lta</span><span class="op">(</span><span class="va">wellbeing_panel</span>, waves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sleep_1</span><span class="op">:</span><span class="va">lonely_1</span>, <span class="va">sleep_2</span><span class="op">:</span><span class="va">lonely_2</span>, <span class="va">sleep_3</span><span class="op">:</span><span class="va">lonely_3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              K <span class="op">=</span> <span class="fl">3</span>, indicators <span class="op">=</span> <span class="st">"continuous"</span>,</span></span>
 <span class="r-in"><span>              invariance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>stress_1 <span class="op">=</span> <span class="fl">2</span>, lonely_1 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>   <span class="co"># free in 2020 only</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'wb' not found</span>
 <span class="r-in"><span><span class="fu"><a href="compare_models.html">compare_models</a></span><span class="op">(</span><span class="va">c_full</span>, <span class="va">c_part</span><span class="op">)</span>        <span class="co"># partial invariance fits better</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'c_full' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ━━ Nested model comparison ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   c_full (M0) nested in c_part (M1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ─────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Model               LL  Par.  Scaling</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ─────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M0: c_full  -14154.175    30   1.0117</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   M1: c_part  -13944.351    36   1.0022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ─────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ── Difference tests ────────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ───────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Test                                 Chi-square  df       p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ───────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Likelihood ratio (naive, ML)            419.648   6  &lt;0.001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Satorra-Bentler (2001) scaled (MLR)     439.787   6  &lt;0.001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ───────────────────────────────────────────────────────────</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Scaling correction of the difference cd = 0.9542</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ΔAIC = -407.648, ΔBIC = -380.341, ΔsaBIC = -399.393 (M1 - M0)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="profilemeans.html">profilemeans</a></span><span class="op">(</span><span class="va">c_part</span>, wave <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="profilemeans.html">profilemeans</a></span><span class="op">(</span><span class="va">c_part</span>, wave <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'c_part' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            class1 class2 class3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sleep_2      0.00   0.00   0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> activity_2   0.00   0.00   0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> stress_2     1.28   1.68   1.32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lonely_2     1.11   0.84   0.98</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

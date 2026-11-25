@@ -104,15 +104,22 @@ to 2021 <code>[.85 .12 .03; .15 .75 .10; .08 .25 .67]</code>. Licence: CC0 1.0 (
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># latent transitions between three wellbeing profiles, with the 2020 means of stress</span></span></span>
 <span class="r-in"><span><span class="co"># and loneliness free (partial measurement invariance)</span></span></span>
-<span class="r-in"><span><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sleep_1</span><span class="op">:</span><span class="va">lonely_1</span>, <span class="va">sleep_2</span><span class="op">:</span><span class="va">lonely_2</span>, <span class="va">sleep_3</span><span class="op">:</span><span class="va">lonely_3</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'sleep_1' not found</span>
-<span class="r-in"><span><span class="va">t3</span> <span class="op">&lt;-</span> <span class="fu"><a href="lta.html">lta</a></span><span class="op">(</span><span class="va">wellbeing_panel</span>, waves <span class="op">=</span> <span class="va">wb</span>, K <span class="op">=</span> <span class="fl">3</span>, indicators <span class="op">=</span> <span class="st">"continuous"</span>,</span></span>
+<span class="r-in"><span><span class="va">t3</span> <span class="op">&lt;-</span> <span class="fu"><a href="lta.html">lta</a></span><span class="op">(</span><span class="va">wellbeing_panel</span>, waves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sleep_1</span><span class="op">:</span><span class="va">lonely_1</span>, <span class="va">sleep_2</span><span class="op">:</span><span class="va">lonely_2</span>, <span class="va">sleep_3</span><span class="op">:</span><span class="va">lonely_3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>          K <span class="op">=</span> <span class="fl">3</span>, indicators <span class="op">=</span> <span class="st">"continuous"</span>,</span></span>
 <span class="r-in"><span>          invariance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>stress_1 <span class="op">=</span> <span class="fl">2</span>, lonely_1 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'wb' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting Julia ...</span>
 <span class="r-in"><span><span class="fu"><a href="profilemeans.html">profilemeans</a></span><span class="op">(</span><span class="va">t3</span>, wave <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>   <span class="co"># Thriving, Typical and Struggling profiles (sorted by size)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 't3' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              class1   class2    class3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sleep_1    7.028023 7.449509  6.021452</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> activity_1 3.215445 5.714955  1.676311</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> stress_1   6.500571 3.709779 10.063516</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lonely_1   4.694226 3.824914  6.811451</span>
 <span class="r-in"><span><span class="fu"><a href="transitions.html">transitions</a></span><span class="op">(</span><span class="va">t3</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 't3' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         to</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> from        class1     class2     class3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   class1 0.6978460 0.14891794 0.15323603</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   class2 0.2021311 0.73752592 0.06034301</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   class3 0.1478838 0.07156245 0.78055376</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Causal effects on latent classes and interventions on indicators • latentclasscausal</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Causal effects on latent classes and interventions on indicators">
 </head>
@@ -142,16 +142,16 @@ and 2.2 the latent-class methods themselves.</p>
 <p>Both run in Julia (LatentClassCausal.jl), in the Julia session that
 latentmixtures manages. Install the Julia packages once:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">latentmixtures</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/install_julia_packages.html" class="external-link">install_julia_packages</a></span><span class="op">(</span>causal_url <span class="op">=</span> <span class="st">"https://github.com/williamlorder/LatentClassCausal.jl"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">latentmixtures</span><span class="fu">::</span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/install_julia_packages.html" class="external-link">install_julia_packages</a></span><span class="op">(</span>causal_url <span class="op">=</span> <span class="st">"https://github.com/williamlorder/LatentClassCausal.jl"</span><span class="op">)</span></span>
 <span><span class="co"># or from local copies:</span></span>
 <span><span class="co"># latentmixtures::install_julia_packages(path = "path/to/LatentMixtures.jl",</span></span>
 <span><span class="co">#                                        causal_path = "path/to/LatentClassCausal.jl")</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">latentmixtures</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://williamlorder.github.io/software/latentmixtures/" class="external-link">latentmixtures</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">latentclasscausal</span><span class="op">)</span></span>
-<span><span class="fu">latentmixtures</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/lm_start.html" class="external-link">lm_start</a></span><span class="op">(</span>threads <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>    <span class="co"># optional; started automatically otherwise</span></span></code></pre></div>
+<span><span class="fu">latentmixtures</span><span class="fu">::</span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lm_start.html" class="external-link">lm_start</a></span><span class="op">(</span>threads <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>    <span class="co"># optional; started automatically otherwise</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Starting Julia ...</span></span></code></pre>
-<pre><code><span><span class="co">#&gt; Julia 1.13.2 started with 4 threads; LatentMixtures.jl loaded.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Julia 1.12.5 started with 4 threads; LatentMixtures.jl loaded.</span></span></code></pre>
 <p>The examples use the two simulated datasets of the package, whose
 true effects are known (<code><a href="../reference/programme.html">?programme</a></code>,
 <code><a href="../reference/ace_study.html">?ace_study</a></code>).</p>
@@ -179,13 +179,15 @@ participation is confounded by indication:</p>
 <h3 id="estimand">Estimand<a class="anchor" aria-label="anchor" href="#estimand"></a>
 </h3>
 <p>With potential classes
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">C(a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">C(a)</annotation></semantics></math>
 under treatment
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>,
 the effect on class
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 is</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><munder><mo>∑</mo><mi>k</mi></munder><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><mo>=</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">\Delta_k = P(C(1) = k) - P(C(0) = k), \qquad \sum_k \Delta_k = 0 .</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Δ</mi><mi>k</mi></msub><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><munder><mo>∑</mo><mi>k</mi></munder><msub><mi>Δ</mi><mi>k</mi></msub><mo>=</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\Delta_k = P(C(1) = k) - P(C(0) = k), \qquad \sum_k \Delta_k = 0 .
+</annotation></semantics></math></p>
 </div>
 <div class="section level3">
 <h3 id="estimation">Estimation<a class="anchor" aria-label="anchor" href="#estimation"></a>
@@ -195,11 +197,11 @@ fitted <strong>without covariates</strong> to the same rows. It corrects
 for classification error with BCH pseudo-outcomes: if
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>c</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat c</annotation></semantics></math>
 is the modal class and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mrow><mi>k</mi><mi>j</mi></mrow></msub><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mover><mi>c</mi><mo accent="true">̂</mo></mover><mo>=</mo><mi>j</mi><mo>∣</mo><mi>C</mi><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">D_{kj} = P(\hat c = j \mid C = k)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mrow><mi>k</mi><mi>j</mi></mrow></msub><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>c</mi><mo accent="true">̂</mo></mover><mo>=</mo><mi>j</mi><mo>∣</mo><mi>C</mi><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">D_{kj} = P(\hat c = j \mid C = k)</annotation></semantics></math>
 the classification-error matrix of the measurement model, then
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Z</mi><mi>k</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>D</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">[</mo><mover><mi>c</mi><mo accent="true">̂</mo></mover><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">Z_k = (D^{-1})[\hat c, k]</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Z</mi><mi>k</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>D</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mover><mi>c</mi><mo accent="true">̂</mo></mover><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">Z_k = (D^{-1})[\hat c, k]</annotation></semantics></math>
 has conditional mean
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo>=</mo><mi>k</mi><mo>∣</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(C = k \mid A, X)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mo>=</mo><mi>k</mi><mo>∣</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">P(C = k \mid A, X)</annotation></semantics></math>
 (Bolck, Croon and Hagenaars 2004; Vermunt 2010). The default estimator
 is augmented inverse probability weighting (Bang and Robins 2005) of
 these pseudo-outcomes, with a propensity model and a latent class
@@ -208,14 +210,15 @@ come from the influence function of the stacked estimating equations, so
 they include the uncertainty of the measurement model.</p>
 <p>Does the programme move students into the Flourishing class?</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="va">programme</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>   <span class="co"># measurement model: items only</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/convergence.html" class="external-link">convergence</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>   <span class="co"># check that the best LL is replicated and EM reached the maximum</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="va">programme</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>   <span class="co"># measurement model: items only</span></span>
+<span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/convergence.html" class="external-link">convergence</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>   <span class="co"># check that the best LL is replicated and EM reached the maximum</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Convergence check: ✓ no problems found</span></span>
 <span><span class="co">#&gt;   best start converged      yes (240 EM iterations)</span></span>
 <span><span class="co">#&gt;   stage-2 starts converged  20 / 20</span></span>
 <span><span class="co">#&gt;   best LL replicated        20 times</span></span>
-<span><span class="co">#&gt;   LL at EM / after Newton   -7785.7692 / -7785.7692 (gain 3.0e-06; max |gradient| 3.2e-12)</span></span>
-<span><span class="co">#&gt;   smallest class            0.204</span></span></code></pre>
+<span><span class="co">#&gt;   LL at EM / after Newton   -7785.7692 / -7785.7692 (gain 0.0e+00; max |gradient| 3.2e-12)</span></span>
+<span><span class="co">#&gt;   smallest class            0.204</span></span>
+<span><span class="co">#&gt;   · EM converged; 2 Newton steps (polish = true) raised the log-likelihood by 3.0e-06 (max |gradient| 4.6e-03 → 3.2e-12); the reported solution is the Newton one</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m</span>                <span class="co"># 1 Flourishing, 2 Moderate, 3 Distressed</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ━━ Latent class analysis ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span></span>
@@ -247,8 +250,8 @@ they include the uncertainty of the measurement model.</p>
 <span><span class="co">#&gt;   sleep = 1          0.097    0.304    0.683</span></span>
 <span><span class="co">#&gt;   lonely = 0         0.956    0.671    0.323</span></span>
 <span><span class="co">#&gt;   lonely = 1         0.044    0.329    0.677</span></span>
-<span><span class="co">#&gt;   hopeless = 0       0.978    0.900    0.445</span></span>
-<span><span class="co">#&gt;   hopeless = 1       0.022    0.100    0.555</span></span>
+<span><span class="co">#&gt;   hopeless = 0       0.978    0.899    0.445</span></span>
+<span><span class="co">#&gt;   hopeless = 1       0.022    0.101    0.555</span></span>
 <span><span class="co">#&gt;   enjoy = 0          0.029    0.364    0.745</span></span>
 <span><span class="co">#&gt;   enjoy = 1          0.971    0.636    0.255</span></span>
 <span><span class="co">#&gt;   confident = 0      0.087    0.489    0.853</span></span>
@@ -269,39 +272,39 @@ they include the uncertainty of the measurement model.</p>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            P(C¹=k)  P(C⁰=k)       Δ     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1    0.623    0.429   0.194  0.031    [0.134, 0.254]  &lt;.001</span></span>
-<span><span class="co">#&gt;   Class 2    0.242    0.294  −0.052  0.037   [−0.123, 0.020]   .160</span></span>
-<span><span class="co">#&gt;   Class 3    0.135    0.277  −0.143  0.021  [−0.185, −0.101]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 1    0.626    0.430   0.196  0.031    [0.136, 0.256]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 2    0.238    0.293  −0.055  0.036   [−0.127, 0.016]   .129</span></span>
+<span><span class="co">#&gt;   Class 3    0.136    0.277  −0.141  0.022  [−0.183, −0.099]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Δ = P(C¹=k) − P(C⁰=k); SE from the influence function incl. the measurement model.</span></span>
-<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, propensity range [0.022, 0.922]</span></span></code></pre>
+<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, propensity range [0.019, 0.923]</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>                    <span class="co"># Delta_k, P(C(1) = k), P(C(0) = k) with SEs and CIs</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;      term class    estimate  std.error statistic      p.value   conf.low</span></span>
-<span><span class="co">#&gt; 1 Class 1     1  0.19412038 0.03079076  6.304501 2.891241e-10  0.1337716</span></span>
-<span><span class="co">#&gt; 2 Class 2     2 -0.05151209 0.03663291 -1.406170 1.596737e-01 -0.1233113</span></span>
-<span><span class="co">#&gt; 3 Class 3     3 -0.14260828 0.02144657 -6.649467 2.941555e-11 -0.1846428</span></span>
+<span><span class="co">#&gt; 1 Class 1     1  0.19623314 0.03068359  6.395377 1.601515e-10  0.1360944</span></span>
+<span><span class="co">#&gt; 2 Class 2     2 -0.05540049 0.03649414 -1.518065 1.289980e-01 -0.1269277</span></span>
+<span><span class="co">#&gt; 3 Class 3     3 -0.14083265 0.02153219 -6.540563 6.128785e-11 -0.1830350</span></span>
 <span><span class="co">#&gt;     conf.high      psi1 psi1.std.error      psi0 psi0.std.error</span></span>
-<span><span class="co">#&gt; 1  0.25446916 0.6231211     0.04064258 0.4290007     0.03583616</span></span>
-<span><span class="co">#&gt; 2  0.02028709 0.2420179     0.03667034 0.2935300     0.03076214</span></span>
-<span><span class="co">#&gt; 3 -0.10057377 0.1348610     0.01684969 0.2774693     0.02435104</span></span></code></pre>
+<span><span class="co">#&gt; 1  0.25637188 0.6263778     0.04041572 0.4301447     0.03583990</span></span>
+<span><span class="co">#&gt; 2  0.01612672 0.2379277     0.03644535 0.2933282     0.03081426</span></span>
+<span><span class="co">#&gt; 3 -0.09863033 0.1356945     0.01681772 0.2765271     0.02444146</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">r</span>, se <span class="op">=</span> <span class="st">"fixed"</span><span class="op">)</span>      <span class="co"># measurement model treated as known</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;      term class    estimate  std.error statistic      p.value   conf.low</span></span>
-<span><span class="co">#&gt; 1 Class 1     1  0.19412038 0.03065453  6.332518 2.411926e-10  0.1340386</span></span>
-<span><span class="co">#&gt; 2 Class 2     2 -0.05151209 0.03585648 -1.436619 1.508263e-01 -0.1217895</span></span>
-<span><span class="co">#&gt; 3 Class 3     3 -0.14260828 0.02051725 -6.950654 3.635958e-12 -0.1828213</span></span>
+<span><span class="co">#&gt; 1 Class 1     1  0.19623314 0.03054539  6.424314 1.324655e-10  0.1363653</span></span>
+<span><span class="co">#&gt; 2 Class 2     2 -0.05540049 0.03569695 -1.551967 1.206702e-01 -0.1253652</span></span>
+<span><span class="co">#&gt; 3 Class 3     3 -0.14083265 0.02056606 -6.847819 7.498423e-12 -0.1811414</span></span>
 <span><span class="co">#&gt;     conf.high      psi1 psi1.std.error      psi0 psi0.std.error</span></span>
-<span><span class="co">#&gt; 1  0.25420216 0.6231211     0.04064258 0.4290007     0.03583616</span></span>
-<span><span class="co">#&gt; 2  0.01876532 0.2420179     0.03667034 0.2935300     0.03076214</span></span>
-<span><span class="co">#&gt; 3 -0.10239522 0.1348610     0.01684969 0.2774693     0.02435104</span></span></code></pre>
+<span><span class="co">#&gt; 1  0.25610100 0.6263778     0.04041572 0.4301447     0.03583990</span></span>
+<span><span class="co">#&gt; 2  0.01456426 0.2379277     0.03644535 0.2933282     0.03081426</span></span>
+<span><span class="co">#&gt; 3 -0.10052392 0.1356945     0.01681772 0.2765271     0.02444146</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>                  <span class="co"># entropy, propensity and pseudo-outcome ranges</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;   nobs K estimator folds treatment n_confounders   entropy propensity.min</span></span>
-<span><span class="co">#&gt; 1 2000 3      aipw     5 programme             5 0.6655446     0.02161042</span></span>
+<pre><code><span><span class="co">#&gt;   nobs K estimator folds treatment n_confounders  entropy propensity.min</span></span>
+<span><span class="co">#&gt; 1 2000 3      aipw     5 programme             5 0.665586     0.01904342</span></span>
 <span><span class="co">#&gt;   propensity.max pseudo.min pseudo.max</span></span>
-<span><span class="co">#&gt; 1      0.9224886 -0.3861859   1.526489</span></span></code></pre>
+<span><span class="co">#&gt; 1      0.9228678 -0.3859328   1.526334</span></span></code></pre>
 <p>The true effects are +0.179 (Flourishing), -0.059 (Moderate) and
 -0.120 (Distressed): the programme raises the share of flourishing
 students by about 18 percentage points and lowers the share of
@@ -332,12 +335,12 @@ treatment-by-covariate interactions:</p>
 <p>───────────────────────────────────────────────────────────────────────
 AIPW AIPW (quadratic) Outcome regression Unadjusted
 ───────────────────────────────────────────────────────────────────────
-Δ Class 1 0.194*** 0.206*** 0.201 0.022<br>
-(0.031) (0.031) (—) (—)<br>
-Δ Class 2 −0.052 −0.070 −0.057 −0.020<br>
-(0.037) (0.038) (—) (—)<br>
-Δ Class 3 −0.143*** −0.136*** −0.144 −0.003<br>
-(0.021) (0.023) (—) (—)<br>
+Δ Class 1 0.196*** 0.195*** 0.200 0.022<br>
+(0.031) (0.032) (—) (—)<br>
+Δ Class 2 −0.055 −0.054 −0.057 −0.020<br>
+(0.036) (0.039) (—) (—)<br>
+Δ Class 3 −0.141*** −0.141*** −0.144 −0.003<br>
+(0.022) (0.023) (—) (—)<br>
 N 2000 2000 2000 2000<br>
 Estimator AIPW (BCH) AIPW (BCH) OR (3-step ML) Unadjusted Treatment
 programme programme programme programme Entropy 0.666 0.666 0.666
@@ -354,21 +357,21 @@ distressed to begin with, which hides the benefit of the programme.</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Consistency:</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">C = C(A)</annotation></semantics></math>.</li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">C = C(A)</annotation></semantics></math>.</li>
 <li>
 <strong>Positivity:</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo>=</mo><mn>1</mn><mo>∣</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0 &lt; P(A = 1 \mid X) &lt; 1</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mo>=</mo><mn>1</mn><mo>∣</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0 &lt; P(A = 1 \mid X) &lt; 1</annotation></semantics></math>.
 Check <code>glance(r)$propensity.min</code> and
 <code>propensity.max</code>; <code>trim</code> truncates extreme
 propensity scores.</li>
 <li>
 <strong>No unmeasured confounding:</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>⟂</mo><mi>A</mi><mo>∣</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">C(a) \perp A \mid X</annotation></semantics></math>.</li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⊥</mo><mi>A</mi><mo>∣</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">C(a) \perp A \mid X</annotation></semantics></math>.</li>
 <li>
 <strong>A valid and invariant measurement model:</strong> the latent
 class model holds and the indicators depend on treatment and confounders
 only through the class,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>⟂</mo><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>∣</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">Y \perp (A, X) \mid C</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>⊥</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mo>,</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∣</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">Y \perp (A, X) \mid C</annotation></semantics></math>
 (no differential item functioning).</li>
 <li>
 <strong>Identifiability:</strong> the measurement model is
@@ -385,11 +388,11 @@ assumption 4: if the treatment changes how people answer the indicators
 within a class, the pseudo-outcomes are biased and no choice of working
 models repairs this. Check measurement invariance across treatment
 groups first, for example with a multigroup model and
-<code><a href="https://rdrr.io/pkg/latentmixtures/man/compare_models.html" class="external-link">compare_models()</a></code>:</p>
+<code><a href="https://williamlorder.github.io/software/latentmixtures/reference/compare_models.html" class="external-link">compare_models()</a></code>:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">inv</span>  <span class="op">&lt;-</span> <span class="va">programme</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span>, group <span class="op">=</span> <span class="va">programme</span><span class="op">)</span></span>
-<span><span class="va">free</span> <span class="op">&lt;-</span> <span class="va">programme</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span>, group <span class="op">=</span> <span class="va">programme</span>, invariance <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/compare_models.html" class="external-link">compare_models</a></span><span class="op">(</span><span class="va">inv</span>, <span class="va">free</span><span class="op">)</span>   <span class="co"># large p: the items work the same in both groups</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">inv</span>  <span class="op">&lt;-</span> <span class="va">programme</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span>, group <span class="op">=</span> <span class="va">programme</span><span class="op">)</span></span>
+<span><span class="va">free</span> <span class="op">&lt;-</span> <span class="va">programme</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span>, group <span class="op">=</span> <span class="va">programme</span>, invariance <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/compare_models.html" class="external-link">compare_models</a></span><span class="op">(</span><span class="va">inv</span>, <span class="va">free</span><span class="op">)</span>   <span class="co"># large p: the items work the same in both groups</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ━━ Nested model comparison ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span></span>
 <span><span class="co">#&gt;   inv (M0) nested in free (M1)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -401,12 +404,12 @@ groups first, for example with a multigroup model and
 <span><span class="co">#&gt;   ──────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Difference tests ────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   ───────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Test                          Chi-square  df      p</span></span>
-<span><span class="co">#&gt;   ───────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Likelihood ratio (naive, ML)      23.815  24  0.472</span></span>
-<span><span class="co">#&gt;   Satorra-Bentler scaled (MLR)      22.794  24  0.532</span></span>
-<span><span class="co">#&gt;   ───────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;   ──────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;   Test                                 Chi-square  df      p</span></span>
+<span><span class="co">#&gt;   ──────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;   Likelihood ratio (naive, ML)             23.815  24  0.472</span></span>
+<span><span class="co">#&gt;   Satorra-Bentler (2001) scaled (MLR)      22.794  24  0.532</span></span>
+<span><span class="co">#&gt;   ──────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   Scaling correction of the difference cd = 1.0448</span></span>
 <span><span class="co">#&gt;   ΔAIC = 24.185, ΔBIC = 158.606, ΔsaBIC = 82.357 (M1 - M0)</span></span></code></pre>
 <p>Invariance is needed with respect to the confounders as well, which
@@ -419,12 +422,12 @@ this check does not cover.</p>
 <code><a href="../reference/intervene_dif.html">intervene_dif()</a></code> is the DIF check of assumption 4 in one
 step: it fits the invariant and the treatment-specific measurement
 models, tests them, and shows how
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
 changes when the classification errors are allowed to differ between
 treated and untreated. <code><a href="../reference/intervene_membership_sensitivity.html">intervene_membership_sensitivity()</a></code>
 addresses assumption 3 (unmeasured confounding): E-values for the causal
 risk ratio
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(C(1)=k)/P(C(0)=k)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">P(C(1)=k)/P(C(0)=k)</annotation></semantics></math>
 (VanderWeele &amp; Ding 2017) and the tipping points of an additive bias
 model whose biases sum to zero over classes.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -437,16 +440,16 @@ model whose biases sum to zero over classes.</p>
 <span><span class="co">#&gt;   ───────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;                 Δ   bias  corrected            95% CI  tip (=0)  tip (CI)     RR  E-value  E (CI)</span></span>
 <span><span class="co">#&gt;   ───────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1   0.194  0.000      0.194    [0.134, 0.254]     0.194     0.134  1.452     2.26    1.90</span></span>
-<span><span class="co">#&gt;   Class 2  −0.052  0.000     −0.052   [−0.123, 0.020]    −0.052     0.000  0.825     1.72    1.00</span></span>
-<span><span class="co">#&gt;   Class 3  −0.143  0.000     −0.143  [−0.185, −0.101]    −0.143    −0.101  0.486     3.53    2.70</span></span>
+<span><span class="co">#&gt;   Class 1   0.196  0.000      0.196    [0.136, 0.256]     0.196     0.136  1.456     2.27    1.90</span></span>
+<span><span class="co">#&gt;   Class 2  −0.055  0.000     −0.055   [−0.127, 0.016]    −0.055     0.000  0.811     1.77    1.00</span></span>
+<span><span class="co">#&gt;   Class 3  −0.141  0.000     −0.141  [−0.183, −0.099]    −0.141    −0.099  0.491     3.49    2.67</span></span>
 <span><span class="co">#&gt;   ───────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Estimate -&gt; Delta_k + bias_k with sum_k bias_k = 0 (probability units).</span></span>
 <span><span class="co">#&gt;   E-values (VanderWeele &amp; Ding 2017) for P(C(1)=k)/P(C(0)=k) given the confounders.</span></span></code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">s1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/lcc-sensitivity-1.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/lcc-sensitivity-1.png" class="r-plt" width="504"></p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intervene_dif.html">intervene_dif</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">programme</span>, indicators <span class="op">=</span> <span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, treatment <span class="op">=</span> <span class="va">programme</span>,</span>
 <span>              confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">female</span>, <span class="va">age</span>, <span class="va">low_ses</span>, <span class="va">distress</span>, <span class="va">belonging</span><span class="op">)</span><span class="op">)</span></span>
@@ -457,9 +460,9 @@ model whose biases sum to zero over classes.</p>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            Delta (invariant)     SE  Delta (non-inv.)     SE  change</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1              0.194  0.031             0.132  0.032  −0.062</span></span>
-<span><span class="co">#&gt;   Class 2             −0.052  0.037            −0.021  0.037   0.030</span></span>
-<span><span class="co">#&gt;   Class 3             −0.143  0.021            −0.111  0.023   0.032</span></span>
+<span><span class="co">#&gt;   Class 1              0.196  0.031             0.134  0.032  −0.062</span></span>
+<span><span class="co">#&gt;   Class 2             −0.055  0.036            −0.021  0.037   0.034</span></span>
+<span><span class="co">#&gt;   Class 3             −0.141  0.022            −0.113  0.022   0.028</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   No significant DIF: the change column is noise around zero.</span></span></code></pre>
@@ -489,7 +492,9 @@ of binary exposures (for example some of the items of a childhood
 adversity class model) and interventions
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>g</mi><mn>1</mn></msub><annotation encoding="application/x-tex">g_1</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>g</mi><mn>0</mn></msub><annotation encoding="application/x-tex">g_0</annotation></semantics></math>,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ψ</mi><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>1</mn></msub></msup><mo stretchy="false" form="postfix">]</mo><mo>−</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>0</mn></msub></msup><mo stretchy="false" form="postfix">]</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">\psi = E[Y^{g_1}] - E[Y^{g_0}].</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ψ</mi><mo>=</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>1</mn></msub></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">[</mo><msup><mi>Y</mi><msub><mi>g</mi><mn>0</mn></msub></msup><mo stretchy="true" form="postfix">]</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\psi = E[Y^{g_1}] - E[Y^{g_0}].
+</annotation></semantics></math></p>
 <p>The intervention is defined on the <strong>observed</strong>
 exposures, never by moving people between latent classes. Three kinds
 are available:</p>
@@ -539,30 +544,30 @@ health?</p>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;                        Estimate     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   E[Yᵍ¹]                 78.934  0.310  [78.327, 79.541]       </span></span>
+<span><span class="co">#&gt;   E[Yᵍ¹]                 78.965  0.305  [78.367, 79.563]       </span></span>
 <span><span class="co">#&gt;   E[Yᵍ⁰]                 76.701  0.255  [76.202, 77.201]       </span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   ψ = E[Yᵍ¹] − E[Yᵍ⁰]     2.233  0.214    [1.814, 2.652]  &lt;.001</span></span>
+<span><span class="co">#&gt;   ψ = E[Yᵍ¹] − E[Yᵍ⁰]     2.264  0.208    [1.855, 2.673]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Overlap: min P(A_S = s | H) = 0.0054, max weight = 8.8</span></span>
+<span><span class="co">#&gt;   Overlap: min P(A_S = s | H) = 0.0050, max weight = 10.1</span></span>
 <span><span class="co">#&gt;   ⚠ near-violation of positivity: some post-intervention profiles are rare</span></span></code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">ie</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;     term                    intervention  estimate std.error statistic</span></span>
-<span><span class="co">#&gt; 1   psi1                   set to (0, 0) 78.933973 0.3097215        NA</span></span>
+<span><span class="co">#&gt; 1   psi1                   set to (0, 0) 78.965074 0.3051997        NA</span></span>
 <span><span class="co">#&gt; 2   psi0                  natural course 76.701200 0.2548355        NA</span></span>
-<span><span class="co">#&gt; 3 effect set to (0, 0) vs natural course  2.232773 0.2138515  10.44077</span></span>
-<span><span class="co">#&gt;     p.value  conf.low conf.high</span></span>
-<span><span class="co">#&gt; 1        NA 78.326930 79.541016</span></span>
-<span><span class="co">#&gt; 2        NA 76.201732 77.200668</span></span>
-<span><span class="co">#&gt; 3 1.615e-25  1.813632  2.651914</span></span></code></pre>
+<span><span class="co">#&gt; 3 effect set to (0, 0) vs natural course  2.263874 0.2084955  10.85815</span></span>
+<span><span class="co">#&gt;        p.value  conf.low conf.high</span></span>
+<span><span class="co">#&gt; 1           NA 78.366894 79.563255</span></span>
+<span><span class="co">#&gt; 2           NA 76.201732 77.200668</span></span>
+<span><span class="co">#&gt; 3 1.824135e-27  1.855231  2.672518</span></span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">ie</span><span class="op">)</span>                 <span class="co"># min_pi, max_weight: positivity diagnostics</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   nobs n_dropped estimator   family folds outcome  intervene            g1</span></span>
 <span><span class="co">#&gt; 1 2500         0      aipw gaussian     5  health ace1, ace2 set to (0, 0)</span></span>
 <span><span class="co">#&gt;               g0      min_pi max_weight</span></span>
-<span><span class="co">#&gt; 1 natural course 0.005384251   8.822055</span></span></code></pre>
+<span><span class="co">#&gt; 1 natural course 0.005046343   10.08433</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="estimators">Estimators<a class="anchor" aria-label="anchor" href="#estimators"></a>
@@ -640,45 +645,45 @@ the confounders; nuisance models are cross-fitted.</p>
 <tbody>
 <tr class="odd">
 <td align="left">E[Y^g1]</td>
-<td align="center">78.934</td>
-<td align="center">78.937</td>
-<td align="center">78.975</td>
-<td align="center">77.850</td>
+<td align="center">78.965</td>
+<td align="center">78.966</td>
+<td align="center">78.982</td>
+<td align="center">77.864</td>
 </tr>
 <tr class="even">
 <td align="left"></td>
-<td align="center">(0.310)</td>
-<td align="center">(0.310)</td>
+<td align="center">(0.305)</td>
+<td align="center">(0.305)</td>
+<td align="center">(0.313)</td>
 <td align="center">(0.256)</td>
-<td align="center">(0.257)</td>
 </tr>
 <tr class="odd">
 <td align="left">E[Y^g0]</td>
 <td align="center">76.701</td>
 <td align="center">76.701</td>
-<td align="center">76.697</td>
+<td align="center">76.705</td>
 <td align="center">76.701</td>
 </tr>
 <tr class="even">
 <td align="left"></td>
 <td align="center">(0.255)</td>
 <td align="center">(0.255)</td>
-<td align="center">(0.232)</td>
+<td align="center">(0.273)</td>
 <td align="center">(0.255)</td>
 </tr>
 <tr class="odd">
 <td align="left">Effect ψ</td>
-<td align="center">2.233***</td>
-<td align="center">2.236***</td>
-<td align="center">2.278***</td>
-<td align="center">1.149***</td>
+<td align="center">2.264***</td>
+<td align="center">2.265***</td>
+<td align="center">2.277***</td>
+<td align="center">1.163***</td>
 </tr>
 <tr class="even">
 <td align="left"></td>
-<td align="center">(0.214)</td>
-<td align="center">(0.214)</td>
-<td align="center">(0.174)</td>
-<td align="center">(0.096)</td>
+<td align="center">(0.208)</td>
+<td align="center">(0.209)</td>
+<td align="center">(0.164)</td>
+<td align="center">(0.094)</td>
 </tr>
 <tr class="odd">
 <td align="left">N</td>
@@ -717,10 +722,10 @@ the confounders; nuisance models are cross-fitted.</p>
 </tr>
 <tr class="even">
 <td align="left">Min. propensity</td>
-<td align="center">0.0054</td>
-<td align="center">0.0054</td>
-<td align="center">0.0054</td>
-<td align="center">0.0054</td>
+<td align="center">0.0050</td>
+<td align="center">0.0050</td>
+<td align="center">0.0050</td>
+<td align="center">0.0050</td>
 </tr>
 </tbody>
 </table>
@@ -746,13 +751,13 @@ is a risk difference:</p>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;                        Estimate     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   E[Yᵍ¹]                  0.130  0.009    [0.112, 0.147]       </span></span>
+<span><span class="co">#&gt;   E[Yᵍ¹]                  0.129  0.009    [0.111, 0.146]       </span></span>
 <span><span class="co">#&gt;   E[Yᵍ⁰]                  0.163  0.007    [0.149, 0.178]       </span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   ψ = E[Yᵍ¹] − E[Yᵍ⁰]    −0.034  0.007  [−0.046, −0.021]  &lt;.001</span></span>
+<span><span class="co">#&gt;   ψ = E[Yᵍ¹] − E[Yᵍ⁰]    −0.035  0.006  [−0.047, −0.022]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Overlap: min P(A_S = s | H) = 0.0054, max weight = 8.8</span></span>
+<span><span class="co">#&gt;   Overlap: min P(A_S = s | H) = 0.0050, max weight = 10.1</span></span>
 <span><span class="co">#&gt;   ⚠ near-violation of positivity: some post-intervention profiles are rare</span></span></code></pre>
 </div>
 <div class="section level4">
@@ -786,15 +791,15 @@ ten years of education (28% of the sample):</p>
 <tbody>
 <tr class="odd">
 <td align="left">E[Y^g1]</td>
-<td align="center">78.934</td>
-<td align="center">78.063</td>
-<td align="center">77.545</td>
+<td align="center">78.965</td>
+<td align="center">78.095</td>
+<td align="center">77.561</td>
 </tr>
 <tr class="even">
 <td align="left"></td>
-<td align="center">(0.310)</td>
-<td align="center">(0.273)</td>
-<td align="center">(0.278)</td>
+<td align="center">(0.305)</td>
+<td align="center">(0.270)</td>
+<td align="center">(0.274)</td>
 </tr>
 <tr class="odd">
 <td align="left">E[Y^g0]</td>
@@ -810,15 +815,15 @@ ten years of education (28% of the sample):</p>
 </tr>
 <tr class="odd">
 <td align="left">Effect ψ</td>
-<td align="center">2.233***</td>
-<td align="center">1.362***</td>
-<td align="center">0.843***</td>
+<td align="center">2.264***</td>
+<td align="center">1.394***</td>
+<td align="center">0.860***</td>
 </tr>
 <tr class="even">
 <td align="left"></td>
-<td align="center">(0.214)</td>
-<td align="center">(0.144)</td>
-<td align="center">(0.133)</td>
+<td align="center">(0.208)</td>
+<td align="center">(0.141)</td>
+<td align="center">(0.126)</td>
 </tr>
 <tr class="odd">
 <td align="left">N</td>
@@ -852,9 +857,9 @@ ten years of education (28% of the sample):</p>
 </tr>
 <tr class="even">
 <td align="left">Min. propensity</td>
-<td align="center">0.0054</td>
-<td align="center">0.0054</td>
-<td align="center">0.0054</td>
+<td align="center">0.0050</td>
+<td align="center">0.0050</td>
+<td align="center">0.0050</td>
 </tr>
 </tbody>
 </table>
@@ -876,7 +881,7 @@ a message. For vectors and matrices use
 <li>
 <strong>Conditional exchangeability</strong> of the intervened
 exposures given the other exposures and the confounders,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>Y</mi><mi>s</mi></msup><mo>⟂</mo><msub><mi>A</mi><mi>S</mi></msub><mo>∣</mo><mi>H</mi></mrow><annotation encoding="application/x-tex">Y^s \perp A_S \mid H</annotation></semantics></math>.</li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>Y</mi><mi>s</mi></msup><mo>⊥</mo><msub><mi>A</mi><mi>S</mi></msub><mo>∣</mo><mi>H</mi></mrow><annotation encoding="application/x-tex">Y^s \perp A_S \mid H</annotation></semantics></math>.</li>
 <li>
 <strong>Positivity</strong> of the exposure profiles the
 intervention moves people to. A small <code>min_pi</code> or a large
@@ -973,16 +978,16 @@ errors that are too small, and the printout says so.</p>
 <span>                    confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span>, g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>                    family <span class="op">=</span> <span class="st">"binomial"</span>, B <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 4 thread(s)…</span></span>
-<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 201 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 137 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 122 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 100 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 85 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 66 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 50 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 33 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 17 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 162 s</span></span></code></pre>
+<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 52 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 42 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 32 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 30 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 25 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 20 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 14 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 10 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 5 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 52 s</span></span></code></pre>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ce</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ▸ Class-specific effects of a hypothetical intervention on exposures</span></span>
@@ -993,12 +998,12 @@ errors that are too small, and the printout says so.</p>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            P(C=k)  E[Y^g1|k]  E[Y^g0|k]   psi_k     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1   0.674      0.120      0.129  −0.008  0.003  [−0.015, −0.002]   .011</span></span>
-<span><span class="co">#&gt;   Class 2   0.230      0.157      0.188  −0.032  0.028   [−0.087, 0.024]   .264</span></span>
-<span><span class="co">#&gt;   Class 3   0.096      0.137      0.345  −0.209  0.052  [−0.311, −0.106]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 1   0.674      0.120      0.129  −0.009  0.003  [−0.015, −0.002]   .007</span></span>
+<span><span class="co">#&gt;   Class 2   0.230      0.153      0.188  −0.035  0.026   [−0.086, 0.015]   .173</span></span>
+<span><span class="co">#&gt;   Class 3   0.096      0.136      0.345  −0.210  0.052  [−0.312, −0.108]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Population effect: −0.033 (SE 0.007); overlap: min pi = 0.0054, max weight = 8.8</span></span>
+<span><span class="co">#&gt;   Population effect: −0.034 (SE 0.007); overlap: min pi = 0.0050, max weight = 10.1</span></span>
 <span><span class="co">#&gt;   Assumes no direct class effect on the outcome (Y^g independent of C given A, X).</span></span>
 <span><span class="co">#&gt;   SE: bootstrap (100 replicates)</span></span></code></pre>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
@@ -1026,16 +1031,16 @@ are far too small (coverage about 50% in the simulation).</p>
 <code class="sourceCode R"><span><span class="va">sh</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intervene_shares.html">intervene_shares</a></span><span class="op">(</span><span class="va">ace_study</span>, exposures <span class="op">=</span> <span class="va">ace1</span><span class="op">:</span><span class="va">ace8</span>, intervene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ace1</span>, <span class="va">ace2</span><span class="op">)</span>,</span>
 <span>                   confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span>, g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">3</span>, B <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 4 thread(s)…</span></span>
-<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 213 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 152 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 115 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 99 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 85 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 66 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 50 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 33 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 16 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 158 s</span></span></code></pre>
+<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 50 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 39 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 35 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 31 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 25 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 19 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 14 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 10 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 5 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 51 s</span></span></code></pre>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sh</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ▸ Post-intervention classification shares (latent class model of all exposures)</span></span>
@@ -1046,9 +1051,9 @@ are far too small (coverage about 50% in the simulation).</p>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            pi_k^g1  pi_k^g0       Δ     SE            95% CI</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1    0.733    0.674   0.058  0.008    [0.043, 0.074]</span></span>
-<span><span class="co">#&gt;   Class 2    0.247    0.230   0.017  0.025   [−0.032, 0.066]</span></span>
-<span><span class="co">#&gt;   Class 3    0.020    0.096  −0.075  0.026  [−0.127, −0.024]</span></span>
+<span><span class="co">#&gt;   Class 1    0.733    0.674   0.058  0.007    [0.045, 0.072]</span></span>
+<span><span class="co">#&gt;   Class 2    0.247    0.230   0.017  0.022   [−0.027, 0.061]</span></span>
+<span><span class="co">#&gt;   Class 3    0.020    0.096  −0.075  0.024  [−0.121, −0.029]</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Shares of the model's classification of post-intervention profiles; not a causal effect</span></span>
@@ -1060,14 +1065,14 @@ context also raised the risk of depression directly, the effect of
 preventing abuse and neglect would be confounded. With a direct effect
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>γ</mi><annotation encoding="application/x-tex">\gamma</annotation></semantics></math>
 of one class (risk-difference scale), the bias is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>k</mi></msub><msub><mi>γ</mi><mi>k</mi></msub><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\sum_k \gamma_k \Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>k</mi></msub><msub><mi>γ</mi><mi>k</mi></msub><msub><mi>Δ</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\sum_k \gamma_k \Delta_k</annotation></semantics></math>
 with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
 the classification-share shifts; the tipping point is the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>γ</mi><annotation encoding="application/x-tex">\gamma</annotation></semantics></math>
 that would explain the effect away. The confidence band comes from a
 joint bootstrap of the effect and the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Δ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\Delta_k</annotation></semantics></math>
 (the default).</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html" class="external-link">which.max</a></span><span class="op">(</span><span class="va">sh</span><span class="op">$</span><span class="va">pi0</span> <span class="op">-</span> <span class="va">sh</span><span class="op">$</span><span class="va">pi1</span><span class="op">)</span>      <span class="co"># the class that loses most members</span></span>
@@ -1075,28 +1080,28 @@ joint bootstrap of the effect and the
 <span>                        confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">female</span>, <span class="va">parent_edu</span><span class="op">)</span>, g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>                        target <span class="op">=</span> <span class="va">hi</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, B <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   class-model bootstrap: 100 replicates on 4 thread(s)…</span></span>
-<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 203 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 135 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 119 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 102 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 83 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 69 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 52 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 34 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 17 s left</span></span>
-<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 161 s</span></span></code></pre>
+<span><span class="co">#&gt;   bootstrap 10/100 (10%), about 51 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 20/100 (20%), about 42 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 30/100 (30%), about 37 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 40/100 (40%), about 32 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 50/100 (50%), about 28 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 60/100 (60%), about 21 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 70/100 (70%), about 15 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 80/100 (80%), about 10 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 90/100 (90%), about 5 s left</span></span>
+<span><span class="co">#&gt;   bootstrap 100/100 (100%), done in 54 s</span></span></code></pre>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ▸ Sensitivity of an intervention effect to a direct effect of the exposure class</span></span>
 <span><span class="co">#&gt;   g1: set to (0, 0)</span></span>
 <span><span class="co">#&gt;   g0: natural course</span></span>
-<span><span class="co">#&gt;   Uncorrected effect: −0.033 (SE 0.006); Δ_k = 0.058, 0.017, −0.075</span></span>
-<span><span class="co">#&gt;   Tipping points in gamma of class 3 vs the rest: effect = 0 at 0.437; 95% CI includes 0 from 0.240</span></span>
+<span><span class="co">#&gt;   Uncorrected effect: −0.034 (SE 0.006); Δ_k = 0.058, 0.017, −0.075</span></span>
+<span><span class="co">#&gt;   Tipping points in gamma of class 3 vs the rest: effect = 0 at 0.452; 95% CI includes 0 from 0.244</span></span>
 <span><span class="co">#&gt;   bias = sum_k gamma_k Delta_k; gamma in outcome units (risk difference for a binary outcome).</span></span>
 <span><span class="co">#&gt;   SE: joint bootstrap of the effect and Delta (100 replicates)</span></span></code></pre>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/latent-sensitivity-1.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/latent-sensitivity-1.png" class="r-plt" width="504"></p>
 <p><strong>Class-based adjustment:
 <code>adjust = "classes"</code>.</strong> With many adversities some
 profiles are rare and the propensity of the intervened ones becomes
@@ -1111,9 +1116,9 @@ well. Compare the estimates and <code>min_pi</code>.</p>
 <span>                                          g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, adjust <span class="op">=</span> <span class="va">adjust</span>, adjust_K <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"exposures"</span>, <span class="st">"classes"</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">{</span> <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="va">a</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>effect <span class="op">=</span> <span class="va">r</span><span class="op">$</span><span class="va">effect</span>, se <span class="op">=</span> <span class="va">r</span><span class="op">$</span><span class="va">se</span>, min_pi <span class="op">=</span> <span class="va">r</span><span class="op">$</span><span class="va">min_pi</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;           exposures      classes         both</span></span>
-<span><span class="co">#&gt; effect -0.032930983 -0.034092027 -0.034319654</span></span>
-<span><span class="co">#&gt; se      0.006621283  0.005682950  0.005698877</span></span>
-<span><span class="co">#&gt; min_pi  0.005384251  0.005775681  0.005957572</span></span></code></pre>
+<span><span class="co">#&gt; effect -0.034071026 -0.035215083 -0.035062699</span></span>
+<span><span class="co">#&gt; se      0.006594700  0.005641716  0.005757146</span></span>
+<span><span class="co">#&gt; min_pi  0.005046343  0.004797183  0.005955781</span></span></code></pre>
 <p><strong>Latent class outcome:
 <code><a href="../reference/intervene_latent_outcome.html">intervene_latent_outcome()</a></code>.</strong> Does an intervention
 change membership in a latent class <em>outcome</em> measured by several
@@ -1126,7 +1131,7 @@ must measure the classes the same way in every exposure group (no DIF;
 see <code><a href="../reference/intervene_dif.html">intervene_dif()</a></code>).</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">programme</span><span class="op">)</span></span>
-<span><span class="va">mo</span> <span class="op">&lt;-</span> <span class="fu">latentmixtures</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/latentmixtures/man/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">programme</span>, <span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">mo</span> <span class="op">&lt;-</span> <span class="fu">latentmixtures</span><span class="fu">::</span><span class="fu"><a href="https://williamlorder.github.io/software/latentmixtures/reference/lca.html" class="external-link">lca</a></span><span class="op">(</span><span class="va">programme</span>, <span class="va">low_mood</span><span class="op">:</span><span class="va">friends</span>, K <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">ic</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intervene_latent_outcome.html">intervene_latent_outcome</a></span><span class="op">(</span><span class="va">mo</span>, <span class="va">programme</span>, exposures <span class="op">=</span> <span class="va">programme</span>, intervene <span class="op">=</span> <span class="va">programme</span>,</span>
 <span>                                confounders <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">female</span>, <span class="va">age</span>, <span class="va">low_ses</span>, <span class="va">distress</span>, <span class="va">belonging</span><span class="op">)</span>,</span>
 <span>                                g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, g0 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
@@ -1139,13 +1144,13 @@ see <code><a href="../reference/intervene_dif.html">intervene_dif()</a></code>).
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;            P(C^g1=k)  P(C^g0=k)       Δ     SE            95% CI      p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Class 1      0.621      0.431   0.190  0.031    [0.129, 0.251]  &lt;.001</span></span>
-<span><span class="co">#&gt;   Class 2      0.242      0.291  −0.050  0.037   [−0.122, 0.023]   .178</span></span>
-<span><span class="co">#&gt;   Class 3      0.137      0.277  −0.140  0.023  [−0.185, −0.096]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 1      0.625      0.432   0.193  0.031    [0.132, 0.253]  &lt;.001</span></span>
+<span><span class="co">#&gt;   Class 2      0.238      0.290  −0.052  0.037   [−0.124, 0.020]   .159</span></span>
+<span><span class="co">#&gt;   Class 3      0.137      0.278  −0.141  0.023  [−0.186, −0.096]  &lt;.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   SE from the influence function incl. the measurement model; assumes no DIF.</span></span>
-<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, min pi = 0.0216, max weight = 25.0</span></span></code></pre>
+<span><span class="co">#&gt;   Diagnostics: entropy = 0.666, min pi = 0.0190, max weight = 25.6</span></span></code></pre>
 <p>Universal participation would raise the flourishing class by ≈ 0.193
 (19 points) and roughly halve the distressed class (true values +0.179
 and −0.120); with the default <code>g0 = natural()</code> the contrast
@@ -1175,7 +1180,7 @@ and interventions</em> gives the derivations and a simulation study.</p>
 <div class="section level2">
 <h2 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a>
 </h2>
-<p><code><a href="../reference/causal_table.html">causal_table()</a></code> (or <code><a href="https://rdrr.io/pkg/latentmixtures/man/lm_table.html" class="external-link">lm_table()</a></code>) puts several
+<p><code><a href="../reference/causal_table.html">causal_table()</a></code> (or <code><a href="https://williamlorder.github.io/software/latentmixtures/reference/lm_table.html" class="external-link">lm_table()</a></code>) puts several
 results side by side in text, markdown, LaTeX or HTML, with estimates,
 stars, standard errors (or confidence intervals with
 <code>ci = TRUE</code>) and a footer with N, the estimator and
@@ -1194,18 +1199,18 @@ diagnostics:</p>
 <span><span class="co">#&gt; \toprule</span></span>
 <span><span class="co">#&gt;  &amp; (1) &amp; (2) \\</span></span>
 <span><span class="co">#&gt; \midrule</span></span>
-<span><span class="co">#&gt; $\Delta$ Class 1 &amp; 0.194$^{***}$ &amp;  \\</span></span>
+<span><span class="co">#&gt; $\Delta$ Class 1 &amp; 0.196$^{***}$ &amp;  \\</span></span>
 <span><span class="co">#&gt;  &amp; (0.031) &amp;  \\</span></span>
-<span><span class="co">#&gt; $\Delta$ Class 2 &amp; $-$0.052 &amp;  \\</span></span>
-<span><span class="co">#&gt;  &amp; (0.037) &amp;  \\</span></span>
-<span><span class="co">#&gt; $\Delta$ Class 3 &amp; $-$0.143$^{***}$ &amp;  \\</span></span>
-<span><span class="co">#&gt;  &amp; (0.021) &amp;  \\</span></span>
-<span><span class="co">#&gt; $E[Y^{g_1}]$ &amp;  &amp; 78.934 \\</span></span>
-<span><span class="co">#&gt;  &amp;  &amp; (0.310) \\</span></span>
+<span><span class="co">#&gt; $\Delta$ Class 2 &amp; $-$0.055 &amp;  \\</span></span>
+<span><span class="co">#&gt;  &amp; (0.036) &amp;  \\</span></span>
+<span><span class="co">#&gt; $\Delta$ Class 3 &amp; $-$0.141$^{***}$ &amp;  \\</span></span>
+<span><span class="co">#&gt;  &amp; (0.022) &amp;  \\</span></span>
+<span><span class="co">#&gt; $E[Y^{g_1}]$ &amp;  &amp; 78.965 \\</span></span>
+<span><span class="co">#&gt;  &amp;  &amp; (0.305) \\</span></span>
 <span><span class="co">#&gt; $E[Y^{g_0}]$ &amp;  &amp; 76.701 \\</span></span>
 <span><span class="co">#&gt;  &amp;  &amp; (0.255) \\</span></span>
-<span><span class="co">#&gt; Effect $\psi$ &amp;  &amp; 2.233$^{***}$ \\</span></span>
-<span><span class="co">#&gt;  &amp;  &amp; (0.214) \\</span></span>
+<span><span class="co">#&gt; Effect $\psi$ &amp;  &amp; 2.264$^{***}$ \\</span></span>
+<span><span class="co">#&gt;  &amp;  &amp; (0.208) \\</span></span>
 <span><span class="co">#&gt; N &amp; 2000 &amp; 2500 \\</span></span>
 <span><span class="co">#&gt; Estimator &amp; AIPW (BCH) &amp; AIPW \\</span></span>
 <span><span class="co">#&gt; Treatment &amp; programme &amp;  \\</span></span>
@@ -1213,7 +1218,7 @@ diagnostics:</p>
 <span><span class="co">#&gt; Intervene &amp;  &amp; ace1, ace2 \\</span></span>
 <span><span class="co">#&gt; g1 &amp;  &amp; set to (0, 0) \\</span></span>
 <span><span class="co">#&gt; g0 &amp;  &amp; natural course \\</span></span>
-<span><span class="co">#&gt; Min. propensity &amp;  &amp; 0.0054 \\</span></span>
+<span><span class="co">#&gt; Min. propensity &amp;  &amp; 0.0050 \\</span></span>
 <span><span class="co">#&gt; \bottomrule</span></span>
 <span><span class="co">#&gt; \end{tabular}</span></span>
 <span><span class="co">#&gt; \par\smallskip</span></span>
@@ -1226,46 +1231,46 @@ diagnostics:</p>
 <p>Results have <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot()</a></code> methods (ggplot2) and
 <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> draws the same figure; the figures return ggplot
 objects and use the theme and palette of latentmixtures
-(<code><a href="https://rdrr.io/pkg/latentmixtures/man/lm_theme.html" class="external-link">lm_theme()</a></code>, <code><a href="https://rdrr.io/pkg/latentmixtures/man/lm_theme.html" class="external-link">lm_palette()</a></code>). They use the
+(<code><a href="https://williamlorder.github.io/software/latentmixtures/reference/lm_theme.html" class="external-link">lm_theme()</a></code>, <code><a href="https://williamlorder.github.io/software/latentmixtures/reference/lm_theme.html" class="external-link">lm_palette()</a></code>). They use the
 values stored in the result, so they also work after the Julia session
 has ended.</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">r</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Flourishing"</span>, <span class="st">"Moderate"</span>, <span class="st">"Distressed"</span><span class="op">)</span><span class="op">)</span>   <span class="co"># forest plot of the class effects Delta_k</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-lcc-1.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-lcc-1.png" class="r-plt" width="504"></p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">r</span>, type <span class="op">=</span> <span class="st">"probabilities"</span><span class="op">)</span>  <span class="co"># P(C(1) = k) and P(C(0) = k) with CIs</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-lcc-2.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-lcc-2.png" class="r-plt" width="504"></p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">r</span>, type <span class="op">=</span> <span class="st">"overlap"</span><span class="op">)</span>        <span class="co"># cross-fitted propensity scores by treatment group</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-lcc-3.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-lcc-3.png" class="r-plt" width="504"></p>
 <p>For interventions, the default figure shows the mean outcomes under
 the two interventions and their difference. The overlap figure shows,
 for every pattern of the intervened exposures that receives probability
 under an intervention, the cross-fitted propensity
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo>∣</mo><mi>H</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\pi(s \mid H)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><mo>∣</mo><mi>H</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\pi(s \mid H)</annotation></semantics></math>
 among the cases observed with that pattern and the others, with the
 smallest propensity the estimator used (<code>glance(ie)$min_pi</code>)
 marked; values near zero signal positivity problems.
 <code>type = "weights"</code> shows the inverse-probability weights.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ie</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-ie-1.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-ie-1.png" class="r-plt" width="504"></p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">ie</span>, type <span class="op">=</span> <span class="st">"overlap"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-ie-2.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-ie-2.png" class="r-plt" width="504"></p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">ie_shift</span>, type <span class="op">=</span> <span class="st">"weights"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-ie-3.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-ie-3.png" class="r-plt" width="504"></p>
 <p><code><a href="../reference/causal_plot.html">causal_plot()</a></code> puts several results side by side,
 e.g. the four estimators of the same intervention, or several
 <code><a href="../reference/intervene_membership.html">intervene_membership()</a></code> estimators:</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ie_ipw</span> <span class="op">&lt;-</span> <span class="fu">ie_fit</span><span class="op">(</span>g1 <span class="op">=</span> <span class="fu"><a href="../reference/natural.html">setto</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, estimator <span class="op">=</span> <span class="st">"ipw"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/causal_plot.html">causal_plot</a></span><span class="op">(</span>AIPW <span class="op">=</span> <span class="va">ie</span>, TMLE <span class="op">=</span> <span class="va">ie_tmle</span>, `g-formula` <span class="op">=</span> <span class="va">ie_gf</span>, IPTW <span class="op">=</span> <span class="va">ie_ipw</span>, what <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-compare-1.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-compare-1.png" class="r-plt" width="504"></p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/causal_plot.html">causal_plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>AIPW <span class="op">=</span> <span class="va">r</span>, `Outcome regression` <span class="op">=</span> <span class="va">r_or</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="latentclasscausal_files/figure-html/plots-compare-2.png" class="r-plt" alt="" width="504"></p>
+<p><img src="latentclasscausal_files/figure-html/plots-compare-2.png" class="r-plt" width="504"></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
