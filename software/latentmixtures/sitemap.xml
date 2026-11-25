@@ -51,6 +51,7 @@
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/lta.html</loc></url>
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/lta3step.html</loc></url>
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/mixture.html</loc></url>
+<url><loc>https://williamlorder.github.io/software/latentmixtures/reference/pairprobs.html</loc></url>
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/parameters.html</loc></url>
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix.html</loc></url>
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix_aux.html</loc></url>
@@ -65,6 +66,8 @@
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/to_mplus.html</loc></url>
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/transitions.html</loc></url>
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/twostep.html</loc></url>
+<url><loc>https://williamlorder.github.io/software/latentmixtures/reference/vcov.latentmix.html</loc></url>
+<url><loc>https://williamlorder.github.io/software/latentmixtures/reference/weightdiagnostics.html</loc></url>
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/wellbeing.html</loc></url>
 <url><loc>https://williamlorder.github.io/software/latentmixtures/reference/wellbeing_panel.html</loc></url>
 </urlset>

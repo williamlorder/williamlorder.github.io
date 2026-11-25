@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Auxiliary variables, weights and multigroup models • latentmixtures</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Auxiliary variables, weights and multigroup models">
 </head>
@@ -87,11 +87,12 @@ measurement model is fitted once:</p>
 <span><span class="co">#&gt;   best start converged      yes (77 EM iterations)</span></span>
 <span><span class="co">#&gt;   stage-2 starts converged  20 / 20</span></span>
 <span><span class="co">#&gt;   best LL replicated        20 times</span></span>
-<span><span class="co">#&gt;   LL at EM / after Newton   -5248.0073 / -5248.0073 (gain 5.5e-07; max |gradient| 1.6e-13)</span></span>
-<span><span class="co">#&gt;   smallest class            0.099</span></span></code></pre>
+<span><span class="co">#&gt;   LL at EM / after Newton   -5248.0073 / -5248.0073 (gain 0.0e+00; max |gradient| 1.4e-13)</span></span>
+<span><span class="co">#&gt;   smallest class            0.099</span></span>
+<span><span class="co">#&gt;   · EM converged; 1 Newton steps (polish = true) raised the log-likelihood by 5.5e-07 (max |gradient| 1.3e-03 → 3.3e-07); the reported solution is the Newton one</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/classprobs.html">classprobs</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>    <span class="co"># 1 Low adversity, 2 Maltreatment, 3 Household dysfunction, 4 High</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; [1] 0.56010632 0.18551660 0.15563172 0.09874536</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] 0.56010023 0.18552219 0.15563946 0.09873811</span></span></code></pre>
 <div class="section level2">
 <h2 id="row-alignment">Row alignment<a class="anchor" aria-label="anchor" href="#row-alignment"></a>
 </h2>
@@ -117,31 +118,31 @@ with the measurement model.</p>
 <span>                  ref <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/coeftable.html">coeftable</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;    class           term     estimate          se          z            p</span></span>
-<span><span class="co">#&gt; 1      2    (Intercept) -0.619531182 0.282451000 -2.1934112 2.827777e-02</span></span>
-<span><span class="co">#&gt; 2      2         female  0.078144949 0.183879791  0.4249785 6.708524e-01</span></span>
-<span><span class="co">#&gt; 3      2            age -0.020783102 0.006160691 -3.3735019 7.421853e-04</span></span>
-<span><span class="co">#&gt; 4      2 low_parent_edu  0.644820714 0.181795020  3.5469658 3.896952e-04</span></span>
-<span><span class="co">#&gt; 5      3    (Intercept) -1.563486919 0.339399942 -4.6066211 4.092648e-06</span></span>
-<span><span class="co">#&gt; 6      3         female -0.331352114 0.208758464 -1.5872512 1.124558e-01</span></span>
-<span><span class="co">#&gt; 7      3            age  0.001400531 0.007242410  0.1933791 8.466621e-01</span></span>
-<span><span class="co">#&gt; 8      3 low_parent_edu  0.774581573 0.207043038  3.7411621 1.831713e-04</span></span>
-<span><span class="co">#&gt; 9      4    (Intercept) -1.823827307 0.385136128 -4.7355394 2.184733e-06</span></span>
-<span><span class="co">#&gt; 10     4         female  0.113218780 0.233847646  0.4841562 6.282750e-01</span></span>
-<span><span class="co">#&gt; 11     4            age -0.007627527 0.007895112 -0.9661075 3.339904e-01</span></span>
-<span><span class="co">#&gt; 12     4 low_parent_edu  0.755111997 0.241038063  3.1327500 1.731769e-03</span></span>
+<span><span class="co">#&gt; 1      2    (Intercept) -0.619512243 0.282442960 -2.1934066 2.827810e-02</span></span>
+<span><span class="co">#&gt; 2      2         female  0.078155153 0.183874978  0.4250451 6.708038e-01</span></span>
+<span><span class="co">#&gt; 3      2            age -0.020782769 0.006160518 -3.3735423 7.420765e-04</span></span>
+<span><span class="co">#&gt; 4      2 low_parent_edu  0.644858877 0.181792169  3.5472313 3.893026e-04</span></span>
+<span><span class="co">#&gt; 5      3    (Intercept) -1.563475490 0.339397494 -4.6066206 4.092657e-06</span></span>
+<span><span class="co">#&gt; 6      3         female -0.331369728 0.208760630 -1.5873191 1.124404e-01</span></span>
+<span><span class="co">#&gt; 7      3            age  0.001401478 0.007242537  0.1935065 8.465623e-01</span></span>
+<span><span class="co">#&gt; 8      3 low_parent_edu  0.774562687 0.207047571  3.7409890 1.832975e-04</span></span>
+<span><span class="co">#&gt; 9      4    (Intercept) -1.823883519 0.385151276 -4.7354991 2.185167e-06</span></span>
+<span><span class="co">#&gt; 10     4         female  0.113187190 0.233858942  0.4839977 6.283875e-01</span></span>
+<span><span class="co">#&gt; 11     4            age -0.007626529 0.007895395 -0.9659464 3.340710e-01</span></span>
+<span><span class="co">#&gt; 12     4 low_parent_edu  0.755073501 0.241056157  3.1323552 1.734100e-03</span></span>
 <span><span class="co">#&gt;    oddsratio</span></span>
-<span><span class="co">#&gt; 1  0.5381967</span></span>
-<span><span class="co">#&gt; 2  1.0812794</span></span>
-<span><span class="co">#&gt; 3  0.9794314</span></span>
-<span><span class="co">#&gt; 4  1.9056453</span></span>
-<span><span class="co">#&gt; 5  0.2094046</span></span>
-<span><span class="co">#&gt; 6  0.7179523</span></span>
-<span><span class="co">#&gt; 7  1.0014015</span></span>
-<span><span class="co">#&gt; 8  2.1696841</span></span>
-<span><span class="co">#&gt; 9  0.1614068</span></span>
-<span><span class="co">#&gt; 10 1.1198769</span></span>
-<span><span class="co">#&gt; 11 0.9924015</span></span>
-<span><span class="co">#&gt; 12 2.1278498</span></span></code></pre>
+<span><span class="co">#&gt; 1  0.5382069</span></span>
+<span><span class="co">#&gt; 2  1.0812904</span></span>
+<span><span class="co">#&gt; 3  0.9794317</span></span>
+<span><span class="co">#&gt; 4  1.9057181</span></span>
+<span><span class="co">#&gt; 5  0.2094070</span></span>
+<span><span class="co">#&gt; 6  0.7179397</span></span>
+<span><span class="co">#&gt; 7  1.0014025</span></span>
+<span><span class="co">#&gt; 8  2.1696431</span></span>
+<span><span class="co">#&gt; 9  0.1613977</span></span>
+<span><span class="co">#&gt; 10 1.1198415</span></span>
+<span><span class="co">#&gt; 11 0.9924025</span></span>
+<span><span class="co">#&gt; 12 2.1277679</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/lm_table.html">lm_table</a></span><span class="op">(</span><span class="va">m1</span>, what <span class="op">=</span> <span class="st">"regression"</span>, format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Latent class regression (multinomial logits)</strong></p>
@@ -276,7 +277,7 @@ at those of the measurement model.</p>
 <code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/r3step.html">r3step</a></span><span class="op">(</span><span class="va">m</span>, <span class="va">aces</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">female</span>, <span class="va">age</span>, <span class="va">low_parent_edu</span><span class="op">)</span>, ref <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">r</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ━━ R3STEP: latent class regression (three-step) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span></span>
-<span><span class="co">#&gt;   n = 1500; reference class 1; robust standard errors</span></span>
+<span><span class="co">#&gt;   n = 1500; reference class 1; robust (MLR) standard errors</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   Term                  Logit     SE     OR       p</span></span>
@@ -292,16 +293,16 @@ at those of the measurement model.</p>
 <span><span class="co">#&gt;     age                -0.002  0.007  0.998   0.835</span></span>
 <span><span class="co">#&gt;     low_parent_edu   0.957***  0.211  2.603  &lt;0.001</span></span>
 <span><span class="co">#&gt;   Class 4 vs. 1</span></span>
-<span><span class="co">#&gt;     (Intercept)     -1.787***  0.362  0.168  &lt;0.001</span></span>
+<span><span class="co">#&gt;     (Intercept)     -1.787***  0.362  0.167  &lt;0.001</span></span>
 <span><span class="co">#&gt;     female              0.032  0.216  1.033   0.881</span></span>
-<span><span class="co">#&gt;     age                -0.008  0.008  0.992   0.333</span></span>
+<span><span class="co">#&gt;     age                -0.008  0.008  0.992   0.334</span></span>
 <span><span class="co">#&gt;     low_parent_edu   0.767***  0.221  2.153  &lt;0.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   * p &lt; 0.05; ** p &lt; 0.01; *** p &lt; 0.001</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/lm_table.html">lm_table</a></span><span class="op">(</span><span class="va">r</span>, ci <span class="op">=</span> <span class="cn">TRUE</span>, format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Three-step (R3STEP) latent class regression</strong></p>
-<table style="width:99%;" class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="16%">
 <col width="16%">
@@ -412,7 +413,7 @@ at those of the measurement model.</p>
 <td align="right">-1.787***</td>
 <td align="right">0.362</td>
 <td align="right">[-2.497, -1.077]</td>
-<td align="right">0.168</td>
+<td align="right">0.167</td>
 <td align="right">&lt;0.001</td>
 </tr>
 <tr class="odd">
@@ -429,7 +430,7 @@ at those of the measurement model.</p>
 <td align="right">0.008</td>
 <td align="right">[-0.023, 0.008]</td>
 <td align="right">0.992</td>
-<td align="right">0.333</td>
+<td align="right">0.334</td>
 </tr>
 <tr class="odd">
 <td align="left">low_parent_edu</td>
@@ -442,7 +443,7 @@ at those of the measurement model.</p>
 </tbody>
 </table>
 <p><em>Multinomial logits against class 1; OR = odds ratio; n = 1500.
-Robust standard errors.</em><br><em>* p &lt; 0.05; ** p &lt; 0.01; *** p &lt; 0.001</em></p>
+Robust (MLR) standard errors.</em><br><em>* p &lt; 0.05; ** p &lt; 0.01; *** p &lt; 0.001</em></p>
 <p>Coefficients are multinomial logits against the reference class (the
 last, smallest class unless <code>ref</code> is given), with robust
 standard errors (<code>se = "ml"</code> for ML ones). Rows with a
@@ -473,30 +474,30 @@ excluded.</p>
 <span><span class="co">#&gt;   1       4.761  0.138    12.101</span></span>
 <span><span class="co">#&gt;   2      10.259  0.297    12.933</span></span>
 <span><span class="co">#&gt;   3       6.985  0.320     7.295</span></span>
-<span><span class="co">#&gt;   4      13.800  0.436    12.509</span></span>
+<span><span class="co">#&gt;   4      13.801  0.436    12.508</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Wald tests of equal means ───────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   Test           Chi-square  df       p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Overall           647.903   3  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 1 vs. 2     264.856   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Overall           647.905   3  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 1 vs. 2     264.877   1  &lt;0.001</span></span>
 <span><span class="co">#&gt;   Class 1 vs. 3      36.417   1  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 1 vs. 4     392.358   1  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 2 vs. 3      51.610   1  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 2 vs. 4      39.751   1  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 3 vs. 4     143.693   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 1 vs. 4     392.337   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 2 vs. 3      51.616   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 2 vs. 4      39.748   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 3 vs. 4     143.694   1  &lt;0.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b</span><span class="op">$</span><span class="va">pairwise</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   a b     chisq            p</span></span>
-<span><span class="co">#&gt; 1 1 2 264.85622 1.499728e-59</span></span>
-<span><span class="co">#&gt; 2 1 3  36.41715 1.592953e-09</span></span>
-<span><span class="co">#&gt; 3 1 4 392.35775 2.538616e-87</span></span>
-<span><span class="co">#&gt; 4 2 3  51.61026 6.768705e-13</span></span>
-<span><span class="co">#&gt; 5 2 4  39.75086 2.885141e-10</span></span>
-<span><span class="co">#&gt; 6 3 4 143.69279 4.147241e-33</span></span></code></pre>
+<span><span class="co">#&gt; 1 1 2 264.87718 1.484035e-59</span></span>
+<span><span class="co">#&gt; 2 1 3  36.41677 1.593265e-09</span></span>
+<span><span class="co">#&gt; 3 1 4 392.33747 2.564555e-87</span></span>
+<span><span class="co">#&gt; 4 2 3  51.61581 6.749588e-13</span></span>
+<span><span class="co">#&gt; 5 2 4  39.74850 2.888631e-10</span></span>
+<span><span class="co">#&gt; 6 3 4 143.69401 4.144679e-33</span></span></code></pre>
 <p>The generating class means of <code>depress</code> are 4 (Low), 9
 (Maltreatment), 7 (Household) and 13 (High adversity), plus 1 for women
 (about half the sample). Several outcomes can be tabulated side by side;
@@ -529,12 +530,13 @@ smokers:</p>
 </tr>
 <tr class="even">
 <td align="left">Class 4</td>
-<td align="right">13.800 (0.436)</td>
+<td align="right">13.801 (0.436)</td>
 <td align="right">0.440 (0.050)</td>
 </tr>
 </tbody>
 </table>
-<p><em>Means with robust standard errors in parentheses.</em><br><em>depress: Overall Wald test: χ²(3) = 647.90, p &lt; 0.001. n =
+<p><em>Means with robust (MLR) standard errors in
+parentheses.</em><br><em>depress: Overall Wald test: χ²(3) = 647.91, p &lt; 0.001. n =
 1453.</em><br><em>depress pairwise: 1 vs. 2 p = &lt;0.001; 1 vs. 3 p = &lt;0.001; 1
 vs. 4 p = &lt;0.001; 2 vs. 3 p = &lt;0.001; 2 vs. 4 p = &lt;0.001; 3
 vs. 4 p = &lt;0.001.</em><br><em>smoker: Overall Wald test: χ²(3) = 43.99, p &lt; 0.001. n =
@@ -696,8 +698,8 @@ robust standard errors are weighted, and <code><a href="../reference/r3step.html
 <code class="sourceCode R"><span><span class="va">mw</span> <span class="op">&lt;-</span> <span class="va">aces</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/lca.html">lca</a></span><span class="op">(</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"ace_"</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">4</span>, weights <span class="op">=</span> <span class="va">weight</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span>unweighted <span class="op">=</span> <span class="fu"><a href="../reference/classprobs.html">classprobs</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>, weighted <span class="op">=</span> <span class="fu"><a href="../reference/classprobs.html">classprobs</a></span><span class="op">(</span><span class="va">mw</span><span class="op">)</span><span class="op">)</span>   <span class="co"># fewer high-adversity adults</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;                 [,1]      [,2]      [,3]       [,4]</span></span>
-<span><span class="co">#&gt; unweighted 0.5601063 0.1855166 0.1556317 0.09874536</span></span>
-<span><span class="co">#&gt; weighted   0.5886255 0.1780398 0.1455871 0.08774761</span></span></code></pre>
+<span><span class="co">#&gt; unweighted 0.5601002 0.1855222 0.1556395 0.09873811</span></span>
+<span><span class="co">#&gt; weighted   0.5886098 0.1780414 0.1456006 0.08774827</span></span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/bch.html">bch</a></span><span class="op">(</span><span class="va">mw</span>, <span class="va">aces</span>, <span class="va">depress</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ━━ BCH: distal outcome depress by class ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span></span>
@@ -708,21 +710,21 @@ robust standard errors are weighted, and <code><a href="../reference/r3step.html
 <span><span class="co">#&gt;   ──────────────────────────────</span></span>
 <span><span class="co">#&gt;   1       4.787  0.143    12.017</span></span>
 <span><span class="co">#&gt;   2      10.310  0.308    12.881</span></span>
-<span><span class="co">#&gt;   3       6.984  0.341     6.973</span></span>
-<span><span class="co">#&gt;   4      14.059  0.486    12.830</span></span>
+<span><span class="co">#&gt;   3       6.984  0.341     6.972</span></span>
+<span><span class="co">#&gt;   4      14.059  0.486    12.831</span></span>
 <span><span class="co">#&gt;   ──────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Wald tests of equal means ───────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   Test           Chi-square  df       p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Overall           583.160   3  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 1 vs. 2     250.256   1  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 1 vs. 3      31.700   1  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 1 vs. 4     336.847   1  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 2 vs. 3      48.622   1  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 2 vs. 4      37.838   1  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Class 3 vs. 4     127.929   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Overall           583.167   3  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 1 vs. 2     250.265   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 1 vs. 3      31.695   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 1 vs. 4     336.851   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 2 vs. 3      48.630   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 2 vs. 4      37.835   1  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Class 3 vs. 4     127.935   1  &lt;0.001</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────</span></span></code></pre>
 <p>Weighting moves the class shares towards the population, in which low
 parental education and hence childhood adversity are less common
@@ -760,25 +762,26 @@ invariant.</p>
 <span><span class="co">#&gt;   best start converged      yes (84 EM iterations)</span></span>
 <span><span class="co">#&gt;   stage-2 starts converged  20 / 20</span></span>
 <span><span class="co">#&gt;   best LL replicated        20 times</span></span>
-<span><span class="co">#&gt;   LL at EM / after Newton   -6263.9010 / -6263.9010 (gain 6.7e-07; max |gradient| 9.7e-14)</span></span>
-<span><span class="co">#&gt;   smallest class            0.096</span></span></code></pre>
+<span><span class="co">#&gt;   LL at EM / after Newton   -6263.9010 / -6263.9010 (gain 0.0e+00; max |gradient| 1.0e-13)</span></span>
+<span><span class="co">#&gt;   smallest class            0.096</span></span>
+<span><span class="co">#&gt;   · EM converged; 1 Newton steps (polish = true) raised the log-likelihood by 6.7e-07 (max |gradient| 7.6e-04 → 6.2e-07); the reported solution is the Newton one</span></span></code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/classprobs.html">classprobs</a></span><span class="op">(</span><span class="va">full</span><span class="op">)</span>                          <span class="co"># class-by-group proportions (men, women)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;            [,1]      [,2]</span></span>
-<span><span class="co">#&gt; [1,] 0.54743158 0.5670998</span></span>
-<span><span class="co">#&gt; [2,] 0.17552235 0.1928102</span></span>
-<span><span class="co">#&gt; [3,] 0.18346359 0.1341350</span></span>
-<span><span class="co">#&gt; [4,] 0.09358248 0.1059550</span></span></code></pre>
+<span><span class="co">#&gt; [1,] 0.54741567 0.5670889</span></span>
+<span><span class="co">#&gt; [2,] 0.17552676 0.1928184</span></span>
+<span><span class="co">#&gt; [3,] 0.18347629 0.1341428</span></span>
+<span><span class="co">#&gt; [4,] 0.09358128 0.1059498</span></span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/itemprobs.html">itemprobs</a></span><span class="op">(</span><span class="va">part</span>, group <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="va">ace_sex_abuse</span>  <span class="co"># women</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;       class1    class2     class3    class4</span></span>
-<span><span class="co">#&gt; 0 0.92670967 0.5233015 0.91077561 0.3959592</span></span>
-<span><span class="co">#&gt; 1 0.07329033 0.4766985 0.08922439 0.6040408</span></span></code></pre>
+<span><span class="co">#&gt; 0 0.92670879 0.5232947 0.91078105 0.3959632</span></span>
+<span><span class="co">#&gt; 1 0.07329121 0.4767053 0.08921895 0.6040368</span></span></code></pre>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/itemprobs.html">itemprobs</a></span><span class="op">(</span><span class="va">part</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">$</span><span class="va">ace_sex_abuse</span>  <span class="co"># men</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;      class1    class2     class3    class4</span></span>
-<span><span class="co">#&gt; 0 0.9859012 0.7820709 0.93668586 0.6338656</span></span>
-<span><span class="co">#&gt; 1 0.0140988 0.2179291 0.06331414 0.3661344</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;       class1    class2     class3    class4</span></span>
+<span><span class="co">#&gt; 0 0.98590122 0.7820698 0.93669271 0.6338566</span></span>
+<span><span class="co">#&gt; 1 0.01409878 0.2179302 0.06330729 0.3661434</span></span></code></pre>
 <p>Groups are numbered in the order of
 <code>levels(factor(female))</code> (0 = men, 1 = women). The invariance
 models are nested with the same number of classes, so
@@ -798,12 +801,12 @@ likelihood-ratio test and the differences in AIC and BIC:</p>
 <span><span class="co">#&gt;   ──────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Difference tests ────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   ────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Test                          Chi-square  df       p</span></span>
-<span><span class="co">#&gt;   ────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Likelihood ratio (naive, ML)      43.615   4  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Satorra-Bentler scaled (MLR)      41.724   4  &lt;0.001</span></span>
-<span><span class="co">#&gt;   ────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;   ───────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;   Test                                 Chi-square  df       p</span></span>
+<span><span class="co">#&gt;   ───────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;   Likelihood ratio (naive, ML)             43.615   4  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Satorra-Bentler (2001) scaled (MLR)      41.724   4  &lt;0.001</span></span>
+<span><span class="co">#&gt;   ───────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   Scaling correction of the difference cd = 1.0453</span></span>
 <span><span class="co">#&gt;   ΔAIC = -35.615, ΔBIC = -14.362, ΔsaBIC = -27.069 (M1 - M0)</span></span></code></pre>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
@@ -817,7 +820,7 @@ likelihood-ratio test and the differences in AIC and BIC:</p>
 <span><span class="co">#&gt; part   4    43  -6263.901   1.0381  12842.271   4      43.615  1.0453             41.724    &lt;0.001</span></span>
 <span><span class="co">#&gt; none   4    71  -6248.025   1.0573  13015.290  28      31.751  1.0868             29.215     0.402</span></span>
 <span><span class="co">#&gt; ──────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; Each model is tested against the previous one. Scaling = MLR scaling correction factor; cd = scaling correction of the difference; scaled test = Satorra-Bentler (Mplus MLR).</span></span></code></pre>
+<span><span class="co">#&gt; Each model is tested against the previous one. Scaling = MLR scaling correction factor; cd = scaling correction of the difference; scaled test = Satorra-Bentler (2001; Mplus MLR).</span></span></code></pre>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/lm_table.html">lm_table</a></span><span class="op">(</span><span class="va">cmp</span>, format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Nested model comparison</strong></p>
@@ -892,7 +895,7 @@ likelihood-ratio test and the differences in AIC and BIC:</p>
 </table>
 <p><em>Each model is tested against the previous one. Scaling = MLR
 scaling correction factor; cd = scaling correction of the difference;
-scaled test = Satorra-Bentler (Mplus MLR).</em></p>
+scaled test = Satorra-Bentler (2001; Mplus MLR).</em></p>
 <p>Partial invariance is preferred over full invariance, and freeing the
 other seven items as well (<code>"none"</code>) does not improve the fit
 further — the generating model.</p>
@@ -1037,12 +1040,12 @@ model-implied two-way table, divided by its df; Mplus
 <pre><code><span><span class="co">#&gt; Bivariate residuals (Pearson chi-square / df; &gt; 3.84 suggests local dependence)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;           item1            item2 pearson    lr df   bvr</span></span>
-<span><span class="co">#&gt;  ace_phys_abuse  ace_emo_neglect   8.767 8.958  1 8.767</span></span>
+<span><span class="co">#&gt;  ace_phys_abuse  ace_emo_neglect   8.766 8.957  1 8.766</span></span>
 <span><span class="co">#&gt;   ace_emo_abuse    ace_sex_abuse   4.106 4.073  1 4.106</span></span>
 <span><span class="co">#&gt;   ace_emo_abuse ace_phys_neglect   4.079 4.154  1 4.079</span></span>
-<span><span class="co">#&gt;  ace_phys_abuse    ace_sex_abuse   3.290 3.221  1 3.290</span></span>
-<span><span class="co">#&gt;   ace_sex_abuse ace_phys_neglect   3.206 3.097  1 3.206</span></span>
-<span><span class="co">#&gt;   ace_emo_abuse   ace_phys_abuse   3.134 3.163  1 3.134</span></span></code></pre>
+<span><span class="co">#&gt;  ace_phys_abuse    ace_sex_abuse   3.289 3.221  1 3.289</span></span>
+<span><span class="co">#&gt;   ace_sex_abuse ace_phys_neglect   3.206 3.096  1 3.206</span></span>
+<span><span class="co">#&gt;   ace_emo_abuse   ace_phys_abuse   3.133 3.163  1 3.133</span></span></code></pre>
 <p>A pair with a large BVR can be modelled jointly with a within-class
 log-linear association (Hagenaars 1988), class-specific
 (<code>association = "varying"</code>, the pair as one joint item) or

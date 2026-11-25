@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Getting started with latentmixtures • latentmixtures</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting started with latentmixtures">
 </head>
@@ -115,10 +115,10 @@ and bootstrap replications:</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">latentmixtures</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/lm_start.html">lm_start</a></span><span class="op">(</span>threads <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Starting Julia ...</span></span></code></pre>
-<pre><code><span><span class="co">#&gt; Julia 1.13.2 started with 4 threads; LatentMixtures.jl loaded.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Julia 1.12.5 started with 4 threads; LatentMixtures.jl loaded.</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/lm_start.html">lm_status</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Julia 1.13.2 running: 4 threads, LatentMixtures.jl loaded (session 1)</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Julia 1.12.5 running: 4 threads, LatentMixtures.jl loaded (session 1)</span></span></code></pre>
 <p>The first fit of each model type in a session includes Julia’s
 compilation time; later fits are fast. The thread count of a running
 process cannot change: use <code><a href="../reference/lm_start.html">lm_end(); lm_start(threads = n)</a></code>.
@@ -154,8 +154,9 @@ iterated to convergence.</p>
 <span><span class="co">#&gt;   best start converged      yes (77 EM iterations)</span></span>
 <span><span class="co">#&gt;   stage-2 starts converged  20 / 20</span></span>
 <span><span class="co">#&gt;   best LL replicated        20 times</span></span>
-<span><span class="co">#&gt;   LL at EM / after Newton   -5248.0073 / -5248.0073 (gain 5.5e-07; max |gradient| 1.6e-13)</span></span>
-<span><span class="co">#&gt;   smallest class            0.099</span></span></code></pre>
+<span><span class="co">#&gt;   LL at EM / after Newton   -5248.0073 / -5248.0073 (gain 0.0e+00; max |gradient| 1.4e-13)</span></span>
+<span><span class="co">#&gt;   smallest class            0.099</span></span>
+<span><span class="co">#&gt;   · EM converged; 1 Newton steps (polish = true) raised the log-likelihood by 5.5e-07 (max |gradient| 1.3e-03 → 3.3e-07); the reported solution is the Newton one</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m4</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; ━━ Latent class analysis ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span></span>
@@ -251,7 +252,7 @@ every item missing are not analysed.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   summary() for standard errors · lm_table() to export · classify() for posteriors</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── Parameters (robust standard errors) ─────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; ── Parameters (standard errors: robust (MLR)) ──────────────────────────────────</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   Parameter               Class  Estimate     SE      z       p</span></span>
 <span><span class="co">#&gt;   ─────────────────────────────────────────────────────────────</span></span>
@@ -330,21 +331,21 @@ every item missing are not analysed.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fitstats.html">fitstats</a></span><span class="op">(</span><span class="va">m4</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   K    n npar        ll      aic      bic    sabic     caic   entropy</span></span>
-<span><span class="co">#&gt; 1 4 1500   35 -5248.007 10566.01 10751.98 10640.79 10786.98 0.7593488</span></span>
+<span><span class="co">#&gt; 1 4 1500   35 -5248.007 10566.01 10751.98 10640.79 10786.98 0.7593466</span></span>
 <span><span class="co">#&gt;     smallest replicated starts</span></span>
-<span><span class="co">#&gt; 1 0.09874536         20     20</span></span></code></pre>
+<span><span class="co">#&gt; 1 0.09873811         20     20</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">BIC</a></span><span class="op">(</span><span class="va">m4</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs</a></span><span class="op">(</span><span class="va">m4</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] 10751.98</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; [1] 1500</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/itemprobs.html">itemprobs</a></span><span class="op">(</span><span class="va">m4</span><span class="op">)</span><span class="op">$</span><span class="va">ace_emo_abuse</span>    <span class="co"># category-by-class probabilities</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;       class1    class2    class3   class4</span></span>
-<span><span class="co">#&gt; 0 0.93938201 0.2093227 0.8075345 0.179069</span></span>
-<span><span class="co">#&gt; 1 0.06061799 0.7906773 0.1924655 0.820931</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;       class1    class2    class3    class4</span></span>
+<span><span class="co">#&gt; 0 0.93938127 0.2093157 0.8075377 0.1790758</span></span>
+<span><span class="co">#&gt; 1 0.06061873 0.7906843 0.1924623 0.8209242</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/classprobs.html">classprobs</a></span><span class="op">(</span><span class="va">m4</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; [1] 0.56010632 0.18551660 0.15563172 0.09874536</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] 0.56010023 0.18552219 0.15563946 0.09873811</span></span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="../reference/classification_table.html">classification_table</a></span><span class="op">(</span><span class="va">m4</span><span class="op">)</span><span class="op">$</span><span class="va">avgpost</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;       [,1]  [,2]  [,3]  [,4]</span></span>
@@ -393,11 +394,12 @@ variances, or full covariance matrices.</p>
 <span><span class="va">p_full</span> <span class="op">&lt;-</span> <span class="va">wellbeing</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/lpa.html">lpa</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">:</span><span class="va">lifesat</span>, K <span class="op">=</span> <span class="fl">4</span>, variances <span class="op">=</span> <span class="st">"varying"</span>, covariances <span class="op">=</span> <span class="st">"varying"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/convergence.html">convergence</a></span><span class="op">(</span><span class="va">p_vv</span><span class="op">)</span>   <span class="co"># check that the best LL is replicated and EM reached the maximum</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Convergence check: ✓ no problems found</span></span>
-<span><span class="co">#&gt;   best start converged      yes (42 EM iterations)</span></span>
+<span><span class="co">#&gt;   best start converged      yes (32 EM iterations)</span></span>
 <span><span class="co">#&gt;   stage-2 starts converged  20 / 20</span></span>
 <span><span class="co">#&gt;   best LL replicated        20 times</span></span>
-<span><span class="co">#&gt;   LL at EM / after Newton   -9995.7125 / -9995.7125 (gain 1.0e-07; max |gradient| 8.2e-14)</span></span>
-<span><span class="co">#&gt;   smallest class            0.100</span></span></code></pre>
+<span><span class="co">#&gt;   LL at EM / after Newton   -9995.7125 / -9995.7125 (gain 0.0e+00; max |gradient| 1.3e-13)</span></span>
+<span><span class="co">#&gt;   smallest class            0.100</span></span>
+<span><span class="co">#&gt;   · EM converged; 1 Newton steps (polish = true) raised the log-likelihood by 1.0e-07 (max |gradient| 1.4e-03 → 8.4e-08); the reported solution is the Newton one</span></span></code></pre>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="../reference/profilemeans.html">profilemeans</a></span><span class="op">(</span><span class="va">p_vv</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;          class1 class2 class3 class4</span></span>
@@ -433,18 +435,18 @@ stacks their fit statistics:</p>
 <span><span class="fu"><a href="../reference/fittable.html">fittable</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;           K    n npar        ll      aic      bic    sabic     caic   entropy</span></span>
 <span><span class="co">#&gt; 1 classes 1 1500    8 -6197.364 12410.73 12453.23 12427.82 12461.23       NaN</span></span>
-<span><span class="co">#&gt; 2 classes 2 1500   17 -5413.828 10861.66 10951.98 10897.98 10968.98 0.7812648</span></span>
-<span><span class="co">#&gt; 3 classes 3 1500   26 -5316.153 10684.31 10822.45 10739.86 10848.45 0.7935798</span></span>
-<span><span class="co">#&gt; 4 classes 4 1500   35 -5248.007 10566.01 10751.98 10640.79 10786.98 0.7593488</span></span>
-<span><span class="co">#&gt; 5 classes 5 1500   44 -5240.280 10568.56 10802.34 10662.57 10846.34 0.7712387</span></span>
-<span><span class="co">#&gt; 6 classes 6 1500   53 -5234.394 10574.79 10856.39 10688.02 10909.39 0.7698876</span></span>
+<span><span class="co">#&gt; 2 classes 2 1500   17 -5413.828 10861.66 10951.98 10897.98 10968.98 0.7812622</span></span>
+<span><span class="co">#&gt; 3 classes 3 1500   26 -5316.153 10684.31 10822.45 10739.86 10848.45 0.7935852</span></span>
+<span><span class="co">#&gt; 4 classes 4 1500   35 -5248.007 10566.01 10751.98 10640.79 10786.98 0.7593466</span></span>
+<span><span class="co">#&gt; 5 classes 5 1500   44 -5240.280 10568.56 10802.34 10662.57 10846.34 0.7712432</span></span>
+<span><span class="co">#&gt; 6 classes 6 1500   53 -5234.394 10574.79 10856.39 10688.02 10909.39 0.7699156</span></span>
 <span><span class="co">#&gt;             smallest replicated starts</span></span>
 <span><span class="co">#&gt; 1 classes 1.00000000         20     20</span></span>
-<span><span class="co">#&gt; 2 classes 0.35913827         20     20</span></span>
-<span><span class="co">#&gt; 3 classes 0.18182138         10     20</span></span>
-<span><span class="co">#&gt; 4 classes 0.09874536         20     20</span></span>
-<span><span class="co">#&gt; 5 classes 0.05222319          2     20</span></span>
-<span><span class="co">#&gt; 6 classes 0.04634629          2     20</span></span></code></pre>
+<span><span class="co">#&gt; 2 classes 0.35914474         20     20</span></span>
+<span><span class="co">#&gt; 3 classes 0.18180184         10     20</span></span>
+<span><span class="co">#&gt; 4 classes 0.09873811         20     20</span></span>
+<span><span class="co">#&gt; 5 classes 0.05216880          2     20</span></span>
+<span><span class="co">#&gt; 6 classes 0.04633679          2     20</span></span></code></pre>
 <p>BIC has its minimum at four classes, the generating number. The
 Vuong-Lo-Mendell-Rubin test (<code><a href="../reference/lmr.html">lmr()</a></code>, Mplus TECH11) and the
 bootstrap likelihood-ratio test (<code><a href="../reference/blrt.html">blrt()</a></code>, Mplus TECH14)
@@ -487,7 +489,7 @@ information criteria are set in bold:</p>
 <code class="sourceCode R"><span><span class="va">lmrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">fits</span>, <span class="kw">function</span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="kw">if</span> <span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="va">info</span><span class="op">$</span><span class="va">fit</span><span class="op">$</span><span class="va">K</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="fu"><a href="../reference/lmr.html">lmr</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/lm_table.html">lm_table</a></span><span class="op">(</span><span class="va">fits</span>, lmr <span class="op">=</span> <span class="va">lmrs</span>, format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Model fit</strong></p>
-<table style="width:99%;" class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="10%">
 <col width="10%">
@@ -583,7 +585,7 @@ information criteria are set in bold:</p>
 <td align="right">10688.022</td>
 <td align="right">0.770</td>
 <td align="right">4.6</td>
-<td align="right">0.245</td>
+<td align="right">0.244</td>
 </tr>
 </tbody>
 </table>
@@ -610,12 +612,12 @@ that Mplus uses under MLR, based on the scaling correction factors
 <span><span class="co">#&gt;   ───────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Difference tests ────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   ────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Test                          Chi-square  df       p</span></span>
-<span><span class="co">#&gt;   ────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt;   Likelihood ratio (naive, ML)     339.304  18  &lt;0.001</span></span>
-<span><span class="co">#&gt;   Satorra-Bentler scaled (MLR)     458.650  18  &lt;0.001</span></span>
-<span><span class="co">#&gt;   ────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;   ───────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;   Test                                 Chi-square  df       p</span></span>
+<span><span class="co">#&gt;   ───────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt;   Likelihood ratio (naive, ML)            339.304  18  &lt;0.001</span></span>
+<span><span class="co">#&gt;   Satorra-Bentler (2001) scaled (MLR)     458.650  18  &lt;0.001</span></span>
+<span><span class="co">#&gt;   ───────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt;   Scaling correction of the difference cd = 0.7398</span></span>
 <span><span class="co">#&gt;   ΔAIC = -303.304, ΔBIC = -214.964, ΔsaBIC = -272.133 (M1 - M0)</span></span></code></pre>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
@@ -628,7 +630,7 @@ that Mplus uses under MLR, based on the scaling correction factors
 <span><span class="co">#&gt; p_vv    4    51   -9995.712   0.9916  20343.720  18     339.304  0.7398            458.650    &lt;0.001</span></span>
 <span><span class="co">#&gt; p_full  4   111   -9842.132   1.1041  20451.024  60     307.161  1.1998            256.008    &lt;0.001</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; Each model is tested against the previous one. Scaling = MLR scaling correction factor; cd = scaling correction of the difference; scaled test = Satorra-Bentler (Mplus MLR).</span></span></code></pre>
+<span><span class="co">#&gt; Each model is tested against the previous one. Scaling = MLR scaling correction factor; cd = scaling correction of the difference; scaled test = Satorra-Bentler (2001; Mplus MLR).</span></span></code></pre>
 <p>The chi-square reference distribution does not hold for models with
 different numbers of classes; use <code><a href="../reference/lmr.html">lmr()</a></code> or
 <code><a href="../reference/blrt.html">blrt()</a></code> for those.</p>
@@ -719,8 +721,8 @@ ace_emo_neglect = 0 3 0.828 [0.745, 0.911]<br>
 ace_emo_neglect = 1 3 0.172 [0.089, 0.255]<br>
 ace_phys_neglect = 0 3 0.891 [0.830, 0.952]<br>
 ace_phys_neglect = 1 3 0.109 [0.048, 0.170]<br>
-ace_violence = 0 3 0.460 [0.343, 0.576]<br>
-ace_violence = 1 3 0.540 [0.424, 0.657]<br>
+ace_violence = 0 3 0.460 [0.343, 0.577]<br>
+ace_violence = 1 3 0.540 [0.423, 0.657]<br>
 ace_substance = 0 3 0.178 [0.044, 0.312]<br>
 ace_substance = 1 3 0.822 [0.688, 0.956]<br>
 ace_mental = 0 3 0.443 [0.334, 0.552]<br>
@@ -886,7 +888,7 @@ Avg. posterior
 <td align="right">&lt;0.001</td>
 </tr>
 <tr class="even">
-<td align="left">Satorra-Bentler scaled (MLR)</td>
+<td align="left">Satorra-Bentler (2001) scaled (MLR)</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right"></td>
@@ -896,8 +898,8 @@ Avg. posterior
 </tr>
 </tbody>
 </table>
-<p><em>cd = 0.7398 (scaling correction of the difference); ΔBIC (M1 -
-M0) = -214.964.</em></p>
+<p><em>cd = 0.7398 (scaling correction of the difference,
+Satorra-Bentler 2001); ΔBIC (M1 - M0) = -214.964.</em></p>
 <p>In R Markdown or Quarto, a table is emitted as is; use the format
 that matches the output (<code>"markdown"</code> or <code>"html"</code>
 for HTML documents, <code>"latex"</code> for PDF). Any data frame can be

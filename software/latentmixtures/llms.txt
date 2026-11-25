@@ -31,20 +31,22 @@ estimation runs in one persistent Julia process.
 
 2.  **R packages**:
 
-    \
-    [`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(`[`c`](https://rdrr.io/r/base/c.html)`(``"JuliaConnectoR"``, ``"rlang"``, ``"tidyselect"``, ``"remotes"``)``)`\
-    `# the repository is private: set a GitHub token first, e.g. Sys.setenv(GITHUB_PAT = "...")`\
-    `remotes``::`[`install_github`](https://remotes.r-lib.org/reference/install_github.html)`(``"williamlorder/latentmixtures"``)`\
-    `# or from a local checkout`\
-    [`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"path/to/latentmixtures"``, repos ``=`` ``NULL``, type ``=`` ``"source"``)`
+    ``` r
+    install.packages(c("JuliaConnectoR", "rlang", "tidyselect", "remotes"))
+    # the repository is private: set a GitHub token first, e.g. Sys.setenv(GITHUB_PAT = "...")
+    remotes::install_github("williamlorder/latentmixtures")
+    # or from a local checkout
+    install.packages("path/to/latentmixtures", repos = NULL, type = "source")
+    ```
 
 3.  **Julia packages**: install LatentMixtures.jl into the default Julia
     environment, from GitHub (default) or from a local copy (development
     mode):
 
-    \
-    `latentmixtures``::`[`install_julia_packages`](https://williamlorder.github.io/software/latentmixtures/reference/install_julia_packages.md)`(``)``      ``# Pkg.add(url = "https://github.com/williamlorder/LatentMixtures.jl")`\
-    `# or: install_julia_packages(path = "path/to/LatentMixtures.jl")`
+    ``` r
+    latentmixtures::install_julia_packages()      # Pkg.add(url = "https://github.com/williamlorder/LatentMixtures.jl")
+    # or: install_julia_packages(path = "path/to/LatentMixtures.jl")
+    ```
 
     The repositories are private: you need read access, and Git must be
     able to authenticate to github.com (for example `gh auth login`
@@ -57,67 +59,64 @@ Documentation:
 ## Quick start
 
 The package ships five simulated datasets with known generating models
-([`?aces`](https://williamlorder.github.io/software/latentmixtures/reference/aces.md),
-[`?wellbeing`](https://williamlorder.github.io/software/latentmixtures/reference/wellbeing.md),
-[`?wellbeing_panel`](https://williamlorder.github.io/software/latentmixtures/reference/wellbeing_panel.md),
-[`?depression`](https://williamlorder.github.io/software/latentmixtures/reference/depression.md),
-[`?substance`](https://williamlorder.github.io/software/latentmixtures/reference/substance.md));
-every example below runs as is.
+(`?aces`, `?wellbeing`, `?wellbeing_panel`, `?depression`,
+`?substance`); every example below runs as is.
 
-\
-[`library`](https://rdrr.io/r/base/library.html)`(``latentmixtures``)`\
-[`lm_available`](https://williamlorder.github.io/software/latentmixtures/reference/lm_available.md)`(``)``               ``# TRUE once Julia and LatentMixtures.jl are installed`\
-[`lm_start`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md)`(``threads ``=`` ``4``)``        ``# optional: starts Julia once; fitting functions auto-start it`\
-\
-`# LCA: eight adverse childhood experiences (ace_*) of 1,500 adults. Which patterns of`\
-`# childhood adversity are there? (generated with four classes)`\
-[`data`](https://rdrr.io/r/utils/data.html)`(``aces``)`\
-`m4`` ``<-`` ``aces`` ``|>`` `[`lca`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)`(``starts_with``(``"ace_"``)``, K ``=`` ``4``)`\
-[`convergence`](https://williamlorder.github.io/software/latentmixtures/reference/convergence.md)`(``m4``)``              ``# check that the best LL is replicated and EM reached the maximum`\
-`m4``                           ``# header, fit, class sizes, item-response probabilities`\
-[`summary`](https://rdrr.io/r/base/summary.html)`(``m4``)``                  ``# every parameter with robust standard errors`\
-[`head`](https://rdrr.io/r/utils/head.html)`(`[`classify`](https://williamlorder.github.io/software/latentmixtures/reference/classify.md)`(``m4``)``)``           ``# posterior probabilities and modal class per row`\
-\
-`# covariates, known groups, weights: also columns of the data`\
-[`lca`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)`(``aces``, ``starts_with``(``"ace_"``)``, K ``=`` ``4``, covariates ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``female``, ``low_parent_edu``)``, weights ``=`` ``weight``)`\
-[`lca`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)`(``aces``, ``starts_with``(``"ace_"``)``, K ``=`` ``4``, group ``=`` ``female``, invariance ``=`` ``"ace_sex_abuse"``)`\
-\
-`# LPA: sleep, activity, diet, stress, loneliness and life satisfaction`\
-[`data`](https://rdrr.io/r/utils/data.html)`(``wellbeing``)`\
-[`lpa`](https://williamlorder.github.io/software/latentmixtures/reference/lpa.md)`(``wellbeing``, ``sleep``:``lifesat``, K ``=`` ``4``, variances ``=`` ``"varying"``)`\
-`# mixed indicator types: binary ACE items with an overdispersed symptom count (Mplus COUNT)`\
-[`mixture`](https://williamlorder.github.io/software/latentmixtures/reference/mixture.md)`(``aces``, K ``=`` ``4``, categorical ``=`` ``starts_with``(``"ace_"``)``, negbin ``=`` ``depress``)`\
-`# LTA: alcohol, binge drinking, cigarettes and cannabis in grades 8, 10 and 12`\
-[`data`](https://rdrr.io/r/utils/data.html)`(``substance``)`\
-`t3`` ``<-`` `[`lta`](https://williamlorder.github.io/software/latentmixtures/reference/lta.md)`(``substance``, waves ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``alc_1``:``mj_1``, ``alc_2``:``mj_2``, ``alc_3``:``mj_3``)``, K ``=`` ``3``)`\
-[`transitions`](https://williamlorder.github.io/software/latentmixtures/reference/transitions.md)`(``t3``)`\
-`# growth mixtures: depressive (dep1-dep5) and anxiety (anx1-anx5) symptoms, ages 12-16`\
-[`data`](https://rdrr.io/r/utils/data.html)`(``depression``)`\
-`g`` ``<-`` `[`growth`](https://williamlorder.github.io/software/latentmixtures/reference/growth.md)`(``depression``, ``dep1``:``dep5``, K ``=`` ``4``, model ``=`` ``"gmm"``, degree ``=`` ``2``)`\
-[`growth`](https://williamlorder.github.io/software/latentmixtures/reference/growth.md)`(``depression``, processes ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``dep1``:``dep5``, ``anx1``:``anx5``)``, K ``=`` ``4``, model ``=`` ``"gmm"``)`\
-`# two-level LCA: students in schools, 3 student classes and 2 latent school types`\
-[`data`](https://rdrr.io/r/utils/data.html)`(``schools``)`\
-`ml`` ``<-`` `[`lca`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)`(``schools``, ``starts_with``(``"b_"``)``, K ``=`` ``3``, level2 ``=`` ``school``, KB ``=`` ``2``)`\
-[`conditionalprobs`](https://williamlorder.github.io/software/latentmixtures/reference/conditionalprobs.md)`(``ml``)``         ``# P(student class | school type)`\
-\
-`# three-step auxiliary models: model, data, columns`\
-[`r3step`](https://williamlorder.github.io/software/latentmixtures/reference/r3step.md)`(``m4``, ``aces``, `[`c`](https://rdrr.io/r/base/c.html)`(``female``, ``age``, ``low_parent_edu``)``, ref ``=`` ``1``)``   ``# who is in which class?`\
-[`bch`](https://williamlorder.github.io/software/latentmixtures/reference/bch.md)`(``m4``, ``aces``, ``depress``)``       ``# depressive symptoms by class (generated means 4 to 13)`\
-[`dcat`](https://williamlorder.github.io/software/latentmixtures/reference/dcat.md)`(``m4``, ``aces``, ``srh``, ref ``=`` ``1``)`` ``# self-rated health by class`\
-\
-`# class enumeration tests: 4 against 3 classes`\
-[`lmr`](https://williamlorder.github.io/software/latentmixtures/reference/lmr.md)`(``m4``)``; `[`blrt`](https://williamlorder.github.io/software/latentmixtures/reference/blrt.md)`(``m4``, reps ``=`` ``100``)`\
-\
-`# nested models with the same K (e.g. measurement invariance across sex): naive and`\
-`# Satorra-Bentler scaled (MLR) difference tests, as in Mplus`\
-`full`` ``<-`` `[`lca`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)`(``aces``, ``starts_with``(``"ace_"``)``, K ``=`` ``4``, group ``=`` ``female``)`\
-`part`` ``<-`` `[`lca`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)`(``aces``, ``starts_with``(``"ace_"``)``, K ``=`` ``4``, group ``=`` ``female``, invariance ``=`` ``"ace_sex_abuse"``)`\
-`none`` ``<-`` `[`lca`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)`(``aces``, ``starts_with``(``"ace_"``)``, K ``=`` ``4``, group ``=`` ``female``, invariance ``=`` ``"none"``)`\
-[`scaling_factor`](https://williamlorder.github.io/software/latentmixtures/reference/scaling_factor.md)`(``full``)`\
-[`compare_models`](https://williamlorder.github.io/software/latentmixtures/reference/compare_models.md)`(``full``, ``part``)``   ``# sexual abuse is reported differently by women and men`\
-[`compare_models`](https://williamlorder.github.io/software/latentmixtures/reference/compare_models.md)`(`[`list`](https://rdrr.io/r/base/list.html)`(``full ``=`` ``full``, partial ``=`` ``part``, none ``=`` ``none``)``)``   ``# each vs. the previous`\
-\
-[`lm_end`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md)`(``)``                     ``# shut Julia down (lm_start() starts a fresh one)`
+``` r
+library(latentmixtures)
+lm_available()               # TRUE once Julia and LatentMixtures.jl are installed
+lm_start(threads = 4)        # optional: starts Julia once; fitting functions auto-start it
+
+# LCA: eight adverse childhood experiences (ace_*) of 1,500 adults. Which patterns of
+# childhood adversity are there? (generated with four classes)
+data(aces)
+m4 <- aces |> lca(starts_with("ace_"), K = 4)
+convergence(m4)              # check that the best LL is replicated and EM reached the maximum
+m4                           # header, fit, class sizes, item-response probabilities
+summary(m4)                  # every parameter with robust standard errors
+head(classify(m4))           # posterior probabilities and modal class per row
+
+# covariates, known groups, weights: also columns of the data
+lca(aces, starts_with("ace_"), K = 4, covariates = c(female, low_parent_edu), weights = weight)
+lca(aces, starts_with("ace_"), K = 4, group = female, invariance = "ace_sex_abuse")
+
+# LPA: sleep, activity, diet, stress, loneliness and life satisfaction
+data(wellbeing)
+lpa(wellbeing, sleep:lifesat, K = 4, variances = "varying")
+# mixed indicator types: binary ACE items with an overdispersed symptom count (Mplus COUNT)
+mixture(aces, K = 4, categorical = starts_with("ace_"), negbin = depress)
+# LTA: alcohol, binge drinking, cigarettes and cannabis in grades 8, 10 and 12
+data(substance)
+t3 <- lta(substance, waves = list(alc_1:mj_1, alc_2:mj_2, alc_3:mj_3), K = 3)
+transitions(t3)
+# growth mixtures: depressive (dep1-dep5) and anxiety (anx1-anx5) symptoms, ages 12-16
+data(depression)
+g <- growth(depression, dep1:dep5, K = 4, model = "gmm", degree = 2)
+growth(depression, processes = list(dep1:dep5, anx1:anx5), K = 4, model = "gmm")
+# two-level LCA: students in schools, 3 student classes and 2 latent school types
+data(schools)
+ml <- lca(schools, starts_with("b_"), K = 3, level2 = school, KB = 2)
+conditionalprobs(ml)         # P(student class | school type)
+
+# three-step auxiliary models: model, data, columns
+r3step(m4, aces, c(female, age, low_parent_edu), ref = 1)   # who is in which class?
+bch(m4, aces, depress)       # depressive symptoms by class (generated means 4 to 13)
+dcat(m4, aces, srh, ref = 1) # self-rated health by class
+
+# class enumeration tests: 4 against 3 classes
+lmr(m4); blrt(m4, reps = 100)
+
+# nested models with the same K (e.g. measurement invariance across sex): naive and
+# Satorra-Bentler scaled (MLR) difference tests, as in Mplus
+full <- lca(aces, starts_with("ace_"), K = 4, group = female)
+part <- lca(aces, starts_with("ace_"), K = 4, group = female, invariance = "ace_sex_abuse")
+none <- lca(aces, starts_with("ace_"), K = 4, group = female, invariance = "none")
+scaling_factor(full)
+compare_models(full, part)   # sexual abuse is reported differently by women and men
+compare_models(list(full = full, partial = part, none = none))   # each vs. the previous
+
+lm_end()                     # shut Julia down (lm_start() starts a fresh one)
+```
 
 Raw survey or Mplus files often code missing values as `-999`; convert
 them before fitting (`dat[dat == -999] <- NA`).
@@ -127,118 +126,116 @@ The older positional form (`lca(items_df, 3)`,
 
 ## Tables
 
-[`lm_table()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)
-formats results for papers in four formats: `"text"` (console),
-`"markdown"` (GitHub), `"latex"` (booktabs) and `"html"`. It returns the
-table, and writes it to a file if you give `file`. In R Markdown and
-Quarto the table is inserted as it is.
+`lm_table()` formats results for papers in four formats: `"text"`
+(console), `"markdown"` (GitHub), `"latex"` (booktabs) and `"html"`. It
+returns the table, and writes it to a file if you give `file`. In R
+Markdown and Quarto the table is inserted as it is.
 
-\
-`fits`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``1``:``5``, ``function``(``k``)`` `[`lca`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)`(``aces``, ``starts_with``(``"ace_"``)``, K ``=`` ``k``)``)`\
-[`names`](https://rdrr.io/r/base/names.html)`(``fits``)`` ``<-`` `[`paste0`](https://rdrr.io/r/base/paste.html)`(``1``:``5``, ``"-class"``)`\
-\
-`# class enumeration: K, free parameters, LL, AIC, BIC, saBIC, entropy, smallest class,`\
-`# plus LMR / BLRT p-values if you pass them (the lowest information criteria are in bold)`\
-[`lm_table`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)`(``fits``, lmr  ``=`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``fits``, ``function``(``m``)`` ``if`` ``(``m``$``info``$``fit``$``K`` ``>`` ``1``)`` `[`lmr`](https://williamlorder.github.io/software/latentmixtures/reference/lmr.md)`(``m``)``)``,`\
-`               blrt ``=`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``fits``, ``function``(``m``)`` ``if`` ``(``m``$``info``$``fit``$``K`` ``>`` ``1``)`` `[`blrt`](https://williamlorder.github.io/software/latentmixtures/reference/blrt.md)`(``m``)``)``,`\
-`         format ``=`` ``"markdown"``)`\
-[`lm_table`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)`(``fits``[[``3``]``]``, ``fits``[[``4``]``]``, format ``=`` ``"latex"``, file ``=`` ``"fit.tex"``, label ``=`` ``"tab:fit"``)`\
-\
-`# parameters: classes side by side ("est (SE)", stars on testable parameters),`\
-`# or one row per parameter; confidence intervals instead of SEs`\
-[`lm_table`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)`(``fits``[[``4``]``]``, what ``=`` ``"parameters"``, format ``=`` ``"latex"``, file ``=`` ``"lca4.tex"``)`\
-[`lm_table`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)`(``fits``[[``4``]``]``, what ``=`` ``"parameters"``, layout ``=`` ``"long"``, ci ``=`` ``TRUE``, format ``=`` ``"html"``)`\
-[`lm_table`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)`(``fits``[[``4``]``]``, what ``=`` ``"classes"``)``      ``# class sizes, average posterior probabilities`\
-\
-`# auxiliary models`\
-[`lm_table`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)`(`[`r3step`](https://williamlorder.github.io/software/latentmixtures/reference/r3step.md)`(``fits``[[``4``]``]``, ``aces``, `[`c`](https://rdrr.io/r/base/c.html)`(``age``, ``female``)``)``, format ``=`` ``"markdown"``)`\
-[`lm_table`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)`(`[`bch`](https://williamlorder.github.io/software/latentmixtures/reference/bch.md)`(``fits``[[``4``]``]``, ``aces``, ``depress``)``, `[`bch`](https://williamlorder.github.io/software/latentmixtures/reference/bch.md)`(``fits``[[``4``]``]``, ``aces``, ``smoker``)``, pairwise ``=`` ``TRUE``)`\
-[`lm_table`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)`(`[`dcat`](https://williamlorder.github.io/software/latentmixtures/reference/dcat.md)`(``fits``[[``4``]``]``, ``aces``, ``srh``)``, format ``=`` ``"html"``, file ``=`` ``"srh.html"``)`\
-[`lm_table`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)`(`[`compare_models`](https://williamlorder.github.io/software/latentmixtures/reference/compare_models.md)`(``full``, ``part``)``, format ``=`` ``"latex"``)`
+``` r
+fits <- lapply(1:5, function(k) lca(aces, starts_with("ace_"), K = k))
+names(fits) <- paste0(1:5, "-class")
+
+# class enumeration: K, free parameters, LL, AIC, BIC, saBIC, entropy, smallest class,
+# plus LMR / BLRT p-values if you pass them (the lowest information criteria are in bold)
+lm_table(fits, lmr  = lapply(fits, function(m) if (m$info$fit$K > 1) lmr(m)),
+               blrt = lapply(fits, function(m) if (m$info$fit$K > 1) blrt(m)),
+         format = "markdown")
+lm_table(fits[[3]], fits[[4]], format = "latex", file = "fit.tex", label = "tab:fit")
+
+# parameters: classes side by side ("est (SE)", stars on testable parameters),
+# or one row per parameter; confidence intervals instead of SEs
+lm_table(fits[[4]], what = "parameters", format = "latex", file = "lca4.tex")
+lm_table(fits[[4]], what = "parameters", layout = "long", ci = TRUE, format = "html")
+lm_table(fits[[4]], what = "classes")      # class sizes, average posterior probabilities
+
+# auxiliary models
+lm_table(r3step(fits[[4]], aces, c(age, female)), format = "markdown")
+lm_table(bch(fits[[4]], aces, depress), bch(fits[[4]], aces, smoker), pairwise = TRUE)
+lm_table(dcat(fits[[4]], aces, srh), format = "html", file = "srh.html")
+lm_table(compare_models(full, part), format = "latex")
+```
 
 Options: `digits`, `title`, `notes`, `stars = c(0.05, 0.01, 0.001)` (or
 `FALSE`), `se`, `ci`, `level`, `layout`, `kinds`, `labels`.
 
 ### Extending `lm_table()`
 
-[`lm_table()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)
-is an S3 generic. A package with its own result class builds an `lm_tab`
-(formatted cells, optional panel groups, title, notes) and renders it
-with
-[`lm_render()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_tab.md),
-which takes care of the four formats:
+`lm_table()` is an S3 generic. A package with its own result class
+builds an `lm_tab` (formatted cells, optional panel groups, title,
+notes) and renders it with `lm_render()`, which takes care of the four
+formats:
 
-\
-`#' @exportS3Method latentmixtures::lm_table`\
-`lm_table.my_result`` ``<-`` ``function``(``x``, ``...``, ``format`` ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"text"``, ``"markdown"``, ``"latex"``, ``"html"``)``,`\
-`                               ``digits`` ``=`` ``3``, ``file`` ``=`` ``NULL``, ``title`` ``=`` ``NULL``, ``notes`` ``=`` ``NULL``, ``label`` ``=`` ``NULL``)`` ``{`\
-`  ``body`` ``<-`` `[`data.frame`](https://rdrr.io/r/base/data.frame.html)`(``Class ``=`` `[`paste`](https://rdrr.io/r/base/paste.html)`(``"Class"``, `[`seq_along`](https://rdrr.io/r/base/seq.html)`(``x``$``est``)``)``,`\
-`                     Effect ``=`` `[`paste0`](https://rdrr.io/r/base/paste.html)`(`[`lm_format_num`](https://williamlorder.github.io/software/latentmixtures/reference/lm_format_num.md)`(``x``$``est``, ``digits``)``, `[`lm_stars`](https://williamlorder.github.io/software/latentmixtures/reference/lm_format_num.md)`(``x``$``p``)``)``,`\
-`                     SE ``=`` `[`lm_format_num`](https://williamlorder.github.io/software/latentmixtures/reference/lm_format_num.md)`(``x``$``se``, ``digits``)``, p ``=`` `[`lm_format_p`](https://williamlorder.github.io/software/latentmixtures/reference/lm_format_num.md)`(``x``$``p``)``)`\
-`  ``tab`` ``<-`` `[`lm_tab`](https://williamlorder.github.io/software/latentmixtures/reference/lm_tab.md)`(``body``, title ``=`` ``title`` `[`%||%`](https://rdrr.io/r/base/Control.html)` ``"My estimates"``, notes ``=`` ``notes``)`\
-`  `[`lm_render`](https://williamlorder.github.io/software/latentmixtures/reference/lm_tab.md)`(``tab``, `[`match.arg`](https://rdrr.io/r/base/match.arg.html)`(``format``)``, file ``=`` ``file``, label ``=`` ``label``)`\
-`}`
+``` r
+#' @exportS3Method latentmixtures::lm_table
+lm_table.my_result <- function(x, ..., format = c("text", "markdown", "latex", "html"),
+                               digits = 3, file = NULL, title = NULL, notes = NULL, label = NULL) {
+  body <- data.frame(Class = paste("Class", seq_along(x$est)),
+                     Effect = paste0(lm_format_num(x$est, digits), lm_stars(x$p)),
+                     SE = lm_format_num(x$se, digits), p = lm_format_p(x$p))
+  tab <- lm_tab(body, title = title %||% "My estimates", notes = notes)
+  lm_render(tab, match.arg(format), file = file, label = label)
+}
+```
 
 ## Plots
 
-Every model and auxiliary result has an
-[`autoplot()`](https://ggplot2.tidyverse.org/reference/autoplot.html)
-method (ggplot2), and
-[`plot()`](https://rdrr.io/r/graphics/plot.default.html) draws the same
-figure. The functions return ggplot objects, so titles, scales and
-themes can be changed with `+`. The default theme
-([`lm_theme()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_theme.md))
-and the colour-blind-safe Okabe-Ito palette
-([`lm_palette()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_theme.md))
-are exported for your own figures.
+Every model and auxiliary result has an `autoplot()` method (ggplot2),
+and `plot()` draws the same figure. The functions return ggplot objects,
+so titles, scales and themes can be changed with `+`. The default theme
+(`lm_theme()`) and the colour-blind-safe Okabe-Ito palette
+(`lm_palette()`) are exported for your own figures.
 
-\
-`m`` ``<-`` `[`lca`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)`(``aces``, ``starts_with``(``"ace_"``)``, K ``=`` ``4``)`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``m``, error ``=`` ``"ci"``)``            ``# item-response profiles with 95% CIs`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``m``, type ``=`` ``"bars"``)``           ``# stacked category probabilities per class`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``m``, type ``=`` ``"classification"``)`` ``# average posterior probabilities by modal class`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``m``, type ``=`` ``"posterior"``)``      ``# histograms of the assigned-class posteriors`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``m``, type ``=`` ``"sizes"``)``          ``# estimated class proportions and modal counts`\
-\
-`# class enumeration: information criteria and entropy against K, LMR / BLRT p-values`\
-[`lm_fitplot`](https://williamlorder.github.io/software/latentmixtures/reference/lm_fitplot.md)`(``fits``, lmr ``=`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``fits``, ``function``(``m``)`` ``if`` ``(``m``$``info``$``fit``$``K`` ``>`` ``1``)`` `[`lmr`](https://williamlorder.github.io/software/latentmixtures/reference/lmr.md)`(``m``)``)``)`
+``` r
+m <- lca(aces, starts_with("ace_"), K = 4)
+autoplot(m, error = "ci")            # item-response profiles with 95% CIs
+autoplot(m, type = "bars")           # stacked category probabilities per class
+autoplot(m, type = "classification") # average posterior probabilities by modal class
+autoplot(m, type = "posterior")      # histograms of the assigned-class posteriors
+autoplot(m, type = "sizes")          # estimated class proportions and modal counts
 
-![LCA item-response profiles](reference/figures/README-lca-profile.png)
+# class enumeration: information criteria and entropy against K, LMR / BLRT p-values
+lm_fitplot(fits, lmr = lapply(fits, function(m) if (m$info$fit$K > 1) lmr(m)))
+```
+
+![](reference/figures/README-lca-profile.png)
 
 LCA item-response profiles
 
-![Class enumeration](reference/figures/README-enumeration.png)
+![](reference/figures/README-enumeration.png)
 
 Class enumeration
 
-\
-`p`` ``<-`` `[`lpa`](https://williamlorder.github.io/software/latentmixtures/reference/lpa.md)`(``wellbeing``, ``sleep``:``lifesat``, K ``=`` ``4``, variances ``=`` ``"varying"``)`\
-`p_full`` ``<-`` `[`lpa`](https://williamlorder.github.io/software/latentmixtures/reference/lpa.md)`(``wellbeing``, ``sleep``:``lifesat``, K ``=`` ``4``, variances ``=`` ``"varying"``, covariances ``=`` ``"varying"``)`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``p``, standardize ``=`` ``TRUE``)``      ``# profile means ± 95% CI, in overall-SD units`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``p``, error ``=`` ``"sd"``)``            ``# means ± within-profile SD`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``p_full``, type ``=`` ``"correlation"``)``   ``# within-profile correlations (covariances != "zero")`
+``` r
+p <- lpa(wellbeing, sleep:lifesat, K = 4, variances = "varying")
+p_full <- lpa(wellbeing, sleep:lifesat, K = 4, variances = "varying", covariances = "varying")
+autoplot(p, standardize = TRUE)      # profile means ± 95% CI, in overall-SD units
+autoplot(p, error = "sd")            # means ± within-profile SD
+autoplot(p_full, type = "correlation")   # within-profile correlations (covariances != "zero")
+```
 
-![LPA profiles](reference/figures/README-lpa-profile.png)
+![](reference/figures/README-lpa-profile.png)
 
 LPA profiles
 
-\
-`t`` ``<-`` `[`lta`](https://williamlorder.github.io/software/latentmixtures/reference/lta.md)`(``substance``, waves ``=`` `[`list`](https://rdrr.io/r/base/list.html)`(``alc_1``:``mj_1``, ``alc_2``:``mj_2``, ``alc_3``:``mj_3``)``, K ``=`` ``3``)`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``t``)``                          ``# LTA transition matrices, one panel per transition`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``t``, type ``=`` ``"prevalence"``)``     ``# class proportions over the waves (geom = "area")`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``t``, type ``=`` ``"profile"``)``        ``# item profiles at every wave (non-invariance)`
+``` r
+t <- lta(substance, waves = list(alc_1:mj_1, alc_2:mj_2, alc_3:mj_3), K = 3)
+autoplot(t)                          # LTA transition matrices, one panel per transition
+autoplot(t, type = "prevalence")     # class proportions over the waves (geom = "area")
+autoplot(t, type = "profile")        # item profiles at every wave (non-invariance)
+```
 
-![LTA transitions](reference/figures/README-lta-transitions.png)
+![](reference/figures/README-lta-transitions.png)
 
 LTA transitions
 
-\
-`# growth mixtures: estimated class trajectories, observed posterior-weighted class`\
-`# means and a sample of individual trajectories (one panel per process)`\
-`g`` ``<-`` `[`growth`](https://williamlorder.github.io/software/latentmixtures/reference/growth.md)`(``depression``, ``dep1``:``dep5``, K ``=`` ``4``, model ``=`` ``"gmm"``, degree ``=`` ``2``)`\
-[`autoplot`](https://ggplot2.tidyverse.org/reference/autoplot.html)`(``g``, data ``=`` ``depression``, spaghetti ``=`` ``60``)`
+``` r
+# growth mixtures: estimated class trajectories, observed posterior-weighted class
+# means and a sample of individual trajectories (one panel per process)
+g <- growth(depression, dep1:dep5, K = 4, model = "gmm", degree = 2)
+autoplot(g, data = depression, spaghetti = 60)
+```
 
-![Growth mixture trajectories](reference/figures/README-growth.png)
+![](reference/figures/README-growth.png)
 
 Growth mixture trajectories
 
@@ -248,260 +245,201 @@ Other figures: multigroup models (one panel per group),
 / `autoplot(dcat(...))` (class means / probabilities with CIs),
 `autoplot(blrt(...))` (bootstrap distribution of the LR statistic) and
 `autoplot(compare_models(m1, m2, m3))` (dot plot of the fit indices).
-See
-[`?autoplot.latentmix`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot.latentmix.md)
-and the vignettes.
+See `?autoplot.latentmix` and the vignettes.
 
 ## Julia session
 
-- `lm_start(threads = "auto")` starts one Julia process, sets
-  `JULIA_NUM_THREADS` and loads LatentMixtures.jl once. Later calls
-  reuse it. Fitting functions start it automatically, using
-  `JULIA_NUM_THREADS` if it is set and `"auto"` otherwise.
-- [`lm_status()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md)
-  reports whether Julia is running and how many threads it has.
-- [`lm_end()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md)
-  stops the process. Models fitted before still print (their fit
-  statistics are kept in R), but anything that needs Julia asks you to
-  refit them.
-- You cannot change the number of threads of a running process. To
-  change it, run
-  [`lm_end(); lm_start(threads = n)`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md).
-- [`lm_session_id()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_session_id.md)
-  increases with each new Julia process. Packages that load their own
-  Julia code can check it to know when to reload.
+-   `lm_start(threads = "auto")` starts one Julia process, sets
+    `JULIA_NUM_THREADS` and loads LatentMixtures.jl once. Later calls
+    reuse it. Fitting functions start it automatically, using
+    `JULIA_NUM_THREADS` if it is set and `"auto"` otherwise.
+-   `lm_status()` reports whether Julia is running and how many threads
+    it has.
+-   `lm_end()` stops the process. Models fitted before still print
+    (their fit statistics are kept in R), but anything that needs Julia
+    asks you to refit them.
+-   You cannot change the number of threads of a running process. To
+    change it, run `lm_end(); lm_start(threads = n)`.
+-   `lm_session_id()` increases with each new Julia process. Packages
+    that load their own Julia code can check it to know when to reload.
 
 # Package index
 
 ## All functions
 
-- [`aces`](https://williamlorder.github.io/software/latentmixtures/reference/aces.md)
-  : Adverse childhood experiences (simulated)
+-   `aces` : Adverse childhood experiences (simulated)
 
-- [`autoplot(`*`<latentmix_bch>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot-auxiliary.md)
-  [`autoplot(`*`<latentmix_dcat>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot-auxiliary.md)
-  [`autoplot(`*`<latentmix_r3step>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot-auxiliary.md)
-  [`autoplot(`*`<latentmix_blrt>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot-auxiliary.md)
-  [`plot(`*`<latentmix_bch>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot-auxiliary.md)
-  [`plot(`*`<latentmix_dcat>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot-auxiliary.md)
-  [`plot(`*`<latentmix_r3step>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot-auxiliary.md)
-  [`plot(`*`<latentmix_blrt>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot-auxiliary.md)
-  : Plot auxiliary-model results
+-   `autoplot(<latentmix_bch>)` `autoplot(<latentmix_dcat>)`
+    `autoplot(<latentmix_r3step>)` `autoplot(<latentmix_blrt>)`
+    `plot(<latentmix_bch>)` `plot(<latentmix_dcat>)`
+    `plot(<latentmix_r3step>)` `plot(<latentmix_blrt>)` : Plot
+    auxiliary-model results
 
-- [`autoplot(`*`<latentmix>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot.latentmix.md)
-  [`plot(`*`<latentmix>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/autoplot.latentmix.md)
-  : Plot a fitted mixture model
+-   `autoplot(<latentmix>)` `plot(<latentmix>)` : Plot a fitted mixture
+    model
 
-- [`bch()`](https://williamlorder.github.io/software/latentmixtures/reference/bch.md)
-  : Continuous distal outcome means by class (BCH; Mplus AUXILIARY = y
-  (BCH))
+-   `bch()` : Continuous distal outcome means by class (BCH; Mplus
+    AUXILIARY = y (BCH))
 
-- [`blrt()`](https://williamlorder.github.io/software/latentmixtures/reference/blrt.md)
-  : Bootstrap likelihood-ratio test of K-1 against K classes (Mplus
-  TECH14)
+-   `blrt()` : Bootstrap likelihood-ratio test of K-1 against K classes
+    (Mplus TECH14)
 
-- [`bvr()`](https://williamlorder.github.io/software/latentmixtures/reference/bvr.md)
-  : Bivariate residuals of a latent class model
+-   `bvr()` : Bivariate residuals of a latent class model
 
-- [`classification_table()`](https://williamlorder.github.io/software/latentmixtures/reference/classification_table.md)
-  : Classification diagnostics (Mplus CLASSIFICATION QUALITY)
+-   `classification_table()` : Classification diagnostics (Mplus
+    CLASSIFICATION QUALITY)
 
-- [`classify()`](https://williamlorder.github.io/software/latentmixtures/reference/classify.md)
-  [`posterior()`](https://williamlorder.github.io/software/latentmixtures/reference/classify.md)
-  : Posterior class probabilities and class membership
+-   `classify()` `posterior()` : Posterior class probabilities and class
+    membership
 
-- [`classprobs()`](https://williamlorder.github.io/software/latentmixtures/reference/classprobs.md)
-  : Estimated class proportions
+-   `classprobs()` : Estimated class proportions
 
-- [`coeftable()`](https://williamlorder.github.io/software/latentmixtures/reference/coeftable.md)
-  : Regression coefficients of the one-step latent class regression
+-   `coeftable()` : Regression coefficients of the one-step latent class
+    regression
 
-- [`compare_models()`](https://williamlorder.github.io/software/latentmixtures/reference/compare_models.md)
-  : Compare nested models with the same number of classes
+-   `compare_models()` : Compare nested models with the same number of
+    classes
 
-- [`compare_mplus()`](https://williamlorder.github.io/software/latentmixtures/reference/compare_mplus.md)
-  : Compare a fit with Mplus
+-   `compare_mplus()` : Compare a fit with Mplus
 
-- [`conditionalprobs()`](https://williamlorder.github.io/software/latentmixtures/reference/conditionalprobs.md)
-  : Within-class distribution in each between class (two-level models)
+-   `conditionalprobs()` : Within-class distribution in each between
+    class (two-level models)
 
-- [`convergence()`](https://williamlorder.github.io/software/latentmixtures/reference/convergence.md)
-  [`print(`*`<lm_convergence>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/convergence.md)
-  : Check the convergence of a fitted mixture model
+-   `convergence()` `print(<lm_convergence>)` : Check the convergence of
+    a fitted mixture model
 
-- [`countparams()`](https://williamlorder.github.io/software/latentmixtures/reference/countparams.md)
-  : Count-indicator parameters of a mixture model
+-   `countparams()` : Count-indicator parameters of a mixture model
 
-- [`dcat()`](https://williamlorder.github.io/software/latentmixtures/reference/dcat.md)
-  : Categorical distal outcome by class (Mplus DCAT)
+-   `dcat()` : Categorical distal outcome by class (Mplus DCAT)
 
-- [`depression`](https://williamlorder.github.io/software/latentmixtures/reference/depression.md)
-  : Adolescent depressive and anxiety symptoms, ages 12–16 (simulated)
+-   `depression` : Adolescent depressive and anxiety symptoms, ages
+    12–16 (simulated)
 
-- [`fitstats()`](https://williamlorder.github.io/software/latentmixtures/reference/fitstats.md)
-  : Fit statistics
+-   `fitstats()` : Fit statistics
 
-- [`fittable()`](https://williamlorder.github.io/software/latentmixtures/reference/fittable.md)
-  : Fit statistics of several models (e.g. 1 to 6 classes)
+-   `fittable()` : Fit statistics of several models (e.g. 1 to 6
+    classes)
 
-- [`growth()`](https://williamlorder.github.io/software/latentmixtures/reference/growth.md)
-  : Growth mixture models (LCGA, GMM, parallel processes)
+-   `growth()` : Growth mixture models (LCGA, GMM, parallel processes)
 
-- [`growthparams()`](https://williamlorder.github.io/software/latentmixtures/reference/growthparams.md)
-  : Growth parameters of LCGA / GMM models
+-   `growthparams()` : Growth parameters of LCGA / GMM models
 
-- [`install_julia_packages()`](https://williamlorder.github.io/software/latentmixtures/reference/install_julia_packages.md)
-  : Install the Julia packages used by latentmixtures
+-   `install_julia_packages()` : Install the Julia packages used by
+    latentmixtures
 
-- [`itemprobs()`](https://williamlorder.github.io/software/latentmixtures/reference/itemprobs.md)
-  : Item-response probabilities of an LCA
+-   `itemprobs()` : Item-response probabilities of an LCA
 
-- [`julia_threads()`](https://williamlorder.github.io/software/latentmixtures/reference/julia_threads.md)
-  :
+-   `julia_threads()` :
 
-  Set the number of Julia threads (superseded by
-  [`lm_start()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md))
+    Set the number of Julia threads (superseded by `lm_start()`)
 
-- [`logLik(`*`<latentmix>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/latentmix-methods.md)
-  [`nobs(`*`<latentmix>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/latentmix-methods.md)
-  [`coef(`*`<latentmix>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/latentmix-methods.md)
-  [`predict(`*`<latentmix>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/latentmix-methods.md)
-  : Standard methods for fitted latent mixture models
+-   `logLik(<latentmix>)` `nobs(<latentmix>)` `coef(<latentmix>)`
+    `predict(<latentmix>)` : Standard methods for fitted latent mixture
+    models
 
-- [`latentmixtures`](https://williamlorder.github.io/software/latentmixtures/reference/latentmixtures-package.md)
-  [`latentmixtures-package`](https://williamlorder.github.io/software/latentmixtures/reference/latentmixtures-package.md)
-  : latentmixtures: latent class, profile, transition and growth mixture
-  models via Julia
+-   `latentmixtures` `latentmixtures-package` : latentmixtures: latent
+    class, profile, transition and growth mixture models via Julia
 
-- [`lca()`](https://williamlorder.github.io/software/latentmixtures/reference/lca.md)
-  : Latent class analysis
+-   `lca()` : Latent class analysis
 
-- [`lm_available()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_available.md)
-  : Is Julia with LatentMixtures.jl available?
+-   `lm_available()` : Is Julia with LatentMixtures.jl available?
 
-- [`lm_fitplot()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_fitplot.md)
-  [`autoplot(`*`<latentmix_comparison>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/lm_fitplot.md)
-  [`autoplot(`*`<latentmix_compare>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/lm_fitplot.md)
-  [`plot(`*`<latentmix_comparison>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/lm_fitplot.md)
-  : Plot fit indices for class enumeration or model comparison
+-   `lm_fitplot()` `autoplot(<latentmix_comparison>)`
+    `autoplot(<latentmix_compare>)` `plot(<latentmix_comparison>)` :
+    Plot fit indices for class enumeration or model comparison
 
-- [`lm_format_num()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_format_num.md)
-  [`lm_format_p()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_format_num.md)
-  [`lm_stars()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_format_num.md)
-  : Format numbers, p-values and significance stars for tables
+-   `lm_format_num()` `lm_format_p()` `lm_stars()` : Format numbers,
+    p-values and significance stars for tables
 
-- [`lm_session_id()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_session_id.md)
-  : Identifier of the current Julia session
+-   `lm_session_id()` : Identifier of the current Julia session
 
-- [`lm_start()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md)
-  [`lm_end()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md)
-  [`lm_status()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md)
-  [`print(`*`<lm_status>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/lm_start.md)
-  : Start, stop and inspect the Julia session
+-   `lm_start()` `lm_end()` `lm_status()` `print(<lm_status>)` : Start,
+    stop and inspect the Julia session
 
-- [`lm_tab()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_tab.md)
-  [`lm_render()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_tab.md)
-  [`print(`*`<lm_table_output>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/lm_tab.md)
-  [`as.character(`*`<lm_table_output>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/lm_tab.md)
-  [`print(`*`<lm_tab>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/lm_tab.md)
-  : Build and render a table
+-   `lm_tab()` `lm_render()` `print(<lm_table_output>)`
+    `as.character(<lm_table_output>)` `print(<lm_tab>)` : Build and
+    render a table
 
-- [`lm_table()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_table.md)
-  : Publication tables of models and auxiliary results
+-   `lm_table()` : Publication tables of models and auxiliary results
 
-- [`lm_theme()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_theme.md)
-  [`lm_palette()`](https://williamlorder.github.io/software/latentmixtures/reference/lm_theme.md)
-  : Theme and colour palette of the package's plots
+-   `lm_theme()` `lm_palette()` : Theme and colour palette of the
+    package's plots
 
-- [`lmr()`](https://williamlorder.github.io/software/latentmixtures/reference/lmr.md)
-  : Vuong-Lo-Mendell-Rubin test of K-1 against K classes (Mplus TECH11)
+-   `lmr()` : Vuong-Lo-Mendell-Rubin test of K-1 against K classes
+    (Mplus TECH11)
 
-- [`lpa()`](https://williamlorder.github.io/software/latentmixtures/reference/lpa.md)
-  : Latent profile analysis
+-   `lpa()` : Latent profile analysis
 
-- [`lrtest()`](https://williamlorder.github.io/software/latentmixtures/reference/lrtest.md)
-  : Likelihood-ratio test of nested models with the same number of
-  classes
+-   `lrtest()` : Likelihood-ratio test of nested models with the same
+    number of classes
 
-- [`lta()`](https://williamlorder.github.io/software/latentmixtures/reference/lta.md)
-  : Latent transition analysis
+-   `lta()` : Latent transition analysis
 
-- [`lta3step()`](https://williamlorder.github.io/software/latentmixtures/reference/lta3step.md)
-  : ML three-step latent transition analysis (covariates and distal
-  outcomes)
+-   `lta3step()` : ML three-step latent transition analysis (covariates
+    and distal outcomes)
 
-- [`mixture()`](https://williamlorder.github.io/software/latentmixtures/reference/mixture.md)
-  : Mixture model with mixed indicator types
+-   `mixture()` : Mixture model with mixed indicator types
 
-- [`parameters()`](https://williamlorder.github.io/software/latentmixtures/reference/parameters.md)
-  : Parameter estimates with robust (Mplus MLR) standard errors
+-   `pairprobs()` : Joint probabilities of locally dependent item pairs
 
-- [`print(`*`<latentmix>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix.md)
-  : Print a fitted latent mixture model
+-   `parameters()` : Parameter estimates with robust (Mplus MLR)
+    standard errors
 
-- [`print(`*`<latentmix_aux>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix_aux.md)
-  [`print(`*`<latentmix_r3step>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix_aux.md)
-  [`print(`*`<latentmix_bch>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix_aux.md)
-  [`print(`*`<latentmix_dcat>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix_aux.md)
-  [`print(`*`<latentmix_lmr>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix_aux.md)
-  [`print(`*`<latentmix_blrt>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix_aux.md)
-  [`print(`*`<latentmix_compare>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix_aux.md)
-  [`print(`*`<latentmix_comparison>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/print.latentmix_aux.md)
-  : Print auxiliary-model and test results
+-   `print(<latentmix>)` : Print a fitted latent mixture model
 
-- [`profilemeans()`](https://williamlorder.github.io/software/latentmixtures/reference/profilemeans.md)
-  [`profilevariances()`](https://williamlorder.github.io/software/latentmixtures/reference/profilemeans.md)
-  [`profilecovariances()`](https://williamlorder.github.io/software/latentmixtures/reference/profilemeans.md)
-  : Profile means, variances and covariances of an LPA or a continuous
-  LTA
+-   `print(<latentmix_aux>)` `print(<latentmix_r3step>)`
+    `print(<latentmix_bch>)` `print(<latentmix_dcat>)`
+    `print(<latentmix_lmr>)` `print(<latentmix_blrt>)`
+    `print(<latentmix_compare>)` `print(<latentmix_comparison>)` : Print
+    auxiliary-model and test results
 
-- [`r3step()`](https://williamlorder.github.io/software/latentmixtures/reference/r3step.md)
-  : Three-step regression of class membership on covariates (Mplus
-  R3STEP)
+-   `profilemeans()` `profilevariances()` `profilecovariances()` :
+    Profile means, variances and covariances of an LPA or a continuous
+    LTA
 
-- [`refit_start()`](https://williamlorder.github.io/software/latentmixtures/reference/refit_start.md)
-  : Refit a model from one of its random starts
+-   `r3step()` : Three-step regression of class membership on covariates
+    (Mplus R3STEP)
 
-- [`scaling_factor()`](https://williamlorder.github.io/software/latentmixtures/reference/scaling_factor.md)
-  : MLR scaling correction factor
+-   `refit_start()` : Refit a model from one of its random starts
 
-- [`schools`](https://williamlorder.github.io/software/latentmixtures/reference/schools.md)
-  : Students nested in schools (simulated)
+-   `scaling_factor()` : MLR scaling correction factor
 
-- [`substance`](https://williamlorder.github.io/software/latentmixtures/reference/substance.md)
-  : Adolescent substance use in grades 8, 10 and 12 (simulated)
+-   `schools` : Students nested in schools (simulated)
 
-- [`summary(`*`<latentmix>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/summary.latentmix.md)
-  [`print(`*`<summary.latentmix>`*`)`](https://williamlorder.github.io/software/latentmixtures/reference/summary.latentmix.md)
-  : Summary of a fitted model with all parameters
+-   `substance` : Adolescent substance use in grades 8, 10 and 12
+    (simulated)
 
-- [`to_mplus()`](https://williamlorder.github.io/software/latentmixtures/reference/to_mplus.md)
-  : Export a fitted model to Mplus
+-   `summary(<latentmix>)` `print(<summary.latentmix>)` : Summary of a
+    fitted model with all parameters
 
-- [`transitions()`](https://williamlorder.github.io/software/latentmixtures/reference/transitions.md)
-  : Transition matrices of an LTA
+-   `to_mplus()` : Export a fitted model to Mplus
 
-- [`twostep()`](https://williamlorder.github.io/software/latentmixtures/reference/twostep.md)
-  : Two-step estimation of covariate effects in a two-level latent class
-  model
+-   `transitions()` : Transition matrices of an LTA
 
-- [`wellbeing`](https://williamlorder.github.io/software/latentmixtures/reference/wellbeing.md)
-  : Health behaviours and wellbeing (simulated)
+-   `twostep()` : Two-step estimation of covariate effects in a
+    two-level latent class model
 
-- [`wellbeing_panel`](https://williamlorder.github.io/software/latentmixtures/reference/wellbeing_panel.md)
-  : Wellbeing before and during the COVID-19 pandemic (simulated panel)
+-   `vcov(<latentmix>)` : Covariance matrix of the parameter estimates
+
+-   `weightdiagnostics()` : Effective number of cases behind each class
+    (weight diagnostics)
+
+-   `wellbeing` : Health behaviours and wellbeing (simulated)
+
+-   `wellbeing_panel` : Wellbeing before and during the COVID-19
+    pandemic (simulated panel)
 
 # Articles
 
 ### All vignettes
 
-- [Auxiliary variables, weights and multigroup
-  models](https://williamlorder.github.io/software/latentmixtures/articles/auxiliary.md):
-- [Getting started with
-  latentmixtures](https://williamlorder.github.io/software/latentmixtures/articles/latentmixtures.md):
-- [Longitudinal models: latent transitions and growth
-  mixtures](https://williamlorder.github.io/software/latentmixtures/articles/longitudinal.md):
-- [Two-level latent class and profile
-  models](https://williamlorder.github.io/software/latentmixtures/articles/multilevel.md):
-- [Plotting latent mixture
-  models](https://williamlorder.github.io/software/latentmixtures/articles/plotting.md):
+-   [Auxiliary variables, weights and multigroup
+    models](https://williamlorder.github.io/software/latentmixtures/articles/auxiliary.md):
+-   [Getting started with
+    latentmixtures](https://williamlorder.github.io/software/latentmixtures/articles/latentmixtures.md):
+-   [Longitudinal models: latent transitions and growth
+    mixtures](https://williamlorder.github.io/software/latentmixtures/articles/longitudinal.md):
+-   [Two-level latent class and profile
+    models](https://williamlorder.github.io/software/latentmixtures/articles/multilevel.md):
+-   [Plotting latent mixture
+    models](https://williamlorder.github.io/software/latentmixtures/articles/plotting.md):

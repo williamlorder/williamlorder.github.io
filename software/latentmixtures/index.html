@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Fast Latent Class, Profile, Transition and Growth Mixture Models via Julia • latentmixtures</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Fast Latent Class, Profile, Transition and Growth Mixture Models via Julia">
 <meta name="description" content="R interface to the Julia package LatentMixtures.jl: latent class analysis, latent profile analysis (diagonal or full within-profile covariances), latent transition analysis, multigroup models with full, partial or no measurement invariance, latent class growth analysis and growth mixture models (including parallel processes), with full-information maximum likelihood for missing data, sampling weights, covariates (one-step and R3STEP), distal outcomes (BCH, DCAT), robust standard errors, the Vuong-Lo-Mendell-Rubin and bootstrap likelihood-ratio tests, multithreaded random starts and optional GPU estimation. Results agree with Mplus on the validation cases shipped with the Julia package.">
@@ -65,7 +65,7 @@
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Julia</strong> (&gt;= 1.12), for example with <a href="https://github.com/JuliaLang/juliaup" class="external-link">juliaup</a>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://install.julialang.org <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://install.julialang.org <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
 <p>JuliaConnectoR must be able to find <code>julia</code>. If it is not on the <code>PATH</code>, set <code>JULIA_BINDIR</code> (e.g. in <code>~/.Renviron</code>: <code>JULIA_BINDIR=~/.juliaup/bin</code>).</p>
 </li>
 <li>
@@ -206,11 +206,11 @@
 <span></span>
 <span><span class="co"># class enumeration: information criteria and entropy against K, LMR / BLRT p-values</span></span>
 <span><span class="fu"><a href="reference/lm_fitplot.html">lm_fitplot</a></span><span class="op">(</span><span class="va">fits</span>, lmr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">fits</span>, <span class="kw">function</span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="kw">if</span> <span class="op">(</span><span class="va">m</span><span class="op">$</span><span class="va">info</span><span class="op">$</span><span class="va">fit</span><span class="op">$</span><span class="va">K</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="fu"><a href="reference/lmr.html">lmr</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="reference/figures/README-lca-profile.png" alt="LCA item-response profiles"><div class="figcaption">LCA item-response profiles</div>
+<div class="figure">
+<img src="reference/figures/README-lca-profile.png" alt=""><p class="caption">LCA item-response profiles</p>
 </div>
-<div class="float">
-<img src="reference/figures/README-enumeration.png" alt="Class enumeration"><div class="figcaption">Class enumeration</div>
+<div class="figure">
+<img src="reference/figures/README-enumeration.png" alt=""><p class="caption">Class enumeration</p>
 </div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lpa.html">lpa</a></span><span class="op">(</span><span class="va">wellbeing</span>, <span class="va">sleep</span><span class="op">:</span><span class="va">lifesat</span>, K <span class="op">=</span> <span class="fl">4</span>, variances <span class="op">=</span> <span class="st">"varying"</span><span class="op">)</span></span>
@@ -218,24 +218,24 @@
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">p</span>, standardize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>      <span class="co"># profile means ± 95% CI, in overall-SD units</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">p</span>, error <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span>            <span class="co"># means ± within-profile SD</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">p_full</span>, type <span class="op">=</span> <span class="st">"correlation"</span><span class="op">)</span>   <span class="co"># within-profile correlations (covariances != "zero")</span></span></code></pre></div>
-<div class="float">
-<img src="reference/figures/README-lpa-profile.png" alt="LPA profiles"><div class="figcaption">LPA profiles</div>
+<div class="figure">
+<img src="reference/figures/README-lpa-profile.png" alt=""><p class="caption">LPA profiles</p>
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lta.html">lta</a></span><span class="op">(</span><span class="va">substance</span>, waves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">alc_1</span><span class="op">:</span><span class="va">mj_1</span>, <span class="va">alc_2</span><span class="op">:</span><span class="va">mj_2</span>, <span class="va">alc_3</span><span class="op">:</span><span class="va">mj_3</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>                          <span class="co"># LTA transition matrices, one panel per transition</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">t</span>, type <span class="op">=</span> <span class="st">"prevalence"</span><span class="op">)</span>     <span class="co"># class proportions over the waves (geom = "area")</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">t</span>, type <span class="op">=</span> <span class="st">"profile"</span><span class="op">)</span>        <span class="co"># item profiles at every wave (non-invariance)</span></span></code></pre></div>
-<div class="float">
-<img src="reference/figures/README-lta-transitions.png" alt="LTA transitions"><div class="figcaption">LTA transitions</div>
+<div class="figure">
+<img src="reference/figures/README-lta-transitions.png" alt=""><p class="caption">LTA transitions</p>
 </div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># growth mixtures: estimated class trajectories, observed posterior-weighted class</span></span>
 <span><span class="co"># means and a sample of individual trajectories (one panel per process)</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/growth.html">growth</a></span><span class="op">(</span><span class="va">depression</span>, <span class="va">dep1</span><span class="op">:</span><span class="va">dep5</span>, K <span class="op">=</span> <span class="fl">4</span>, model <span class="op">=</span> <span class="st">"gmm"</span>, degree <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">g</span>, data <span class="op">=</span> <span class="va">depression</span>, spaghetti <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="reference/figures/README-growth.png" alt="Growth mixture trajectories"><div class="figcaption">Growth mixture trajectories</div>
+<div class="figure">
+<img src="reference/figures/README-growth.png" alt=""><p class="caption">Growth mixture trajectories</p>
 </div>
 <p>Other figures: multigroup models (one panel per group), <code>autoplot(m, type = "regression")</code> for one-step covariates and <code>autoplot(r3step(...))</code> (odds-ratio forest plots), <code>autoplot(bch(...))</code> / <code>autoplot(dcat(...))</code> (class means / probabilities with CIs), <code>autoplot(blrt(...))</code> (bootstrap distribution of the LR statistic) and <code>autoplot(compare_models(m1, m2, m3))</code> (dot plot of the fit indices). See <code><a href="reference/autoplot.latentmix.html">?autoplot.latentmix</a></code> and the vignettes.</p>
 </div>
